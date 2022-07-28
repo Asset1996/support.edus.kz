@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
@@ -46,5 +47,52 @@ class AuthController extends Controller
             session()->flash('success_message', 'Email verified successfully.');
         }
         return view('pages.auth.verifyEmail');
+    }
+
+    /**
+     * Receives auth credentials from Login form and attemts to log user in.
+     *
+     * @param credentials
+     * @return redirect
+     */
+    public function authenticate()
+    {
+        $credentials = request()->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            request()->session()->regenerate();
+            request()->session()->flash('success_message', trans('You have successfully logged in.'));
+            return redirect()->home();
+        }
+
+        request()->session()->flash('error_message', trans('Incorrect email or password.'));
+        return back();
+    }
+
+    /**
+     * Returns the login view.
+     *
+     * @param credentials
+     * @return view
+     */
+    public function login(){
+        return view('pages.auth.login');
+    }
+
+    /**
+     * Logs the user out of the system(if he(she) was logged in).
+     *
+     * @return redirect
+     */
+    public function logout(){
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        request()->session()->flash('success_message', trans('You have successfully logged out.'));
+
+        return redirect()->route('login');
     }
 }

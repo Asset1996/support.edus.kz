@@ -19,7 +19,7 @@
         <div class="col-12">
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
-            <a href="#" class="logo">
+            <a href="{{ route('home') }}" class="logo">
               <h4><svg width="105" height="25" viewBox="0 0 105 25" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="105" height="25" fill="url(#pattern0)"></rect>
                 <defs>
@@ -33,9 +33,19 @@
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
-              <li class="scroll-to-section"><a href="#" class="active">{{Lang::get("Home")}}</a></li>
-              <li class="scroll-to-section"><a href="#">{{Lang::get("About Us")}}</a></li>
-              <li class="scroll-to-section"><a href="#">{{Lang::get("Our products")}}</a></li>
+              <li class="scroll-to-section"><a href="{{ route('home') }}" class="active">{{Lang::get("Home")}}</a></li>
+              
+              @if (auth()->check())
+                <form class="form-inline" method="POST" action="{{ route('logout') }}">
+                  @csrf
+                  <div class="md-form my-0">
+                    <button class="scroll-to-section" type="submit">Выйти</button>
+                  </div>
+                </form>
+              @else
+                <li class="scroll-to-section"><a href="{{ route('login') }}">{{Lang::get("Login")}}</a></li>
+              @endif
+              
               <li class="scroll-to-section"><a href="{{ route('registration') }}">{{Lang::get("Register")}}</a></li> 
               <li class="scroll-to-section"><div class="main-blue-button"><a href="#">{{Lang::get("Ask question")}}</a></div></li> 
             </ul>        

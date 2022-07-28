@@ -15,5 +15,9 @@ Route::prefix('{lang?}')->middleware('locale')->group(function(){
         })->name('registration');
         Route::post('/registration-post', [AuthController::class, 'registration'])->name('registration-post');
         Route::get('/verify-email/{token}', [AuthController::class, 'verifyEmail'])->name('verify-email');
+
+        Route::post('/login', [AuthController::class, 'authenticate'])->name('authenticate');
+        Route::get('/login', [AuthController::class, 'login'])->name('login');
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     });
 });

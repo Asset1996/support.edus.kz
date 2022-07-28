@@ -5,7 +5,7 @@
     <div class="main-banner">
         <section class="vh-100" style="background-color: white;">
             <div class="container h-100">
-                <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="row d-flex justify-content-center align-items-center">
                     @if (Session::has('error_message'))
                         <div class="alert">{{ Session::get('error_message') }}</div>
                     @endif
@@ -64,7 +64,7 @@
                             </div>
                         </div>
                     </div>
-            </div>
+                </div>
             </div>
         </section>
     </div>

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use App\Providers\JSONResponseProvider;
+use Illuminate\Support\Facades\URL;
 
 class Locale
 {
@@ -23,6 +24,7 @@ class Locale
             return $response->error(_('Not found'), 404);
         }
 
+        URL::defaults(['lang' => $lang]);  
         session(['locale' => $lang]);
         app()->setLocale($lang);
 

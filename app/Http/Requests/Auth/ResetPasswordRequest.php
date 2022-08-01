@@ -4,7 +4,7 @@ namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\BaseRequest;
 
-class RegistrationPostRequest extends BaseRequest
+class ResetPasswordRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,7 @@ class RegistrationPostRequest extends BaseRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:50',
-            'email' => 'required|email|unique:support_user|max:255',
-            'password' => ['required', 'confirmed', 'min:7', 'max:50', new \App\Rules\PasswordValidate()],
+            'email' => 'required|email|max:255',
         ];
     }
 }

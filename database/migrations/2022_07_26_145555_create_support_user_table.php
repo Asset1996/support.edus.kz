@@ -23,6 +23,10 @@ class CreateSupportUserTable extends Migration
             $table->timestamp('phone_verified_at')->comment('Время вреификации номера телефона')->nullable();
             $table->string('password')->length(255)->comment('Хэш пароля')->nullable();
             $table->string('verification_token')->comment('Токен верификации почты')->nullable();
+
+            $table->integer('roles_id')->default(1)->comment('Роль пользователя')->nullable();
+            $table->integer('organizations_id')->comment('Роль пользователя')->nullable();
+
             $table->boolean('has_access')->default(0)->comment('Доступ: 1 - Да, 0 - нет')->nullable();
             $table->timestamp('created_at')->comment('Время создания записи')->useCurrent();
             $table->timestamp('updated_at')->comment('Время обновления записи')->useCurrentOnUpdate()->nullable();

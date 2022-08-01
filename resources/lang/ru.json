@@ -35,6 +35,8 @@
     "Error occured.": "Ошибка.",
     "User not found.": "Пользователь не найден.",
     "Update failed.": "Ошибка при редактировании.",
+    "Reset password": "Восстановить пароль",
+    "Remind password": "Напомнить пароль",
 
     "Successfully logged in.": "Успешно авторизован.",
     "Registration successfull, now need to confirm credentials.": "Регистрация прошла успешно, теперь необходимо подтвердить учетные данные.",

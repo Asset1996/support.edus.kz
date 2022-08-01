@@ -1,4 +1,6 @@
-
+  @include('modals.login-modal')
+  @include('modals.register-modal')
+  @include('modals.reset-password-modal')
   <!-- ***** Preloader Start ***** -->
   <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">
@@ -38,15 +40,17 @@
               @if (auth()->check())
                 <form class="form-inline" method="POST" action="{{ route('logout') }}">
                   @csrf
-                  <div class="md-form my-0">
-                    <button class="scroll-to-section" type="submit">Выйти</button>
-                  </div>
+                  <button class="btn btn-primary" type="submit">Выйти</button>
                 </form>
               @else
-                <li class="scroll-to-section"><a href="{{ route('login') }}">{{Lang::get("Login")}}</a></li>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+                  {{Lang::get("Login")}}
+                </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
+                  {{Lang::get("Register")}}
+                </button>
               @endif
               
-              <li class="scroll-to-section"><a href="{{ route('registration') }}">{{Lang::get("Register")}}</a></li> 
               <li class="scroll-to-section"><div class="main-blue-button"><a href="#">{{Lang::get("Ask question")}}</a></div></li> 
             </ul>        
             <a class='menu-trigger'>
@@ -58,4 +62,3 @@
       </div>
     </div>
   </header>
-  <!-- ***** Header Area End ***** -->

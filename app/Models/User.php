@@ -98,6 +98,48 @@ class User extends Authenticatable
     }
 
     /**
+     * Verifies email and resets the password.
+     *
+     * @return bool 
+     */
+    public function ResetPassword(){
+        $email = request()->input('email');
+        $user = $this::where([
+            'email' => $email
+        ])->first();
+
+        if(!$user){
+            $this->errors[] = trans('User not found');
+            return False;
+        }
+        $user->verification_token = uniqid();
+        $user->save();
+
+        $data = [
+            'verification_token' => $user->verification_token,
+            'email' => $email,
+            'name' => $user->name
+        ];
+        if(!MailSender::sendLinkToEmailToResetThePassword($data)){
+            $this->errors[] = trans('Error occurred while sending email');
+            return False;
+        };
+        return True;
+    }
+
+    /**
+     * Sets the new password.
+     *
+     * @param User object $user
+     * @return bool 
+     */
+    public function setNewPassword(User $user){
+        $user->password = Hash::make(request()->input('password'));
+        $user->verification_token = null;
+        return $user->save();
+    }
+
+    /**
      * Cheks if the errors array is empty.
      *
      * @return bool 

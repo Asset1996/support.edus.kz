@@ -1,22 +1,21 @@
 <?php
-
+/**
+ * User model.
+ */
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
-use Laravel\Sanctum\HasApiTokens;
 use App\Helpers\MailSender;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
-class User extends Authenticatable
+class User extends BaseModel implements 
+    AuthenticatableContract,
+    AuthorizableContract
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
-    /**
-     * Array of errors.
-     */
-    protected $errors = [];
+    use Authenticatable, Authorizable;
 
     /**
      * Name of table in DB.
@@ -60,19 +59,25 @@ class User extends Authenticatable
     ];
 
     /**
+     * Get the tickets that owns the User.
+     */
+    public function tickets()
+    {
+        return $this->hasMany(Tickets::class, 'created_by', 'id');
+    }
+
+    public function tickets_tmp()
+    {
+        return $this->hasMany(TicketsTmp::class, 'created_by', 'id');
+    }
+
+    /**
      * Creates the new user in DB.
      *
-     * @return bool 
+     * @return bool|object 
      */
-    public function createUser(){
-        $data = request()->only(['name', 'email', 'password']);
-        $data['password'] = Hash::make($data['password']);
-        $data['verification_token'] = uniqid();
-        if(!MailSender::sendVerificationLinkToEmail($data)){
-            $this->errors[] = trans('Error occurred while sending email');
-            return False;
-        };
-        return $this::create($data);
+    public function _create(array $context = []){
+        return $this::create($context);
     }
 
     /**
@@ -82,25 +87,34 @@ class User extends Authenticatable
      */
     public function verifyEmail(string $token){
 
-        $verified = $this::where([
+        $user = $this::where([
             'has_access' => 0, 
             'verification_token' => $token
-        ])->update([
+        ])->first();
+        $verified = $user->update([
             'email_verified_at' => now(),
             'verification_token' => null,
             'has_access' => 1
         ]);
+
         if(!$verified){
             $this->errors[] = trans('Email verification failed');
             return False;
         }
+        
+        if($user->tickets_tmp->isNotEmpty()){
+            $temp_tickets_id = $user->tickets_tmp->modelKeys();
+            TicketsTmp::whereIn('id', $temp_tickets_id)->delete();
+            Tickets::get_tickets_from_temp($user->tickets_tmp);
+        }
+
         return True;
     }
 
     /**
      * Verifies email and resets the password.
      *
-     * @return bool 
+     * @return bool|array
      */
     public function ResetPassword(){
         $email = request()->input('email');
@@ -115,16 +129,13 @@ class User extends Authenticatable
         $user->verification_token = uniqid();
         $user->save();
 
-        $data = [
+        $context = [
             'verification_token' => $user->verification_token,
             'email' => $email,
             'name' => $user->name
         ];
-        if(!MailSender::sendLinkToEmailToResetThePassword($data)){
-            $this->errors[] = trans('Error occurred while sending email');
-            return False;
-        };
-        return True;
+        
+        return $context;
     }
 
     /**
@@ -140,20 +151,12 @@ class User extends Authenticatable
     }
 
     /**
-     * Cheks if the errors array is empty.
+     * Checks if user exists by key=>val.
      *
-     * @return bool 
+     * @param array $data
+     * @return object|bool
      */
-    public function hasErrors(){
-        return !empty($this->errors);
-    }
-
-    /**
-     * Returns the first element of the errors array.
-     *
-     * @return array 
-     */
-    public function getFirstError(){
-        return $this->errors[0];
+    public function isUserExist(array $data){
+        return $this::select('id')->where($data)->first();
     }
 }

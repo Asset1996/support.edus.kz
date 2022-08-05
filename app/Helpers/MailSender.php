@@ -1,44 +1,70 @@
 <?php
+/**
+ * MailSender helper handles all staff with mails.
+ */
 namespace App\Helpers;
 
 use Illuminate\Support\Facades\Mail;
-use App\Mail\ResetPassword;
-use App\Mail\VerifyEmail;
 
 class MailSender
 {
     /**
-     * Sends an email with cerification link after registration.
-     * @param string $email - Email addess of registrated person.
+     * URL route of the link.
+     */
+    protected $route;
+
+    /**
+     * Mail template path.
+     */
+    protected $template;
+
+    public function __construct(string $route, string $template)
+    {
+        $this->route = $route;
+        $this->template = $template;
+    }
+
+    /**
+     * Array of errors.
+     */
+    protected $errors = [];
+
+    /**
+     * Sends an email with context.
+     * @param array $data.
      * 
      * @return bool 
      */
-    public static function sendVerificationLinkToEmail(array $data){
+    public function send(array $context){
         try{
-            $url = route('verify-email', ['lang'=> app()->getLocale(), 'token' => $data['verification_token']]);
-            Mail::to($data['email'])->send(new VerifyEmail($data['name'], $url));
+            $context['url'] = route($this->route, [
+                'lang'=> app()->getLocale(), 
+                'token' => $context['verification_token']
+            ]);
+            $context['template'] = $this->template;
+            Mail::to($context['email'])->send(new \App\Mail\VerifyEmail($context));
         }catch(\Swift_TransportException $e){
+            $this->errors[] = trans('Error occurred while sending email');
             return False;
         }
         return True;
     }
 
     /**
-     * Sends an email with cerification link after registration.
-     * @param string $email - Email addess of registrated person.
-     * 
+     * Cheks if the errors array is empty.
+     *
      * @return bool 
      */
-    public static function sendLinkToEmailToResetThePassword(array $data){
-        try{
-            $url = route('set-new-password', [
-                'lang'=> app()->getLocale(), 
-                'token' => $data['verification_token']
-            ]);
-            Mail::to($data['email'])->send(new ResetPassword($data['name'], $url));
-        }catch(\Swift_TransportException $e){
-            return False;
-        }
-        return True;
+    public function hasErrors(){
+        return !empty($this->errors);
+    }
+
+    /**
+     * Returns the first element of the errors array.
+     *
+     * @return array 
+     */
+    public function getFirstError(){
+        return $this->errors[0];
     }
 }

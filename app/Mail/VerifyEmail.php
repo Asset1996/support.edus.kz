@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -11,19 +10,36 @@ class VerifyEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    /**
+     * Users name.
+     */
     public $name;
 
+    /**
+     * Url link to activate the accout.
+     */
     public $url;
+
+    /**
+     * Url link to activate the accout.
+     */
+    public $password;
+
+    /**
+     * Template path.
+     */
+    public $template;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(string $name, string $url)
+    public function __construct(array $context)
     {
-        $this->name = $name;
-        $this->url = $url;
+        foreach($context as $key => $value){
+            $this->$key = $value;
+        }
     }
 
     /**
@@ -33,6 +49,6 @@ class VerifyEmail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.VerifyEmail');
+        return $this->markdown($this->template);
     }
 }

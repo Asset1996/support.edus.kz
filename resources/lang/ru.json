@@ -23,7 +23,6 @@
     "Phone": "Номер телефона",
     "Repeat your password": "Повторите пароль",
 
-
     "The password field is required.": "Поле пароль объязателен к заполнению.",
     "The email field is required.": "Поле email объязателен к заполнению.",
     "The name field is required.": "Поле Имя объязателен к заполнению.",
@@ -43,5 +42,29 @@
     "Email verified successfully.": "Почта успешно верифицирована.",
     "Successfully updated.": "Изменения успешно внесены.",
     "Password successfully updated.": "Новый пароль успешно установлен.",
-    "Please confirm your credentials.": "Пожалуйста, подтвердите свои учетные данные."
+    "Please confirm your credentials.": "Пожалуйста, подтвердите свои учетные данные.",
+
+    "Your question regarding": "Ваш вопрос касательно",
+    "Hint": "Подсказка",
+    "Our support team makes his best effort to process your request ASAP. As soon as we respond to your request (ticket), you will receive an email notification.": "Наша служба поддержки делает все возможное, чтобы обрабатывать вашио бращения в кратчайшие сроки. Как только мы ответим на ваш запрос (тикет), вам придет уведомление на электронную почту.",
+    "We try to respond to all requests (tickets) as soon as possible. But we can do it even faster if you write your request in more detail and clearly. Please note that if you supplement an already open request with new details, the response time may increase as the request is re-added to the queue. Therefore, it is important to send a detailed request right away.": "Мы стараемся отвечать на все запросы (тикеты) как можно скорее. Но мы сможем делать это еще быстрее, если вы напишите ваш запрос более детально и понятно. Обратите внимание, что если дополнять уже открытый запрос новыми подробностями, время ответа может увеличиться, так как заявка заново добавляется в очередь. Поэтому важно сразу отправлять подробный запрос.",
+    "Send request": "Отправить запрос",
+    "Write request": "Написать запрос",
+    "New appeal": "Новое обращение",
+    "Message subject": "Тема сообщения",
+    "Detailed description of your request": "Подробное описание вашего запроса",
+    "Your name": "Ваше имя",
+    "I'm not robot": "Я не робот",
+    "Attach file": "Прикрепить файл",
+    "Attachув fileы": "Прикрепленные файлы",
+    "Ticket created": "Тикет создан",
+    "Your appeal has been registered, please wait for a response from specialists": "Ваше обращение зарегистрировано, ожидайте ответ специалистов",
+    "The history of your requests is in the section": "История ваших запросов находится в разделе",
+    "Thank you": "Спасибо",
+    "Sign into the support system": "Вход в систему техподдержки",
+    "If you're here for the first time, you have to register to get to your personal account": "Если вы здесь впервые, то для входа в личный кабинет необходима регистрация",
+    "Close": "Закрыть",
+    "Sign up account": "Регистрация аккаунта",
+    "My appeals": "Мои обращения"
+
 }

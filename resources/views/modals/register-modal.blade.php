@@ -67,33 +67,8 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ Lang::get('Close') }}</button>
         </div>
       </div>
     </div>
 </div>
-
-<script>
-    window.onload = function() {
-        $('#register_password, #register_password_confirmation').on('keyup', function () {
-
-            $('#message').html('Отлично!').css('color', 'green');
-            $("#register_submit").prop("disabled",false);
-            pass_input = $('#register_password').val()
-            pass_confirm_input = $('#register_password_confirmation').val()
-
-            if (pass_input != pass_confirm_input) {
-                $('#message').html('Пароли не совпадают').css('color', 'red');
-                $("#register_submit").prop("disabled",true);
-            }
-            if (pass_input.length < 7) {
-                $('#message').html('Минимальная длина пароли - 7 символов').css('color', 'red');
-                $("#register_submit").prop("disabled",true);
-            }
-            if(!/[0-9]/.test(pass_input) || !/[a-zA-Z]/.test(pass_input)) {
-                $('#message').html('Пароль должен содержать минимум 1 букву и 1 цифру').css('color', 'red');
-                $("#register_submit").prop("disabled",true);
-            }
-        });
-    }
-</script>

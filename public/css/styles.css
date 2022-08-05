@@ -1,0 +1,38 @@
+.flash-messages {
+    position: absolute;
+    top: 115px;
+    right: 15px;
+    z-index: 2;
+}
+
+.change-button{
+    float:right; 
+    text-decoration: underline !important;
+}
+
+.created-ticket{
+    background-color: #f1f1f1;
+    padding: 30px 30px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.paragraph{
+    padding: 10px 10px;
+}
+
+.tickets-list{
+    
+}
+
+.auth-action-button{
+    background-color: transparent;
+    text-decoration: underline;
+    border: none;
+    color: blue;
+    cursor: pointer;
+}
+
+.auth-action-button:hover{
+    color: rgb(91, 91, 255);
+}

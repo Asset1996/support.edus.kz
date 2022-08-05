@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Helpers\MailSender;
 
 class AuthController extends Controller
 {
@@ -20,10 +21,18 @@ class AuthController extends Controller
      * @return Redirect 
      */
     public function registration(\App\Http\Requests\Auth\RegistrationPostRequest $request){
-        
-        $this->user->createUser();
+        $context = request()->only(['name', 'email', 'password']);
+        $context['password'] = \Illuminate\Support\Facades\Hash::make($context['password']);
+        $context['verification_token'] = uniqid();
+
+        $this->user->_create($context);
+        $mail_sender = new MailSender(env('VERIFY_EMAIL_ROUTE'), 'mail.VerifyEmail');
+        $mail_sender->send($context);
+
         if($this->user->hasErrors()){
             session()->flash('error_message', $this->user->getFirstError());
+        }elseif($mail_sender->hasErrors()){
+            session()->flash('error_message', $mail_sender->getFirstError());
         }else{
             session()->flash('success_message', 'Registration successfull, now need to confirm credentials.');
         }
@@ -96,10 +105,15 @@ class AuthController extends Controller
      * @return redirect
      */
     public function resetPassword(\App\Http\Requests\Auth\ResetPasswordRequest $request){
+
+        $context = $this->user->resetPassword();
+        $mail_sender = new MailSender(env('SET_NEW_PASSWORD_ROUTE'), 'mail.ResetPassword');
+        $mail_sender->send($context);
         
-        $this->user->resetPassword();
         if($this->user->hasErrors()){
             session()->flash('error_message', $this->user->getFirstError());
+        }elseif($mail_sender->hasErrors()){
+            session()->flash('error_message', $mail_sender->getFirstError());
         }else{
             session()->flash('success_message', 'Success! Now need to follow the link, that we sent to you email.');
         }

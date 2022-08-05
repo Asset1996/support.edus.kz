@@ -38,4 +38,15 @@ class Messages extends BaseModel
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    /**
+     * Creates message.
+     *
+     * @param array $context
+     * @return object 
+     */
+    public function _create(array $context = []){
+        $context['user_id'] = auth()->user()->id;
+        return $this::create($context);
+    }
 }

@@ -49,4 +49,25 @@ class Messages extends BaseModel
         $context['user_id'] = auth()->user()->id;
         return $this::create($context);
     }
+
+    /**
+     * Updates the message ticket.
+     *
+     * @param array $conditions
+     * @param array $context
+     * @return object 
+     */
+    public function _update(array $conditions = [], array $context = []){
+        return $this::where($conditions)->update($context);
+    }
+
+    /**
+     * Deletes the message from DB.
+     *
+     * @param array $conditions
+     * @return object 
+     */
+    public function _delete(array $conditions){
+        return $this::where($conditions)->delete();
+    }
 }

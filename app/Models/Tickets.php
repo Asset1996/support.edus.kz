@@ -18,6 +18,7 @@ class Tickets extends BaseModel
         'title',
         'initial_message',
         'service_types_id',
+        'status_id',
         'created_by',
         'answered_by',
         'answered_at',
@@ -67,6 +68,31 @@ class Tickets extends BaseModel
     public function _create(array $context = []){
         $context['created_by'] = auth()->user()->id;
         return $this::create($context);
+    }
+
+    /**
+     * Updates the ticket.
+     *
+     * @param array $context
+     * @return object 
+     */
+    public function _update(array $conditions, array $context){
+        return $this::where($conditions)->update($context);
+    }
+
+    /**
+     * Deletes the ticket.
+     *
+     * @param array $conditions
+     * @return object 
+     */
+    public function _delete(array $conditions){
+        $ticket = $this::where($conditions)->first();
+        if(!in_array($ticket->status_id, [1,2])) {
+            $this->errors[] = trans('Only unproccesed or in-processing tickets can be deleted');
+            return False;
+        }
+        return $this::where($conditions)->delete();
     }
 
     /**

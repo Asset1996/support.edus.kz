@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Providers\JSONResponseProvider;
 use Illuminate\Support\Facades\URL;
 
 class Locale
@@ -17,11 +16,10 @@ class Locale
      */
     public function handle($request, Closure $next)
     {
-        $response = new JSONResponseProvider;
         $lang = $request->route()->parameter('lang');
 
         if (!in_array($lang, config('app.locales'))) {
-            return $response->error(_('Not found'), 404);
+            abort(404);
         }
 
         URL::defaults(['lang' => $lang]);  

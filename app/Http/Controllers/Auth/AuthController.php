@@ -34,7 +34,7 @@ class AuthController extends Controller
         }elseif($mail_sender->hasErrors()){
             session()->flash('error_message', $mail_sender->getFirstError());
         }else{
-            session()->flash('success_message', 'Registration successfull, now need to confirm credentials.');
+            session()->flash('success_message', trans('Registration successfull, now need to confirm credentials'));
         }
         return redirect()->home();
     }
@@ -47,12 +47,13 @@ class AuthController extends Controller
      */
     public function verifyEmail(string $lang, string $token){
         
-        $this->user->verifyEmail($token);
+        $user = $this->user->verifyEmail($token);
         session()->forget(['error_message', 'success_message']);
         if($this->user->hasErrors()){
             session()->flash('error_message', $this->user->getFirstError());
         }else{
-            session()->flash('success_message', 'Email verified successfully.');
+            Auth::login($user);
+            session()->flash('success_message', trans('Email verified successfully'));
         }
         return view('pages.auth.verifyEmail');
     }
@@ -73,15 +74,15 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             if(request()->user()->has_access == 0) {
                 Auth::logout();
-                request()->session()->flash('error_message', trans('First, you must verify your email.'));
+                request()->session()->flash('error_message', trans('First, you must verify your email'));
                 return redirect()->home();
             }
             request()->session()->regenerate();
-            request()->session()->flash('success_message', trans('You have successfully logged in.'));
+            request()->session()->flash('success_message', trans('You have successfully logged in'));
             return redirect()->home();
         }
 
-        request()->session()->flash('error_message', trans('Incorrect email or password.'));
+        request()->session()->flash('error_message', trans('Incorrect email or password'));
         return back();
     }
 
@@ -94,7 +95,7 @@ class AuthController extends Controller
         Auth::logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
-        request()->session()->flash('success_message', trans('You have successfully logged out.'));
+        request()->session()->flash('success_message', trans('You have successfully logged out'));
 
         return redirect()->home();
     }
@@ -107,15 +108,19 @@ class AuthController extends Controller
     public function resetPassword(\App\Http\Requests\Auth\ResetPasswordRequest $request){
 
         $context = $this->user->resetPassword();
-        $mail_sender = new MailSender(env('SET_NEW_PASSWORD_ROUTE'), 'mail.ResetPassword');
-        $mail_sender->send($context);
         
         if($this->user->hasErrors()){
             session()->flash('error_message', $this->user->getFirstError());
-        }elseif($mail_sender->hasErrors()){
+            return redirect()->home();
+        }
+
+        $mail_sender = new MailSender(env('SET_NEW_PASSWORD_ROUTE'), 'mail.ResetPassword');
+        $mail_sender->send($context);
+        
+        if($mail_sender->hasErrors()){
             session()->flash('error_message', $mail_sender->getFirstError());
         }else{
-            session()->flash('success_message', 'Success! Now need to follow the link, that we sent to you email.');
+            session()->flash('success_message', trans('Your request successfully processed. Please, follow the link, that we sent to you email'));
         }
         return redirect()->home();
     }

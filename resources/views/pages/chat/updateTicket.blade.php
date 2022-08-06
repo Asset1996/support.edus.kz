@@ -2,14 +2,14 @@
 
 @section('content')
 <body>
-    <div class="main-banner">
-        <h3>{{ Lang::get('New appeal') }}</h3>
+    <div class="main-banner"> 
+        <h3>{{ Lang::get('Update appeal No') }} {{$my_ticket->id}}</h3>
         <div class="row">
             <div class="col-8">
                 {{ 
-                    Lang::get('Our support team makes his best effort to process your request ASAP. As soon as we respond to your request (ticket), you will receive an email notification') 
+                    Lang::get('Our support team makes his best effort to process your request ASAP. As soon as we respond to your request (ticket), you will receive an email notification.') 
                 }}
-                <form method="POST" action="{{ route('ask-question-post') }}">
+                <form method="POST" action="{{ route('update-ticket-post', ['ticket_id' => $my_ticket->id]) }}">
                     @csrf
                     {{-- First page --}}
                     <div id="first_block">
@@ -17,7 +17,7 @@
                             <div class="form-check">
                                 <label class="form-check-label" for="service_types_id_{{ $service_type->id }}">
                                     <input value="{{ $service_type->id }}" class="form-check-input" type="radio" name="service_types_id" id="service_types_id_{{ $service_type->id }}"
-                                    @if ($service_type->id == 1)
+                                    @if ($my_ticket->service_types_id == $service_type->id)
                                         checked
                                     @endif>
                                     {{ $service_type->name_ru }}
@@ -69,15 +69,15 @@
                         </div>
                         <div class="form-group">
                             <label for="ask_title">{{ Lang::get('Message subject') }}</label>
-                            <input type="text" class="form-control" id="ask_title" name="title" required>
+                            <input type="text" class="form-control" id="ask_title" name="title" value="{{ $my_ticket->title }}" required>
                         </div>
                         <div class="form-group">
                             <label for="ask_initial_message">{{ Lang::get('Detailed description of your request') }}</label>
-                            <textarea class="form-control" id="ask_initial_message" name="initial_message" rows="6" required></textarea>
+                            <textarea class="form-control" id="ask_initial_message" name="initial_message" rows="6" required>{{ $my_ticket->initial_message }}</textarea>
                         </div>
 
                         <div class="d-flex mx-4 mb-3 mb-lg-4">
-                            <button type="submit" class="btn btn-primary btn-lg">{{Lang::get("Send request")}}</button>
+                            <button type="submit" class="btn btn-primary btn-lg">{{Lang::get("Save request")}}</button>
                         </div>
                     </div>
                     {{-- Second page END --}}
@@ -86,7 +86,7 @@
             <div class="col-4">
                 <h3>{{ Lang::get('Hint') }}</h3>
                 {{
-                    Lang::get('We try to respond to all requests (tickets) as soon as possible. But we can do it even faster if you write your request in more detail and clearly. Please note that if you supplement an already open request with new details, the response time may increase as the request is re-added to the queue. Therefore, it is important to send a detailed request right away')
+                    Lang::get('We try to respond to all requests (tickets) as soon as possible. But we can do it even faster if you write your request in more detail and clearly. Please note that if you supplement an already open request with new details, the response time may increase as the request is re-added to the queue. Therefore, it is important to send a detailed request right away.')
                 }}
             </div>
         </div>

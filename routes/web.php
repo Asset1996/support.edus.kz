@@ -55,11 +55,20 @@ Route::prefix('{lang?}')->middleware('locale')->group(function(){
             Route::post('/ask-question', [TicketsController::class, 'askQuestionPost'])->name('ask-question-post');
             Route::get('/ticket-created/{ticket_id}', [TicketsController::class, 'ticketCreated'])->name('ticket-created');
             //TODO
-            // Route::get('/update/{ticket_id}', [TicketsController::class, 'updateTicket'])->name('update-ticket');
-            //TODO
+            Route::get('/update/{ticket_id}', [TicketsController::class, 'update'])
+                ->middleware('authenticated')
+                ->name('update-ticket');
+            Route::post('/update/{ticket_id}', [TicketsController::class, 'updatePost'])
+                ->middleware('authenticated')
+                ->name('update-ticket-post');
             Route::get('/list', [TicketsController::class, 'list'])
                 ->middleware('authenticated')
                 ->name('tickets-list');
+
+            //TODO
+            Route::post('/delete/{ticket_id}', [TicketsController::class, 'delete'])
+                ->middleware('authenticated')
+                ->name('delete-ticket');
         });
 
     });

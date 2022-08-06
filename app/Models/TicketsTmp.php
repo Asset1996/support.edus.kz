@@ -59,10 +59,10 @@ class TicketsTmp extends BaseModel
             return false;
         }
 
-        $context = request()->only(['name', 'email']);
+        $context = request()->only(['name', 'email', 'title', 'initial_message', 'service_types_id']);
         $password = \Illuminate\Support\Str::random();
         $context['password'] = Hash::make($password);
-        $data['verification_token'] = uniqid();
+        $context['verification_token'] = uniqid();
 
         $user = $user_model->_create($context);
 
@@ -72,5 +72,26 @@ class TicketsTmp extends BaseModel
         $mail_sender->send($context);
 
         return $this::create($context);
+    }
+
+    /**
+     * Updates the temporary ticket.
+     *
+     * @param array $conditions
+     * @param array $context
+     * @return object 
+     */
+    public function _update(array $conditions, array $context){
+        return $this::where($conditions)->update($context);
+    }
+
+    /**
+     * Deletes the temporary ticket.
+     *
+     * @param array $conditions
+     * @return object 
+     */
+    public function _delete(array $conditions){
+        return $this::where($conditions)->delete();
     }
 }

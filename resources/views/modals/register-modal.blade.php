@@ -54,15 +54,11 @@
                     </form>
                 </div>
                 <div class="col-6">
-                    {{ Lang::get('To register, the system requires your name and your email address') }}
-                    <p></p>
-                    {{ Lang::get('Password must contain:') }}
-                    <p></p>
-                    - {{ Lang::get('minimum 7 symbols ') }}
-                    <p></p>
-                    - {{ Lang::get('minimum 1 character ') }}
-                    <p></p>
-                    - {{ Lang::get('minimum 1 digit') }}
+                    <p>{{ Lang::get('To register, the system requires your name and your email address') }}</p>
+                    <p>{{ Lang::get('Password must contain:') }}</p>
+                    <p>- {{ Lang::get('minimum 7 symbols') }}</p>
+                    <p>- {{ Lang::get('minimum 1 character') }}</p>
+                    <p>- {{ Lang::get('minimum 1 digit') }}</p>
                 </div>
             </div>
         </div>

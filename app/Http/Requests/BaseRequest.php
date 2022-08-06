@@ -24,14 +24,14 @@ class BaseRequest extends FormRequest
     public function messages()
     {
         return [
-            'required' => trans('The :attribute field is required.'),
-            'unique' => 'The :attribute is already used.',
-            'min' => 'The :attribute must be minimum :min symbols.',
-            'max' => 'The :attribute must be maximum :max symbols.',
-            'email' => 'The :attribute must be email type.',
-            'required_without' => 'The :attribute or :values required.',
-            'required_without_all' => 'The :attribute or :values required.',
-            'confirmed' => 'The :attribute does not match.',
+            'required' => 'The :attribute field is required',
+            'unique' => 'The :attribute is already used',
+            'min' => 'The :attribute must be minimum :min symbols',
+            'max' => 'The :attribute must be maximum :max symbols',
+            'email' => 'The :attribute must be email type',
+            'required_without' => 'The :attribute or :values required',
+            'required_without_all' => 'The :attribute or :values required',
+            'confirmed' => 'The :attribute does not match',
         ];
     }
 

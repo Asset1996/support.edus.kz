@@ -91,6 +91,11 @@ class User extends BaseModel implements
             'has_access' => 0, 
             'verification_token' => $token
         ])->first();
+        if(!$user){
+            $this->errors[] = trans('Email verification failed');
+            return False;
+        }
+
         $verified = $user->update([
             'email_verified_at' => now(),
             'verification_token' => null,
@@ -108,7 +113,7 @@ class User extends BaseModel implements
             Tickets::get_tickets_from_temp($user->tickets_tmp);
         }
 
-        return True;
+        return $user;
     }
 
     /**
@@ -158,5 +163,26 @@ class User extends BaseModel implements
      */
     public function isUserExist(array $data){
         return $this::select('id')->where($data)->first();
+    }
+
+    /**
+     * Updates the user in DB.
+     *
+     * @param array $conditions
+     * @param array $context
+     * @return object 
+     */
+    public function _update(array $conditions = [], array $context = []){
+        return $this::where($conditions)->update($context);
+    }
+
+    /**
+     * Deletes the user from DB.
+     *
+     * @param array $conditions
+     * @return object 
+     */
+    public function _delete(array $conditions){
+        return $this::where($conditions)->delete();
     }
 }

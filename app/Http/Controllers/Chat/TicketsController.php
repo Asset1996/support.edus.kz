@@ -47,9 +47,9 @@ class TicketsController extends Controller
 
         if(!$model->hasErrors()){
             if ($model instanceof Tickets) {
-                session()->flash('success_message', 'Ticket successfully created.');
+                session()->flash('success_message', trans('Ticket successfully created'));
             } elseif ($model instanceof TicketsTmp) {
-                session()->flash('success_message', 'Ticket successfully created. You need to activate your email.');
+                session()->flash('success_message', trans('Ticket successfully created. You need to activate your email'));
             }
             return redirect()->route('ticket-created', ['ticket_id' => $ticket->id]);
         }
@@ -89,5 +89,62 @@ class TicketsController extends Controller
         return view('pages.chat.ticketsList', [
             'my_tickets' => $my_tickets,
         ]);
+    }
+
+    /**
+     * Update the ticket.
+     *
+     * @return view
+     */
+    public function update($lang, $ticket_id){
+        $my_ticket = Tickets::where(['id' => $ticket_id])->first();
+
+        $service_types = \App\Models\Spr\SprServiceTypes::get();
+
+        return view('pages.chat.updateTicket', [
+            'user' => Auth::user(),
+            'service_types' => $service_types,
+            'my_ticket' => $my_ticket,
+        ]);
+    }
+
+    /**
+     * Processes the POST request from update ticket page form.
+     *
+     * @param AskQuestionRequest $request - validation request.
+     * @return redirect 
+     */
+    public function updatePost(\App\Http\Requests\Chat\AskQuestionRequest $request, $lang, $ticket_id){
+        $context = request()->only(
+            'title', 'initial_message', 'service_types_id'
+        );
+        $conditions['id'] = $ticket_id;
+
+        $my_ticket = new Tickets();
+        $my_ticket->_update($conditions, $context);
+
+        session()->flash('success_message', trans('Ticket successfully updated'));
+        return redirect()->route('tickets-list');
+    }
+
+    /**
+     * Processes the POST request from update ticket page form.
+     *
+     * @param AskQuestionRequest $request - validation request.
+     * @return redirect 
+     */
+    public function delete($lang, $ticket_id){
+        $conditions['id'] = $ticket_id;
+
+        $my_ticket = new Tickets();
+        $my_ticket->_delete($conditions);
+
+        if($my_ticket->hasErrors()){
+            session()->flash('error_message', $my_ticket->getFirstError());
+        }else{
+            session()->flash('success_message', trans('Ticket successfully deleted'));
+        }
+        
+        return redirect()->route('tickets-list');
     }
 }

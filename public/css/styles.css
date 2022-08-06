@@ -25,6 +25,10 @@
     
 }
 
+.main-banner{
+    padding: 20px 0;
+}
+
 .auth-action-button{
     background-color: transparent;
     text-decoration: underline;
@@ -33,6 +37,40 @@
     cursor: pointer;
 }
 
+.table-action-button{
+    background-color: transparent;
+    text-decoration: none;
+    border: none;
+    color: blue;
+    cursor: pointer;
+}
+
+.table-action-form{
+    display:inline-block;
+}
+
 .auth-action-button:hover{
     color: rgb(91, 91, 255);
+}
+
+.header-button {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.header-button.person {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.header-button.person>a {
+    color: black;
+}
+
+.header-button.person>a:hover {
+    color: rgb(91, 91, 255);
+}
+
+.header-button.person>a>p {
+    margin: 0;
 }

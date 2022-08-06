@@ -41,7 +41,25 @@ abstract class BaseModel extends Model
     /**
      * Creates the new record in DB.
      *
+     * @param array $context
      * @return bool|array|object
      */
-    abstract public function _create(array $context = []);
+    abstract public function _create(array $context);
+
+    /**
+     * Updates the record in DB.
+     *
+     * @param array $conditions
+     * @param array $context
+     * @return bool|array|object
+     */
+    abstract public function _update(array $conditions, array $context);
+
+    /**
+     * Deletes the record in DB.
+     *
+     * @param array $conditions
+     * @return bool
+     */
+    abstract public function _delete(array $conditions);
 }

@@ -5,6 +5,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Chat\TicketsController;
+use App\Http\Controllers\User\ProfileController;
 
 Route::prefix('{lang?}')->middleware('locale')->group(function(){
     
@@ -64,12 +65,17 @@ Route::prefix('{lang?}')->middleware('locale')->group(function(){
             Route::get('/list', [TicketsController::class, 'list'])
                 ->middleware('authenticated')
                 ->name('tickets-list');
-
-            //TODO
             Route::post('/delete/{ticket_id}', [TicketsController::class, 'delete'])
                 ->middleware('authenticated')
                 ->name('delete-ticket');
-        });
 
+            
+            
+        });
+        Route::prefix('profile')->middleware('authenticated')->group(function(){
+            //TODO
+            Route::get('', [ProfileController::class, 'getProfile'])->name('profile');
+            Route::post('/update', [ProfileController::class, 'updateProfile'])->name('profile-update');
+        });
     });
 });

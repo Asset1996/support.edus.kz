@@ -66,6 +66,22 @@ class User extends BaseModel implements
         return $this->hasMany(Tickets::class, 'created_by', 'id');
     }
 
+    /**
+     * Get the messages that the User created.
+     */
+    public function created_messages()
+    {
+        return $this->hasMany(Messages::class, 'created_by', 'id');
+    }
+
+    /**
+     * Get the tickets that the User evaluated.
+     */
+    public function evaluated_messages()
+    {
+        return $this->hasMany(Messages::class, 'evaluated_by', 'id');
+    }
+
     public function tickets_tmp()
     {
         return $this->hasMany(TicketsTmp::class, 'created_by', 'id');

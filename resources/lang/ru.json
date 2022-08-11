@@ -11,6 +11,7 @@
     "Menu": "Меню",
     "Ask question": "Задать вопрос",
     "Register": "Зарегистрироваться",
+    "register": "зарегистрироваться",
     "Login": "Войти",
     "Logout": "Выйти",
     "Sign up": "Регистрация",
@@ -51,7 +52,8 @@
     "Your question regarding": "Ваш вопрос касательно",
     "Hint": "Подсказка",
     "Our support team makes his best effort to process your request ASAP. As soon as we respond to your request (ticket), you will receive an email notification": "Наша служба поддержки делает все возможное, чтобы обрабатывать вашио бращения в кратчайшие сроки. Как только мы ответим на ваш запрос (тикет), вам придет уведомление на электронную почту",
-    "We try to respond to all requests (tickets) as soon as possible. But we can do it even faster if you write your request in more detail and clearly. Please note that if you supplement an already open request with new details, the response time may increase as the request is re-added to the queue. Therefore, it is important to send a detailed request right away": "Мы стараемся отвечать на все запросы (тикеты) как можно скорее. Но мы сможем делать это еще быстрее, если вы напишите ваш запрос более детально и понятно. Обратите внимание, что если дополнять уже открытый запрос новыми подробностями, время ответа может увеличиться, так как заявка заново добавляется в очередь. Поэтому важно сразу отправлять подробный запрос",
+    "We try to respond to all requests (tickets) as soon as possible. But we can do it even faster if you write your request in more detail and clearly": "Мы стараемся отвечать на все запросы (тикеты) как можно скорее. Но мы сможем делать это еще быстрее, если вы напишите ваш запрос более детально и понятно",
+    "Please note that if you supplement an already open request with new details, the response time may increase as the request is re-added to the queue. Therefore, it is important to send a detailed request right away": "Обратите внимание, что если дополнять уже открытый запрос новыми подробностями, время ответа может увеличиться, так как заявка заново добавляется в очередь. Поэтому важно сразу отправлять подробный запрос",
     "Send request": "Отправить запрос",
     "Save request": "Сохранить запрос",
     "Write request": "Написать запрос",
@@ -92,5 +94,24 @@
     "Ticket successfully deleted": "Тикет успешно удален",
     "Ticket successfully created. You need to activate your email": "Тикет успешно создан. Вам надо верифицировать ваш email",
     "Ticket successfully created": "Тикет успешно создан",
-    "You already have an account with current email": "Пользователь по указанному email уже существует в системе"
+    "You already have an account with current email": "Пользователь по указанному email уже существует в системе",
+    "If an account is found, an email with a link will be sent to your email": "В случае обнаружении аккаунта на вашу почту будет отправлено сообщение со ссылкой",
+    "If the mail is not found, you will need to": "Если почта не обнаружится, вам нужно",
+
+    "Forgot the password?": "Забыли пароль?",
+    "Remembered the password?": "Вспомнили пароль?",
+    "Have a registration?": "Есть регистрация?",
+    "Remind account password": "Напомнить пароль аккаунта",
+
+    "The new password successfully set": "Новый пароль успешно установлен",
+    "New password": "Новый пароль",
+    "Email verification": "Подтверждение электронной почты",
+    "My profile": "Мой профиль",
+    "Tickets amount": "Количество обращений",
+    "Comments amount": "Количество комментов",
+    "Evaluations (average)": "Средняя оценка",
+
+    "Request activation": "Активация запроса",
+    "you have created a new request, but it is inactive - in order for technical support specialists to see it, you need to confirm the email you specified": "вы создали новое обращение, однако оно неактивно - для того, чтобы его увидели специалисты техподдержки, вам необходимо подтвердить указанную вами почту",
+    "An activation link has been sent to your email, please check your inbox": "На вашу почту отправлена ссылка для активации, проверьте почтовый ящик"
 }

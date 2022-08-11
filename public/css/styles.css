@@ -74,3 +74,27 @@
 .header-button.person>a>p {
     margin: 0;
 }
+
+.info-block {
+    background-color: rgb(255, 229, 174);
+    padding: 30px 30px;
+    border: 1px solid rgb(252, 205, 105);
+    border-radius: 25px;
+    height: 20%;
+}
+
+.info-block>p {
+    color: rgb(110, 110, 110);
+    font-size: 13px;
+}
+
+.profile-input{
+    display: inline;
+    width: auto !important;
+}
+
+@media (max-width: 576px){
+    .info-block {
+        margin: 20px 20px;
+    }
+}

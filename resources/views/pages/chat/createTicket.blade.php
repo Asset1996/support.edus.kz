@@ -1,15 +1,16 @@
 @extends('layouts.default')
+@section('title', Lang::get('New appeal'))
 
 @section('content')
 <body>
     <div class="main-banner">
         <h3>{{ Lang::get('New appeal') }}</h3>
         <div class="row">
-            <div class="col-8">
+            <div class="col-md-8 col-sm-12">
                 {{ 
                     Lang::get('Our support team makes his best effort to process your request ASAP. As soon as we respond to your request (ticket), you will receive an email notification') 
                 }}
-                <form method="POST" action="{{ route('ask-question-post') }}">
+                <form method="POST" action="{{ route('ask-question-post') }}" enctype="multipart/form-data">
                     @csrf
                     {{-- First page --}}
                     <div id="first_block">
@@ -76,18 +77,31 @@
                             <textarea class="form-control" id="ask_initial_message" name="initial_message" rows="6" required></textarea>
                         </div>
 
+                        {{-- File upload --}}
+                        <label for="ask-file-input" class="btn">Select Image</label>
+                        <input 
+                            name='ask_images[]'
+                            class="form-control filestyle" 
+                            type='file' 
+                            data-classButton="btn btn-primary"
+                            id="ask-file-input" 
+                            data-input="false" 
+                            multiple/>
+                        {{-- File upload END --}}
+
                         <div class="d-flex mx-4 mb-3 mb-lg-4">
                             <button type="submit" class="btn btn-primary btn-lg">{{Lang::get("Send request")}}</button>
                         </div>
                     </div>
                     {{-- Second page END --}}
                 </form>
+                <div id="images-preview"></div>
+                
             </div>
-            <div class="col-4">
-                <h3>{{ Lang::get('Hint') }}</h3>
-                {{
-                    Lang::get('We try to respond to all requests (tickets) as soon as possible. But we can do it even faster if you write your request in more detail and clearly. Please note that if you supplement an already open request with new details, the response time may increase as the request is re-added to the queue. Therefore, it is important to send a detailed request right away')
-                }}
+            <div class="col-md-4 col-sm-12 info-block">
+                <h5>{{ Lang::get('Hint') }}</h5>
+                <p>{{ Lang::get('We try to respond to all requests (tickets) as soon as possible. But we can do it even faster if you write your request in more detail and clearly') }}. </p>
+                <p>{{ Lang::get('Please note that if you supplement an already open request with new details, the response time may increase as the request is re-added to the queue. Therefore, it is important to send a detailed request right away') }}. </p>
             </div>
         </div>
     </div>
@@ -99,5 +113,31 @@
         $('#first_block').hide();
         $('#second_block').show(); 
     }
+
+    $("#images-preview").hide();
+    function readURL(input) {
+        $("#images-preview").show();
+        $("#images-preview").empty();
+        
+        files = input.files
+
+        if (files) {
+            for (let i = 0; i < files.length; i++) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    jQuery('<img>', {
+                        id: 'image-' + i,
+                        class: 'uploading-files col-sm',
+                    }).appendTo('#images-preview');
+                    $('#image-' + i).attr('src', e.target.result);
+                }
+                reader.readAsDataURL(files[i]);
+                
+            }
+        }
+    }
+    $("#ask-file-input").change(function(){
+        readURL(this);
+    });
 </script>
 @stop

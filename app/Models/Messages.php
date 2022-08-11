@@ -40,6 +40,22 @@ class Messages extends BaseModel
     ];
 
     /**
+     * Get the creator of the message.
+     */
+    public function created_by()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+
+    /**
+     * Get the evaluator of the message.
+     */
+    public function evaluated_by()
+    {
+        return $this->belongsTo(User::class, 'evaluated_by', 'id');
+    }
+
+    /**
      * Creates message.
      *
      * @param array $context

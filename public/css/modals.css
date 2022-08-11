@@ -1,0 +1,23 @@
+.modal-body {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.modal-submit-button {
+    position: relative;
+    width: 100%;
+}
+.pull-down{
+    position: relative;
+    bottom: 0;
+}
+
+@media (max-width: 576px){
+    .modal-info-block {
+        margin: 20px 5px;
+    }
+    .modal-body {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+}

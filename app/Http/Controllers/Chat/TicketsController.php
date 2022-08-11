@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Tickets;
 use App\Models\TicketsTmp;
+use App\Models\Uploads;
+
+use Illuminate\Support\Facades\Storage;
 
 class TicketsController extends Controller
 {
@@ -45,6 +48,23 @@ class TicketsController extends Controller
 
         $ticket = $model->_create($context);
 
+        if(request()->has('ask_images')){
+            $upload_model = new Uploads();
+            foreach(request()->file('ask_images') as $img){
+                $fileName = uniqid() . '.' . $img->extension();
+                $filePath = 'images/'. date('Y') . '/' . date('m') . '/' . date('d') . '/' .$fileName;
+                Storage::disk('public')->put($filePath, $img->get());
+                $context = [
+                    'name' => $fileName,
+                    'ticket_uid' => $ticket->ticket_uid,
+                    'path' => 'storage/' . $filePath,
+                    'extention' => $img->extension(),
+                    'size' => $img->getSize()
+                ];
+                $upload_model->_create($context);
+            }
+        }
+
         if(!$model->hasErrors()){
             if ($model instanceof Tickets) {
                 session()->flash('success_message', trans('Ticket successfully created'));
@@ -72,6 +92,8 @@ class TicketsController extends Controller
             $template = 'pages.chat.tempTicketCreated';
             $ticket = TicketsTmp::where(['id' => $ticket_id])->first();
         }
+
+        // echo '<pre>' . print_r($ticket->uploads, true);exit();
 
         return view($template, [
             'ticket' => $ticket,

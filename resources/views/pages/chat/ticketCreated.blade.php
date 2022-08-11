@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('title', Lang::get('Ticket created'))
 
 @section('content')
 <body>
@@ -14,6 +15,13 @@
             <p class="paragraph"><h4>{{ $ticket->title }}</h4></p>
             <p class="paragraph">{{ $ticket->initial_message }}</p>
             <p class="paragraph">{{ Lang::get('Attached files') }}</p>
+            @if ($ticket->uploads->isNotEmpty())
+                <div id="images-preview">
+                    @foreach ($ticket->uploads as $upload)
+                        <img class="uploading-files col-sm" src="{{URL::asset($upload->path)}}" alt="">
+                    @endforeach
+                </div>
+            @endif
         </div>
     </div>
 </body>

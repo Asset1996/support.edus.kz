@@ -158,7 +158,7 @@ class AuthController extends Controller
             return redirect()->home();
         }
         $this->user->setNewPassword($user);
-        session()->flash('success_message', trans('Thew new password successfully set'));
+        session()->flash('success_message', trans('The new password successfully set'));
         return redirect()->home();
     }
 }

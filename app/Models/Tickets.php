@@ -15,6 +15,7 @@ class Tickets extends BaseModel
      * @var array<int, string>
      */
     protected $fillable = [
+        'ticket_uid',
         'title',
         'initial_message',
         'service_types_id',
@@ -52,6 +53,14 @@ class Tickets extends BaseModel
     }
 
     /**
+     * Get all the uploads of current ticket.
+     */
+    public function uploads()
+    {
+        return $this->hasMany(\App\Models\Uploads::class, 'ticket_uid', 'ticket_uid');
+    }
+
+    /**
      * Get the tickets status.
      */
     public function ticket_status()
@@ -67,6 +76,7 @@ class Tickets extends BaseModel
      */
     public function _create(array $context = []){
         $context['created_by'] = auth()->user()->id;
+        $context['ticket_uid'] = 't_' . uniqid();
         return $this::create($context);
     }
 

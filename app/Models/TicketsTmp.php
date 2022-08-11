@@ -22,6 +22,7 @@ class TicketsTmp extends BaseModel
      * @var array<int, string>
      */
     protected $fillable = [
+        'ticket_uid',
         'title',
         'initial_message',
         'service_types_id',
@@ -44,6 +45,14 @@ class TicketsTmp extends BaseModel
     public function user()
     {
         return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+
+    /**
+     * Get all the uploads of current ticket.
+     */
+    public function uploads()
+    {
+        return $this->hasMany(\App\Models\Uploads::class, 'ticket_uid', 'ticket_uid');
     }
 
     /**
@@ -71,6 +80,7 @@ class TicketsTmp extends BaseModel
         $mail_sender = new MailSender(env('VERIFY_EMAIL_ROUTE'), 'mail.VerifyEmailTemp');
         $mail_sender->send($context);
 
+        $context['ticket_uid'] = 't_' . uniqid();
         return $this::create($context);
     }
 

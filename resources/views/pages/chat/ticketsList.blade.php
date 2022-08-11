@@ -1,8 +1,10 @@
 @extends('layouts.default')
+@section('title', Lang::get('My appeals'))
 
 @section('content')
 <body>
     <div class="main-banner">
+      <h3>{{ Lang::get('My appeals') }}</h3>
       <table class="table table-hover">
           <thead>
             <tr>
@@ -17,7 +19,9 @@
           <tbody>
             @foreach ($my_tickets as $item)
             <tr>
-              <th scope="row">{{ $item->id }}</th>
+              <td scope="row">
+                <a href="#">{{ $item->ticket_uid }}</a>
+              </td>
               <td>{{ $item->title }}</td>
               <td>{{ $item->created_at }}</td>
               <td>{{ $item->ticket_status->name_ru }}</td>
@@ -66,7 +70,6 @@
               </td>
             </tr>
             @endforeach
-            
           </tbody>
       </table>
     </div>

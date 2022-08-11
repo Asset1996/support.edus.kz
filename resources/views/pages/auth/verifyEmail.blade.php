@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('title', Lang::get('Email verification'))
 
 @section('content')
     <body>

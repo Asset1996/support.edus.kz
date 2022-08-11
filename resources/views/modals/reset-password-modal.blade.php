@@ -9,36 +9,31 @@
         </div>
         <div class="modal-body">
             <div class="row">
-                <div class="col-6">
+                <div class="col-sm">
                     <form method="POST" action="{{ route('reset-password') }}" class="mx-1 mx-md-4">
                         @csrf
-                        <div class="d-flex flex-row align-items-center mb-4">
-                            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                        <div class="align-items-center">
                             <div class="form-outline flex-fill mb-0">
                                 <input type="email" id="reset_password_email" name="email" class="form-control" required/>
                                 <label class="form-label" for="reset_password_email">{{Lang::get("Email")}}</label>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                            <button type="submit" class="btn btn-primary btn-lg">{{Lang::get("Reset password")}}</button>
+                        <div class="justify-content-center">
+                          <button type="submit" class="btn btn-primary modal-submit-button">{{Lang::get("Reset password")}}</button>
                         </div>
-                        <div class="d-flex flex-row align-items-center mb-4">
-                            {{ Lang::get('Remembered the password?') }}
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
-                                {{Lang::get("Login")}}
-                              </button>
-                        </div>
+                        <div class="align-items-center pull-down">
+                          {{ Lang::get('Remembered the password?') }}
+                          <a data-toggle="modal" data-target="#loginModal" data-dismiss="modal" href="">{{Lang::get("Login")}}</a>
+                      </div>
                     </form>
                 </div>
-                <div class="col-6">
-                    {{ Lang::get('If an account is found, an email with a link will be sent to your email.') }}
+                <div class="col-sm modal-info-block">
+                    {{ Lang::get('If an account is found, an email with a link will be sent to your email') }}.
                     <p></p>
-                    {{ Lang::get('If the mail is not found, you will need to register') }}
+                    {{ Lang::get('If the mail is not found, you will need to') }} 
+                    <a data-toggle="modal" data-target="#registerModal" data-dismiss="modal" href="">{{ Lang::get('register') }}</a>
                 </div>
             </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ Lang::get('Close') }}</button>
         </div>
       </div>
     </div>

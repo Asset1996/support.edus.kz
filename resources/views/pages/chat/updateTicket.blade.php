@@ -1,11 +1,12 @@
 @extends('layouts.default')
+@section('title', Lang::get('Update appeal No') . $my_ticket->id)
 
 @section('content')
 <body>
     <div class="main-banner"> 
         <h3>{{ Lang::get('Update appeal No') }} {{$my_ticket->id}}</h3>
         <div class="row">
-            <div class="col-8">
+            <div class="col-md-8 col-sm-12">
                 {{ 
                     Lang::get('Our support team makes his best effort to process your request ASAP. As soon as we respond to your request (ticket), you will receive an email notification.') 
                 }}
@@ -83,11 +84,10 @@
                     {{-- Second page END --}}
                 </form>
             </div>
-            <div class="col-4">
-                <h3>{{ Lang::get('Hint') }}</h3>
-                {{
-                    Lang::get('We try to respond to all requests (tickets) as soon as possible. But we can do it even faster if you write your request in more detail and clearly. Please note that if you supplement an already open request with new details, the response time may increase as the request is re-added to the queue. Therefore, it is important to send a detailed request right away.')
-                }}
+            <div class="col-md-4 col-sm-12 info-block">
+                <h5>{{ Lang::get('Hint') }}</h5>
+                <p>{{ Lang::get('We try to respond to all requests (tickets) as soon as possible. But we can do it even faster if you write your request in more detail and clearly') }}. </p>
+                <p>{{ Lang::get('Please note that if you supplement an already open request with new details, the response time may increase as the request is re-added to the queue. Therefore, it is important to send a detailed request right away') }}. </p>
             </div>
         </div>
     </div>

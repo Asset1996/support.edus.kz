@@ -15,6 +15,7 @@ class CreateSupportTicketsTmpTable extends Migration
     {
         Schema::create('support_tickets_tmp', function (Blueprint $table) {
             $table->id();
+            $table->string('ticket_uid')->length(20)->unique()->comment('Уникальный ID тикета');
             $table->string('title')->length(150)->comment('Наименование тикета');
             $table->text('initial_message')->comment('Вводный текст тикета');
             $table->integer('service_types_id')->comment('Тип сервиса (Колледж, школа, абитуриент)');

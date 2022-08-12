@@ -128,7 +128,7 @@ class AuthController extends Controller
     /**
      * Page for setting the new password.
      *
-     * @return redirect
+     * @return redirect|view
      */
     public function setNewPassword(string $lang, string $token){
         
@@ -140,6 +140,30 @@ class AuthController extends Controller
             return redirect()->home();
         }
         return view('pages.auth.setNewPassword', ['token' => $token, 'name' => $user->name]);
+    }
+
+    /**
+     * Page for changing the password only for Authenticated user.
+     *
+     * @return view
+     */
+    public function changePassword(){
+        
+        return view('pages.auth.changePassword');
+    }
+
+    /**
+     * Handle post request for changing the password only for Authenticated user.
+     *
+     * @return view
+     */
+    public function changePasswordPost(\App\Http\Requests\Auth\ChangePasswordRequest $request)
+    {
+        $user = auth()->user();
+        $user->password = \Illuminate\Support\Facades\Hash::make(request()->input('password'));
+        $user->save();
+        session()->flash('success_message', trans('The new password was successfully saved'));
+        return redirect()->route('profile');
     }
 
     /**

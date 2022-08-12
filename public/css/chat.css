@@ -1,0 +1,55 @@
+
+.starrating{
+    justify-content: left;
+}
+
+.starrating > input {display: none;}  /* Remove radio buttons */
+
+.starrating > label:before { 
+  content: "\f005"; /* Star */
+  margin: 2px;
+  font-size: 1em;
+  font-family: FontAwesome;
+  display: inline-block; 
+}
+
+.starrating > label
+{
+  color: #d8bf64; /* Start color when not clicked */
+}
+
+.starrating > input:checked ~ label
+{   
+    color: #fff346 ; 
+} /* Set yellow color when star checked */
+
+.starrating > input:hover ~ label
+{ color: #fff346 ;  } /* Set yellow color when star hover */
+
+.created-date{
+    float:right;
+}
+
+.created-by{
+    float:right;
+    font-weight: bold;
+}
+
+.operators-message{
+    background-color: #93efff;
+    padding: 30px 30px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.clients-message{
+    background-color: #a8ffaf;
+    padding: 30px 30px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.evaluation-message{
+    max-width: 300px;
+    overflow: hidden;
+}

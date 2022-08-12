@@ -46,12 +46,21 @@ Route::prefix('{lang?}')->middleware('locale')->group(function(){
             Route::post('/set-new-password/{token}', [AuthController::class, 'setNewPasswordPost'])
                 ->middleware('guest')
                 ->name('set-new-password-post');
+            Route::get('/change-password', [AuthController::class, 'changePassword'])
+                ->middleware('authenticated')
+                ->name('change-password');
+            Route::post('/change-password-post', [AuthController::class, 'changePasswordPost'])
+                ->middleware('authenticated')
+                ->name('change-password-post');
         });
 
         /**
          * Ticket routes.
          */
         Route::prefix('ticket')->group(function(){
+            Route::get('/view/{ticket_uid}', [TicketsController::class, 'viewTicket'])
+                ->middleware('authenticated')
+                ->name('view-ticket');
             Route::get('/ask-question', [TicketsController::class, 'askQuestion'])->name('ask-question');
             Route::post('/ask-question', [TicketsController::class, 'askQuestionPost'])->name('ask-question-post');
             Route::get('/ticket-created/{ticket_id}', [TicketsController::class, 'ticketCreated'])->name('ticket-created');
@@ -69,6 +78,12 @@ Route::prefix('{lang?}')->middleware('locale')->group(function(){
                 ->middleware('authenticated')
                 ->name('delete-ticket');
 
+            /**
+             * AJAX request.
+             */
+            Route::post('/message/evaluate', [TicketsController::class, 'evaluateMessage'])
+                ->middleware('authenticated')
+                ->name('evaluate-message');
             
             
         });

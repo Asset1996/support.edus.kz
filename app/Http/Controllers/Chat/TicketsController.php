@@ -5,6 +5,7 @@
 namespace App\Http\Controllers\Chat;
 
 use App\Http\Controllers\Controller;
+use App\Models\Messages;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Tickets;
 use App\Models\TicketsTmp;
@@ -111,6 +112,30 @@ class TicketsController extends Controller
         return view('pages.chat.ticketsList', [
             'my_tickets' => $my_tickets,
         ]);
+    }
+
+    /**
+     * Renders the single ticket view.
+     *
+     * @return view
+     */
+    public function viewTicket($lang, $ticket_uid){
+        $ticket = Tickets::where(['ticket_uid' => $ticket_uid])->first();
+        return view('pages.chat.viewTicket', [
+            'ticket' => $ticket,
+        ]);
+    }
+
+    /**
+     * Evaluates the message.
+     *
+     * @return view
+     */
+    public function evaluateMessage(){
+        $message_id = request()->input('message_id');
+        $evaluation = request()->input('evaluation');
+        Messages::where(['id' => $message_id])->update(['evaluation'=> $evaluation]);
+        return response(trans('Evaluation saved'), 200)->header('Content-Type', 'text/plain');;
     }
 
     /**

@@ -69,6 +69,14 @@ class Tickets extends BaseModel
     }
 
     /**
+     * Get the tickets status.
+     */
+    public function messages()
+    {
+        return $this->hasMany(\App\Models\Messages::class, 'ticket_uid', 'ticket_uid');
+    }
+
+    /**
      * Creates ticket.
      *
      * @param array $context

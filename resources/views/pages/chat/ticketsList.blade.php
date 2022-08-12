@@ -20,7 +20,7 @@
             @foreach ($my_tickets as $item)
             <tr>
               <td scope="row">
-                <a href="#">{{ $item->ticket_uid }}</a>
+                <a href="{{ route('view-ticket', ['ticket_uid' => $item->ticket_uid]) }}">{{ $item->ticket_uid }}</a>
               </td>
               <td>{{ $item->title }}</td>
               <td>{{ $item->created_at }}</td>

@@ -1,6 +1,17 @@
 @extends('layouts.default')
 @section('title', Lang::get('My profile'))
 
+<style>
+td {
+  padding-top:10px;
+  padding-bottom:10px;
+  padding-right:10px;
+}
+form{
+    margin: 0;
+}
+</style>
+
 @section('content')
 <body>
     <div class="main-banner">
@@ -9,15 +20,14 @@
             <div class="col-md-8 col-sm-12">
                 <hr class="my-4">
                 <div class="row">
-                    <div class="col-6" style="text-align:right">
-                        <p>{{ Lang::get('Name') }}:</p>
-                        <p>{{ Lang::get('Surname') }}:</p>
-                        <p>{{ Lang::get('Email') }}:</p>
-                        <p>{{ Lang::get('Phone') }}:</p>
-                    </div>
-                    <div class="col-6">
-                        <p>{{ $user->name }}</p>
-                        <p>
+                    <table>
+                        <tr>
+                            <td style="text-align:right">{{ Lang::get('Name') }}:</td>
+                            <td>{{ $user->name }}</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:right">{{ Lang::get('Surname') }}:</td>
+                            <td>
                             @if ($user->surname) 
                                 <form id="profile-surname-form-default" method="POST" action="{{ route('profile-update') }}">
                                     @csrf
@@ -32,9 +42,15 @@
                                     <button type="submit" class="btn btn-primary btn-sm">Изменить</button>
                                 </form>
                             @endif
-                        </p>
-                        <p>{{ $user->email }}</p>
-                        <p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:right">{{ Lang::get('Email') }}:</td>
+                            <td>{{ $user->email }}</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:right">{{ Lang::get('Phone') }}:</td>
+                            <td>
                             @if ($user->phone) 
                                 <form id="profile-phone-form-default" method="POST" action="{{ route('profile-update') }}">
                                     @csrf
@@ -49,8 +65,17 @@
                                     <button type="submit" class="btn btn-primary btn-sm" id="profile-phone-submit">Изменить</button>
                                 </form>
                             @endif
-                        </p>
-                    </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:right">{{ Lang::get('Password') }}:</td>
+                            <td><a href="{{ route('change-password') }}">{{ Lang::get('Change') }}</a></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:right">{{ Lang::get('Status') }}:</td>
+                            <td>{{ Lang::get('Active') }}</td>
+                        </tr>
+                    </table>
                 </div>
                 
                 <hr class="my-4">

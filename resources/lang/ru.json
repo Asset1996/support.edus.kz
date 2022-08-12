@@ -81,6 +81,10 @@
     "Chat": "Переписка",
     "Action": "Действие",
     "Update": "Редактировать",
+    "Change": "Изменить",
+    "Active": "Активный",
+    "Old password": "Старый пароль",
+    "Incorrect old password": "Старый пароль не совпадает",
 
     "Your request successfully processed. Please, follow the link, that we sent to you email": "Ваш запрос успешно обработан. Пожалуйста, перейдите по ссылке, которую мы отправили на вашу почту",
     "To register, the system requires your name and your email address": "Для регистрации система требует вашего имени и адреса электронной почты.",
@@ -97,6 +101,8 @@
     "You already have an account with current email": "Пользователь по указанному email уже существует в системе",
     "If an account is found, an email with a link will be sent to your email": "В случае обнаружении аккаунта на вашу почту будет отправлено сообщение со ссылкой",
     "If the mail is not found, you will need to": "Если почта не обнаружится, вам нужно",
+    "Please, enter the old and new password": "Пожалуйста, введите свой действующий и новый пароль",
+    "The new password was successfully saved": "Новый пароль успешно сохранен",
 
     "Forgot the password?": "Забыли пароль?",
     "Remembered the password?": "Вспомнили пароль?",

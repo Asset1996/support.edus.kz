@@ -20,7 +20,7 @@ class CreateSupportUserTable extends Migration
             $table->string('surname')->length(50)->comment('Фамилия')->nullable();
             $table->string('lastname')->length(50)->comment('Отчество')->nullable();
             $table->string('email')->length(255)->comment('Электронная почта')->unique();
-            $table->integer('phone')->comment('Номер телефона')->nullable();
+            $table->integer('phone')->nullable();
             $table->integer('iin')->nullable();
             $table->timestamp('email_verified_at')->comment('Время вреификации почты')->nullable();
             $table->timestamp('phone_verified_at')->comment('Время вреификации номера телефона')->nullable();
@@ -35,6 +35,7 @@ class CreateSupportUserTable extends Migration
             $table->timestamp('updated_at')->comment('Время обновления записи')->useCurrentOnUpdate()->nullable();
         });
         DB::statement("ALTER TABLE support_user CHANGE iin iin BIGINT(12) UNSIGNED ZEROFILL COMMENT 'ИИН'");
+        DB::statement("ALTER TABLE support_user CHANGE phone phone BIGINT(12) COMMENT 'Номер телефона'");
     }
 
     /**

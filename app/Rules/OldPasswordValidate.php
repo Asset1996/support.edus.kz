@@ -3,8 +3,9 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 
-class PasswordValidate implements Rule
+class OldPasswordValidate implements Rule
 {
     /**
      * Create a new rule instance.
@@ -25,11 +26,7 @@ class PasswordValidate implements Rule
      */
     public function passes($attribute, $value)
     {
-        $number = preg_match('@[0-9]@', $value);
-        $character = preg_match('@[a-zA-Z]@', $value);
-        
-        
-        if (!$number || !$character) {
+        if (!Hash::check($value, auth()->user()->password)){
             return False;
         }
         return True;
@@ -42,6 +39,6 @@ class PasswordValidate implements Rule
      */
     public function message()
     {
-        return trans('Password must contain minimum 1 character and 1 digit');
+        return trans('Incorrect old password');
     }
 }

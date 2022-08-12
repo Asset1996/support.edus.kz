@@ -42,7 +42,7 @@ class Messages extends BaseModel
     /**
      * Get the creator of the message.
      */
-    public function created_by()
+    public function message_created_by()
     {
         return $this->belongsTo(User::class, 'created_by', 'id');
     }
@@ -50,7 +50,7 @@ class Messages extends BaseModel
     /**
      * Get the evaluator of the message.
      */
-    public function evaluated_by()
+    public function message_evaluated_by()
     {
         return $this->belongsTo(User::class, 'evaluated_by', 'id');
     }

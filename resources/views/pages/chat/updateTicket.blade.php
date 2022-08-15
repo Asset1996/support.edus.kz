@@ -4,13 +4,13 @@
 @section('content')
 <body>
     <div class="main-banner"> 
-        <h3>{{ Lang::get('Update appeal No') }} {{$my_ticket->id}}</h3>
+        <h3>{{ Lang::get('Update appeal No') }} {{$my_ticket->ticket_uid}}</h3>
         <div class="row">
             <div class="col-md-8 col-sm-12">
                 {{ 
                     Lang::get('Our support team makes his best effort to process your request ASAP. As soon as we respond to your request (ticket), you will receive an email notification.') 
                 }}
-                <form method="POST" action="{{ route('update-ticket-post', ['ticket_id' => $my_ticket->id]) }}">
+                <form method="POST" action="{{ route('update-ticket-post', ['ticket_uid' => $my_ticket->ticket_uid]) }}">
                     @csrf
                     {{-- First page --}}
                     <div id="first_block">

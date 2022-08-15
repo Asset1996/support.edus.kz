@@ -42,6 +42,20 @@
     margin-top: 20px;
 }
 
+.appeals-filter{
+    padding: 30px 30px;
+    margin-top: 20px;
+}
+
+.filter-inner-block{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.filter-inner-block>p{
+    margin: 0;
+}
+
 .clients-message{
     background-color: #a8ffaf;
     padding: 30px 30px;

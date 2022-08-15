@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Chat\TicketsController;
 use App\Http\Controllers\User\ProfileController;
+use Illuminate\Support\Facades\Config;
 
 Route::prefix('{lang?}')->middleware('locale')->group(function(){
     
@@ -63,20 +64,23 @@ Route::prefix('{lang?}')->middleware('locale')->group(function(){
                 ->name('view-ticket');
             Route::get('/ask-question', [TicketsController::class, 'askQuestion'])->name('ask-question');
             Route::post('/ask-question', [TicketsController::class, 'askQuestionPost'])->name('ask-question-post');
-            Route::get('/ticket-created/{ticket_id}', [TicketsController::class, 'ticketCreated'])->name('ticket-created');
+            Route::get('/ticket-created/{ticket_uid}', [TicketsController::class, 'ticketCreated'])->name('ticket-created');
             //TODO
-            Route::get('/update/{ticket_id}', [TicketsController::class, 'update'])
+            Route::get('/update/{ticket_uid}', [TicketsController::class, 'update'])
                 ->middleware('authenticated')
                 ->name('update-ticket');
-            Route::post('/update/{ticket_id}', [TicketsController::class, 'updatePost'])
+            Route::post('/update/{ticket_uid}', [TicketsController::class, 'updatePost'])
                 ->middleware('authenticated')
                 ->name('update-ticket-post');
             Route::get('/list', [TicketsController::class, 'list'])
                 ->middleware('authenticated')
                 ->name('tickets-list');
-            Route::post('/delete/{ticket_id}', [TicketsController::class, 'delete'])
+            Route::post('/delete/{ticket_uid}', [TicketsController::class, 'delete'])
                 ->middleware('authenticated')
                 ->name('delete-ticket');
+            Route::post('/close/{ticket_uid}', [TicketsController::class, 'close'])
+                ->middleware('authenticated')
+                ->name('close-ticket');
 
             /**
              * AJAX request.

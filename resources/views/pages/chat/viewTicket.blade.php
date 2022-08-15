@@ -51,17 +51,70 @@
                                     <p><span class="created-by">{{ $message->message_created_by->name }}</span></p>
                                 </div>
                             </div>
-                            
-                            
                         </p>
                         @endif
                     </div>
                 @endforeach
             </div>
             <div class="col-md-3 col-sm-12">
-                Col 2
+                <div class="appeals-filter">
+                    <p>{{ Lang::get('Appeals filter') }}</p>
+                    <div class="filter-inner-block">
+                        <p>{{ Lang::get('Appeals category') }}:</p>
+                        <p><strong>{{ $ticket->service_type->name_ru }}</strong></p>
+                    </div>
+                    <div class="filter-inner-block">
+                        <p>{{ Lang::get('Subcategory') }}:</p>
+                        <p><strong>{{ $ticket->subcategory }}</strong></p>
+                    </div>
+                    <div class="filter-inner-block">
+                        <p>{{ Lang::get('Appeals priority') }}:</p>
+                        <p><strong>{{ $ticket->priority }}</strong></p>
+                    </div>
+                    <div class="filter-inner-block">
+                        <p>{{ Lang::get('Tags') }}:</p>
+                        <p><strong>{{ $ticket->tags }}</strong></p>
+                    </div>
+                </div>
             </div>
         </div>
+        @if ($ticket->status_id == 1)
+            <form method="GET" action="{{ route('update-ticket', ['ticket_uid' => $ticket->ticket_uid]) }}">
+                @csrf
+                <div class="d-flex mb-3 mb-lg-4">
+                    <button class="btn btn-primary" type="submit">{{ Lang::get('Update') }}</button>
+                </div>
+            </form>
+            <form method="POST" action="{{ route('delete-ticket', ['ticket_uid' => $ticket->ticket_uid]) }}">
+                @csrf
+                <div class="d-flex mb-3 mb-lg-4">
+                    <button class="btn btn-danger" type="submit">{{ Lang::get('Cancel') }}</button>
+                </div>
+            </form>
+        @elseif ($ticket->status_id == 2)
+            Ваше обращение обрабатывается оператором. Ждите ответа от оператора.
+        @elseif ($ticket->status_id == 3)
+            <form method="POST" action="#">
+                @csrf
+                <div class="d-flex flex-row align-items-cente">
+                    <div class="form-group">
+                        <label for="ask_initial_message">{{ Lang::get('Write new message') }}</label>
+                        <textarea class="form-control" id="message_body" name="message_body" rows="3" required></textarea>
+                    </div>
+                </div>
+                <div class="d-flex mb-3 mb-lg-4">
+                    <button class="btn btn-primary" type="submit">{{ Lang::get('Send') }}</button>
+                </div>
+            </form>
+            <form method="POST" action="{{ route('close-ticket', ['ticket_uid' => $ticket->ticket_uid]) }}">
+                @csrf
+                <div class="d-flex mb-3 mb-lg-4">
+                    <button class="btn btn-primary" type="submit">{{ Lang::get('Close ticket') }}</button>
+                </div>
+            </form>
+        @elseif ($ticket->status_id == 4)
+            {{ Lang::get('Ticket is closed') }}
+        @endif
     </div>
 </body>
 <script>

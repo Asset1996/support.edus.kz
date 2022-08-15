@@ -25,11 +25,11 @@
               <td>{{ $item->title }}</td>
               <td>{{ $item->created_at }}</td>
               <td>{{ $item->ticket_status->name_ru }}</td>
-              <td></td>
+              <td>{{ $item->messages->count() }}</td>
               <td class="table-action-td">
                 @if ( $item->status_id == 1 )
                   {{-- UPDATE BUTTON --}}
-                  <form class="table-action-form" method="GET" action="{{ route('update-ticket', ['ticket_id' => $item->id]) }}">
+                  <form class="table-action-form" method="GET" action="{{ route('update-ticket', ['ticket_uid' => $item->ticket_uid]) }}">
                     @csrf
                     <button class="table-action-button" type="submit">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -42,7 +42,7 @@
                 @endif
                 @if ( in_array($item->status_id, [1,2]) )
                   {{-- DELETE BUTTON --}}
-                  <form class="table-action-form" method="POST" action="{{ route('delete-ticket', ['ticket_id' => $item->id]) }}">
+                  <form class="table-action-form" method="POST" action="{{ route('delete-ticket', ['ticket_uid' => $item->ticket_uid]) }}">
                     @csrf
                     <button class="table-action-button" type="submit">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">

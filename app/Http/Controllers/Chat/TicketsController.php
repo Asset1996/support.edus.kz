@@ -121,6 +121,7 @@ class TicketsController extends Controller
      */
     public function viewTicket($lang, $ticket_uid){
         $ticket = Tickets::where(['ticket_uid' => $ticket_uid])->first();
+        // echo '<pre>' . print_r($ticket, true);exit();
         return view('pages.chat.viewTicket', [
             'ticket' => $ticket,
         ]);
@@ -143,8 +144,8 @@ class TicketsController extends Controller
      *
      * @return view
      */
-    public function update($lang, $ticket_id){
-        $my_ticket = Tickets::where(['id' => $ticket_id])->first();
+    public function update($lang, $ticket_uid){
+        $my_ticket = Tickets::where(['ticket_uid' => $ticket_uid])->first();
 
         $service_types = \App\Models\Spr\SprServiceTypes::get();
 
@@ -161,11 +162,11 @@ class TicketsController extends Controller
      * @param AskQuestionRequest $request - validation request.
      * @return redirect 
      */
-    public function updatePost(\App\Http\Requests\Chat\AskQuestionRequest $request, $lang, $ticket_id){
+    public function updatePost(\App\Http\Requests\Chat\AskQuestionRequest $request, $lang, $ticket_uid){
         $context = request()->only(
             'title', 'initial_message', 'service_types_id'
         );
-        $conditions['id'] = $ticket_id;
+        $conditions['ticket_uid'] = $ticket_uid;
 
         $my_ticket = new Tickets();
         $my_ticket->_update($conditions, $context);
@@ -177,11 +178,11 @@ class TicketsController extends Controller
     /**
      * Processes the POST request from update ticket page form.
      *
-     * @param AskQuestionRequest $request - validation request.
+     * @param int $ticket_uid - unique ID of ticket.
      * @return redirect 
      */
-    public function delete($lang, $ticket_id){
-        $conditions['id'] = $ticket_id;
+    public function delete($lang, $ticket_uid){
+        $conditions['ticket_uid'] = $ticket_uid;
 
         $my_ticket = new Tickets();
         $my_ticket->_delete($conditions);
@@ -193,5 +194,19 @@ class TicketsController extends Controller
         }
         
         return redirect()->route('tickets-list');
+    }
+
+    /**
+     * Updates the ticket status to "closed".
+     *
+     * @param int $ticket_uid - unique ID of ticket.
+     * @return redirect 
+     */
+    public function close($lang, $ticket_uid){
+        Tickets::where(['ticket_uid' => $ticket_uid])->update(['status_id' => 4]);
+
+        session()->flash('success_message', trans('Ticket successfully closed'));
+        
+        return redirect()->back();
     }
 }

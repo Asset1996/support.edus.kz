@@ -37,6 +37,13 @@
       <div class="header-button">
         <a href="{{ route('ask-question') }}" class="btn btn-primary">{{Lang::get("Ask question")}}</a>
       </div>
+      <div class="header-button">
+        @if (Lang::locale() == 'ru')
+          <a href="{{ URL::toRoute($cur = Route::current(), ['lang' => 'kk'] + $cur->parameters(), true) }}" class="btn btn-primary">KAZ</a>
+        @elseif(Lang::locale() == 'kk')
+        <a href="{{ URL::toRoute($cur = Route::current(), ['lang' => 'ru'] + $cur->parameters(), true) }}" class="btn btn-primary">RUS</a>
+        @endif
+      </div>
       @if (auth()->check())
         <div class="header-button">
           <form class="form-inline" method="POST" action="{{ route('logout') }}">

@@ -5,12 +5,12 @@
 
 .starrating > input {display: none;}  /* Remove radio buttons */
 
-.starrating > label:before { 
+.starrating > label:before {
   content: "\f005"; /* Star */
   margin: 2px;
   font-size: 1em;
   font-family: FontAwesome;
-  display: inline-block; 
+  display: inline-block;
 }
 
 .starrating > label
@@ -19,8 +19,8 @@
 }
 
 .starrating > input:checked ~ label
-{   
-    color: #fff346 ; 
+{
+    color: #fff346 ;
 } /* Set yellow color when star checked */
 
 .starrating > input:hover ~ label
@@ -36,10 +36,27 @@
 }
 
 .operators-message{
-    background-color: #93efff;
-    padding: 30px 30px;
+    background: rgba(24, 179, 228, 0.19);
+    padding: 0 30px 30px 26px;
     border-radius: 20px;
     margin-top: 20px;
+}
+
+.ticketBtn {
+    width: 100%;
+    max-width: 238px;
+    border-radius: 8px;
+    min-height: 50px;
+}
+
+.ticketBtn1 {
+    background-color: #006BCE;
+    color: white;
+}
+
+.ticketBtn2 {
+    background-color: #D70000;
+    color: white;
 }
 
 .appeals-filter{
@@ -67,3 +84,5 @@
     max-width: 300px;
     overflow: hidden;
 }
+
+

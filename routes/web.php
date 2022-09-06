@@ -91,6 +91,10 @@ Route::prefix('{lang?}')->middleware('locale')->group(function(){
             
             
         });
+
+        /**
+         * Profile routes.
+         */
         Route::prefix('profile')->middleware('authenticated')->group(function(){
             //TODO
             Route::get('', [ProfileController::class, 'getProfile'])->name('profile');

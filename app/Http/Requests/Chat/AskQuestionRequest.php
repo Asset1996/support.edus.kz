@@ -19,6 +19,7 @@ class AskQuestionRequest extends BaseRequest
             'title' => 'required|min:10|max:150',
             'initial_message' => 'required|min:10',
             'service_types_id' => 'required',
+            'not_robot' => ['required', \Illuminate\Validation\Rule::in(['on'])],
         ];
     }
 }

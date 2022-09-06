@@ -64,12 +64,9 @@ class AuthController extends Controller
      * @param credentials
      * @return redirect
      */
-    public function authenticate()
+    public function authenticate(\App\Http\Requests\Auth\LoginRequest $request)
     {
-        $credentials = request()->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        $credentials = request()->only(['email', 'password']);
 
         if (Auth::attempt($credentials)) {
             if(request()->user()->has_access == 0) {

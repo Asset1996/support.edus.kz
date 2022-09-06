@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Tickets;
 use App\Models\TicketsTmp;
 use App\Models\Uploads;
-
 use Illuminate\Support\Facades\Storage;
 
 class TicketsController extends Controller
@@ -72,7 +71,7 @@ class TicketsController extends Controller
             } elseif ($model instanceof TicketsTmp) {
                 session()->flash('success_message', trans('Ticket successfully created. You need to activate your email'));
             }
-            return redirect()->route('ticket-created', ['ticket_id' => $ticket->id]);
+            return redirect()->route('ticket-created', ['ticket_uid' => $ticket->ticket_uid]);
         }
 
         session()->flash('error_message', $model->getFirstError());
@@ -85,16 +84,15 @@ class TicketsController extends Controller
      * @param int $ticket_id
      * @return view
      */
-    public function ticketCreated($lang, $ticket_id){
+    public function ticketCreated($lang, $ticket_uid){
         if (Auth::check()) {
             $template = 'pages.chat.ticketCreated';
-            $ticket = Tickets::where(['id' => $ticket_id])->first();
+            $ticket = Tickets::where(['ticket_uid' => $ticket_uid])->first();
         }else{
             $template = 'pages.chat.tempTicketCreated';
-            $ticket = TicketsTmp::where(['id' => $ticket_id])->first();
+            $ticket = TicketsTmp::where(['ticket_uid' => $ticket_uid])->first();
         }
-
-        // echo '<pre>' . print_r($ticket->uploads, true);exit();
+        // echo '<pre>' . print_r($ticket, true);exit();
 
         return view($template, [
             'ticket' => $ticket,

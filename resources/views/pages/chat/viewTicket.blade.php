@@ -3,44 +3,62 @@
 
 @section('content')
 <body>
-    <div class="main-banner">
-        <h3>{{ Lang::get('My appeal') }} - #{{ $ticket->ticket_uid }}</h3>
-        <div class="row">
-            <div class="col-md-9 col-sm-12">
-                <div class="operators-message">
-                    <p>{{ $ticket->ticket_status->name_ru }}<span class="created-date">{{ $ticket->created_at }}</span>   </p>
-                    <p class="paragraph"><h4>{{ $ticket->title }}</h4></p>
-                    <p class="paragraph">{{ $ticket->initial_message }}</p>
-                    <p class="paragraph">{{ Lang::get('Attached files') }}</p>
-                    @if ($ticket->uploads->isNotEmpty())
-                        <div id="images-preview">
-                            @foreach ($ticket->uploads as $upload)
-                                <img class="uploading-files col-sm" src="{{URL::asset($upload->path)}}" alt="">
-                            @endforeach
+    <div class="container">
+        <div class="main-banner">
+            <h3>{{ Lang::get('My appeal') }} - #{{ $ticket->ticket_uid }}</h3>
+            <div class="row mt-5">
+                <div class="col-md-9 col-sm-12">
+                    <div class="view_item">
+                        <div style="padding: 0 30px;">
+                            <div class="profile_otvet" style="margin-bottom: -13px;">
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="col-lg-5 col-md-5">
+                                        <div style="margin-bottom: 0px;" class="prev_title">
+                                            <span style="padding: 10px; background: #007bff; color: white;">{{ $ticket->ticket_status->name_ru }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="prev_date">
+                                            <p style="margin-bottom: -5px; font-weight: 400;">{{ $ticket->created_at }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    @endif
-                </div>
-                @foreach ($ticket->messages as $message)
-                    <div 
-                    @if ($message->created_by_type == 1)
-                        class="clients-message"
-                    @else
-                        class="operators-message"
-                    @endif
-                    >
-                        <p><span class="created-date">{{ $message->created_at }}</span></p>
-                        <p class="paragraph"><h4>{{ $message->message_body }}</h4></p>
-                        @if ($message->created_by_type != 1)
-                        <p class="paragraph">
+                        <div style="word-break: break-word;" class="operators-message">
+                            <p class="paragraph">
+                            <h4>{{ $ticket->title }}</h4>
+                            </p>
+                            <p class="paragraph">{{ $ticket->initial_message }}</p>
+
+                            @if ($ticket->uploads->isNotEmpty())
+                            <div id="images-preview">
+                                @foreach ($ticket->uploads as $upload)
+                                <img class="uploading-files col-sm" src="{{URL::asset($upload->path)}}" alt="">
+                                @endforeach
+                            </div>
+                            @endif
+                        </div>
+                        @foreach ($ticket->messages as $message)
+                        <div @if ($message->created_by_type == 1)
+                            class="clients-message"
+                            @else
+                            class="operators-message"
+                            @endif
+                            >
+                            <p><span class="created-date">{{ $message->created_at }}</span></p>
+                            <p class="paragraph">
+                            <h4>{{ $message->message_body }}</h4>
+                            </p>
+                            @if ($message->created_by_type != 1)
+                            <p class="paragraph">
                             <form action="">
                                 <div class="starrating risingstar d-flex flex-row-reverse">
-                                    @for ($i = 1; $i < 6; $i++)
-                                        <input onclick="evaluate_ajax(value, {{ $message->id }})" type="radio" id="star{{$i}}{{ $message->id }}" name="rating" value="{{$i}}" 
-                                            @if ($message->evaluation == $i)
-                                                checked
-                                            @endif
+                                    @for ($i = 1; $i < 6; $i++) <input onclick="evaluate_ajax(value, {{ $message->id }})" type="radio" id="star{{$i}}{{ $message->id }}" name="rating" value="{{$i}}" @if ($message->evaluation == $i)
+                                        checked
+                                        @endif
                                         /><label for="star{{$i}}{{ $message->id }}"></label>
-                                    @endfor
+                                        @endfor
                                 </div>
                             </form>
                             <div class="row">
@@ -51,49 +69,64 @@
                                     <p><span class="created-by">{{ $message->message_created_by->name }}</span></p>
                                 </div>
                             </div>
-                        </p>
-                        @endif
+                            </p>
+                            @endif
+                        </div>
+                        @endforeach
                     </div>
-                @endforeach
-            </div>
-            <div class="col-md-3 col-sm-12">
-                <div class="appeals-filter">
-                    <p>{{ Lang::get('Appeals filter') }}</p>
-                    <div class="filter-inner-block">
-                        <p>{{ Lang::get('Appeals category') }}:</p>
-                        <p><strong>{{ $ticket->service_type->name_ru }}</strong></p>
-                    </div>
-                    <div class="filter-inner-block">
-                        <p>{{ Lang::get('Subcategory') }}:</p>
-                        <p><strong>{{ $ticket->subcategory }}</strong></p>
-                    </div>
-                    <div class="filter-inner-block">
-                        <p>{{ Lang::get('Appeals priority') }}:</p>
-                        <p><strong>{{ $ticket->priority }}</strong></p>
-                    </div>
-                    <div class="filter-inner-block">
-                        <p>{{ Lang::get('Tags') }}:</p>
-                        <p><strong>{{ $ticket->tags }}</strong></p>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                    <div class="appeals-filter">
+                        <p class="appleale-title">{{ Lang::get('Appeals filter') }}</p>
+                        <div class="filter-inner-block">
+                            <p>{{ Lang::get('Appeals category') }}:</p>
+                            <p><strong>{{ $ticket->service_type->name_ru }}</strong></p>
+                        </div>
+                        <div class="filter-inner-block">
+                            <p>{{ Lang::get('Subcategory') }}:</p>
+                            <p><strong>{{ $ticket->subcategory }}</strong></p>
+                        </div>
+                        <div class="filter-inner-block">
+                            <p>{{ Lang::get('Appeals priority') }}:</p>
+                            <p><strong>{{ $ticket->priority }}</strong></p>
+                        </div>
+                        <div class="filter-inner-block">
+                            <p>{{ Lang::get('Tags') }}:</p>
+                            <p><strong>{{ $ticket->tags }}</strong></p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        @if ($ticket->status_id == 1)
-            <form method="GET" action="{{ route('update-ticket', ['ticket_uid' => $ticket->ticket_uid]) }}">
-                @csrf
-                <div class="d-flex mb-3 mb-lg-4">
-                    <button class="btn btn-primary" type="submit">{{ Lang::get('Update') }}</button>
+
+            @if ($ticket->status_id == 1)
+            <div class="view_btn_group mt-4">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="view_btn">
+                            <form method="GET" action="{{ route('update-ticket', ['ticket_uid' => $ticket->ticket_uid]) }}">
+                                @csrf
+                                <div class="d-flex mb-3 mb-lg-4">
+                                    <button class="btn ticketBtn ticketBtn1" type="submit">{{ Lang::get('Update') }}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div style="margin-left: -20px;" class="view_btn">
+                            <form method="POST" action="{{ route('delete-ticket', ['ticket_uid' => $ticket->ticket_uid]) }}">
+                                @csrf
+                                <div class="d-flex mb-3 mb-lg-4">
+                                    <button class="btn ticketBtn ticketBtn2" type="submit">{{ Lang::get('Cancel') }}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </form>
-            <form method="POST" action="{{ route('delete-ticket', ['ticket_uid' => $ticket->ticket_uid]) }}">
-                @csrf
-                <div class="d-flex mb-3 mb-lg-4">
-                    <button class="btn btn-danger" type="submit">{{ Lang::get('Cancel') }}</button>
-                </div>
-            </form>
-        @elseif ($ticket->status_id == 2)
+            </div>
+            @elseif ($ticket->status_id == 2)
             Ваше обращение обрабатывается оператором. Ждите ответа от оператора.
-        @elseif ($ticket->status_id == 3)
+            @elseif ($ticket->status_id == 3)
             <form method="POST" action="#">
                 @csrf
                 <div class="d-flex flex-row align-items-cente">
@@ -112,9 +145,10 @@
                     <button class="btn btn-primary" type="submit">{{ Lang::get('Close ticket') }}</button>
                 </div>
             </form>
-        @elseif ($ticket->status_id == 4)
+            @elseif ($ticket->status_id == 4)
             {{ Lang::get('Ticket is closed') }}
-        @endif
+            @endif
+        </div>
     </div>
 </body>
 <script>

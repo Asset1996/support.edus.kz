@@ -20,9 +20,9 @@ class Messages extends BaseModel
      * @var array<int, string>
      */
     protected $fillable = [
-        'tickets_id',
-        'user_id',
-        'user_type',
+        'ticket_uid',
+        'created_by',
+        'created_by_type',
         'message_body',
         'order_num',
         'replied_message_id',
@@ -62,7 +62,7 @@ class Messages extends BaseModel
      * @return object 
      */
     public function _create(array $context = []){
-        $context['user_id'] = auth()->user()->id;
+        $context['created_by'] = auth()->user()->id;
         return $this::create($context);
     }
 

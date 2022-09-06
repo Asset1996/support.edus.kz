@@ -65,7 +65,6 @@ Route::prefix('{lang?}')->middleware('locale')->group(function(){
             Route::get('/ask-question', [TicketsController::class, 'askQuestion'])->name('ask-question');
             Route::post('/ask-question', [TicketsController::class, 'askQuestionPost'])->name('ask-question-post');
             Route::get('/ticket-created/{ticket_uid}', [TicketsController::class, 'ticketCreated'])->name('ticket-created');
-            //TODO
             Route::get('/update/{ticket_uid}', [TicketsController::class, 'update'])
                 ->middleware('authenticated')
                 ->name('update-ticket');
@@ -81,6 +80,9 @@ Route::prefix('{lang?}')->middleware('locale')->group(function(){
             Route::post('/close/{ticket_uid}', [TicketsController::class, 'close'])
                 ->middleware('authenticated')
                 ->name('close-ticket');
+            Route::post('/write-message/{ticket_uid}', [TicketsController::class, 'writeMessage'])
+                ->middleware('authenticated')
+                ->name('write-message');
 
             /**
              * AJAX request.

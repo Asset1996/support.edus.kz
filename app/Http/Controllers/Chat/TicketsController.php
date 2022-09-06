@@ -207,4 +207,32 @@ class TicketsController extends Controller
         
         return redirect()->back();
     }
+
+    /**
+     * Updates the ticket status to "closed".
+     *
+     * @param int $ticket_uid - unique ID of ticket.
+     * @return redirect 
+     */
+    public function writeMessage(\App\Http\Requests\Chat\WriteMessageRequest $request, $lang, $ticket_uid){
+        $last_message_order_num = Messages::select('order_num')->where([
+            'ticket_uid' => $ticket_uid,
+        ])->latest('order_num')->first()->order_num;
+
+        $context['ticket_uid'] = $ticket_uid;
+        $context['created_by_type'] = 1;
+        $context['message_body'] = request()->input('message_body');
+        $context['order_num'] = $last_message_order_num + 1;
+
+        $message = new Messages();
+        $ticket = new Tickets();
+        $message->_create($context);
+
+        $ticket->_update(
+            ['ticket_uid' => $ticket_uid], 
+            ['status_id' => 2], 
+        );
+
+        return redirect()->back();
+    }
 }

@@ -125,9 +125,9 @@
                 </div>
             </div>
             @elseif ($ticket->status_id == 2)
-            Ваше обращение обрабатывается оператором. Ждите ответа от оператора.
+                {{Lang::get('Your request is being processed by the operator. Wait for a response from the operator.')}}
             @elseif ($ticket->status_id == 3)
-            <form method="POST" action="#">
+            <form method="POST" action="{{ route('write-message', ['ticket_uid' => $ticket->ticket_uid]) }}">
                 @csrf
                 <div class="d-flex flex-row align-items-cente">
                     <div class="form-group">
@@ -146,7 +146,7 @@
                 </div>
             </form>
             @elseif ($ticket->status_id == 4)
-            {{ Lang::get('Ticket is closed') }}
+                {{ Lang::get('Ticket is closed') }}
             @endif
         </div>
     </div>

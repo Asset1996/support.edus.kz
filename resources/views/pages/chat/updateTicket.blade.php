@@ -75,6 +75,11 @@
                                 <textarea class="form-control myInput" id="ask_initial_message" name="initial_message" rows="6" required>{{ $my_ticket->initial_message }}</textarea>
                             </div>
 
+                            <div class="form-group form-check mt-5">
+                                <input type="checkbox" class="form-check-input" id="update_ticket_not_robot" name="not_robot">
+                                <label style="font-size: 17px;" class="form-check-label" for="update_ticket_not_robot">{{ Lang::get('I\'m not robot:') }}</label>
+                            </div>
+
                             <div class="d-flex mx-4 mb-3 mb-lg-4">
                                 <button type="submit" class="btn btn-primary btn-lg">{{Lang::get("Save request")}}</button>
                             </div>

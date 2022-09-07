@@ -19,7 +19,7 @@ class CreateSupportUserTable extends Migration
             $table->string('name')->length(50)->comment('Имя пользователя');
             $table->string('surname')->length(50)->comment('Фамилия')->nullable();
             $table->string('lastname')->length(50)->comment('Отчество')->nullable();
-            $table->string('email')->length(255)->comment('Электронная почта')->unique();
+            $table->string('email')->length(150)->comment('Электронная почта')->unique();
             $table->integer('phone')->nullable();
             $table->integer('iin')->nullable();
             $table->timestamp('email_verified_at')->comment('Время вреификации почты')->nullable();

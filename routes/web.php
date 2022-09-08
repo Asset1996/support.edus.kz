@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Chat\TicketsController;
 use App\Http\Controllers\User\ProfileController;
-use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Redis;
 
 Route::prefix('{lang?}')->middleware('locale')->group(function(){
     
@@ -15,7 +17,9 @@ Route::prefix('{lang?}')->middleware('locale')->group(function(){
         /**
          * Home page route.
          */
-        Route::get('', function () {return view('pages.home');})->name('home');
+        Route::get('', function () {
+            return view('pages.home')->render();
+        })->name('home');
 
         /**
          * Auth routes.
@@ -104,3 +108,5 @@ Route::prefix('{lang?}')->middleware('locale')->group(function(){
         });
     });
 });
+
+Route::get('', function () {return redirect()->route('home', ['lang' => config('app.locale')]);});

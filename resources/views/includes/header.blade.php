@@ -2,8 +2,6 @@
 @include('modals.register-modal')
 @include('modals.reset-password-modal')
 
-
-
 <div class="container">
   <div class="header-content">
     <nav class="navbar navbar-expand-lg navbar-light">
@@ -34,9 +32,9 @@
         </ul>
         <div class="header-button ml-10">
           @if (Lang::locale() == 'ru')
-          <a style="padding: 8px 10px;" href="{{ URL::toRoute($cur = Route::current(), ['lang' => 'kk'] + $cur->parameters(), true) }}" class="btn btColor text-white">KAZ</a>
+            <a style="padding: 8px 10px;" href="{{ URL::toRoute($cur = Route::current(), ['lang' => 'kk'] + $cur->parameters(), true) }}" class="btn btColor text-white">KAZ</a>
           @elseif(Lang::locale() == 'kk')
-          <a style="padding: 8px 10px;" href="{{ URL::toRoute($cur = Route::current(), ['lang' => 'ru'] + $cur->parameters(), true) }}" class="btn btColor text-white">RUS</a>
+            <a style="padding: 8px 10px;" href="{{ URL::toRoute($cur = Route::current(), ['lang' => 'ru'] + $cur->parameters(), true) }}" class="btn btColor text-white">RUS</a>
           @endif
         </div>
         @if (auth()->check())

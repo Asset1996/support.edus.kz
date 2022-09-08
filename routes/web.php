@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Chat\TicketsController;
 use App\Http\Controllers\User\ProfileController;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Redis;
 
 Route::prefix('{lang?}')->middleware('locale')->group(function(){
     

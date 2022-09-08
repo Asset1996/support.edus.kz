@@ -50,8 +50,6 @@
           </a>
         </div>
         @else
-
-
         <div class="header-button">
           <button type="button" class="auth-action-button" data-toggle="modal" data-target="#loginModal">
             {{Lang::get("Login")}}

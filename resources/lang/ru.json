@@ -76,6 +76,7 @@
     "Close": "Закрыть",
     "Sign up account": "Регистрация аккаунта",
     "My appeals": "Мои обращения",
+    "My appeal": "Мое обращение",
     "Update appeal No": "Редактировать обращение No",
     "# of request": "Запрос #",
     "Topic": "Тема обращения",
@@ -169,5 +170,14 @@
     "Convenient search and reference base will help you quickly find the right answers to your problems and questions. You do not need to wait for a support response.": "Удобный поиск и справочная база помогут вам быстро найти нужные ответы на ваши проблемы и вопросы. Вам не нужно ожиддать ответа поддержки.",
     "Help system for the operation of systems and modules of the EDUS platform - write your questions and get answers from technical support specialists.": "Справочная система по работе систем и модулей платформы EDUS - пишите свои вопросы и получайте на них ответы от специалистов техподдержки.",
     "Your request is being processed by the operator. Wait for a response from the operator.": "Ваше обращение обрабатывается оператором. Ждите ответа от оператора.",
-    "The message body must be minimum 10 symbols": "Сообщение должно состоять минимум из 10 символов"
+    "The message body must be minimum 10 symbols": "Сообщение должно состоять минимум из 10 символов",
+    "We have created a channel with many video instructions and answers to frequently asked questions": "Мы создали канал со множеством видео-инструкций и ответов на частые вопросы",
+    "Video instructions on": "Видео-инструкции на",
+    "Youtube channel": "Youtube-канале",
+    "Instant answers to many questions can be obtained using the telegram bot": "Мгновенные ответы на множество вопросов можно получить с помощью телеграм-бота",
+    "Subscribe on": "Подписывайтесь на",
+    "Telegram channel": "Телеграм-канал",
+    "Help system for the operation of systems and modules of the EDUS platform - write your questions and get answers from technical support specialists": "Справочная система по работе систем и модулей платформы EDUS - пишите свои вопросы и получайте на них ответы от специалистов техподдержки",
+    "Electronic school": "Электронная школа",
+    "A video instruction has been added on how to fill out the electronic journal correctly": "Добравлена видео-инструкция по правильному заполнению электронного журнала"
 }

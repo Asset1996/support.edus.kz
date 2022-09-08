@@ -1,8 +1,5 @@
 @extends('layouts.default')
-
 @section('content')
-
-
   <div class="main">
     <div class="container">
       <section class="main_content">
@@ -13,7 +10,7 @@
                 <div class="first-item-text-section">
                   <h1>{{ Lang::get('Write to tech support') }}</h1>
                   <p class="mb-4 text-white fs-17">{{ Lang::get('Help system for the operation of systems and modules of the EDUS platform - write your questions and get answers from technical support specialists.') }}</p>
-                  <a class="myLink text-white" href="#">{{ Lang::get('Go') }} <span><img style="width: 20px; margin-left: 7px;" src="{{ asset('images/firstArrow.svg') }}" alt=""></span></a>
+                  <a class="myLink text-white" href="{{ route('ask-question') }}">{{ Lang::get('Go') }} <span><img style="width: 20px; margin-left: 7px;" src="{{ asset('images/firstArrow.svg') }}" alt=""></span></a>
                 </div>
               </div>
             </div>
@@ -21,9 +18,7 @@
               <div class="first-item leftM mt-5">
                 <div class="first-item-text-section">
                   <h1>{{ Lang::get('Find in directory') }}</h1>
-
                   <p class="mb-4 text-white fs-17">{{ Lang::get('Convenient search and reference base will help you quickly find the right answers to your problems and questions. You do not need to wait for a support response.') }}</p>
-
                   <a class="myLink text-white" href="#">{{ Lang::get('Go') }} <span><img style="width: 20px; margin-left: 7px;" src="{{ asset('images/firstArrow.svg') }}" alt=""></span></a>
                 </div>
               </div>
@@ -33,7 +28,6 @@
       </section>
     </div>
   </div>
-
   <section class="support_bot" style="margin-top: 78px;">
     <div class="container">
       <div class="support_bot_items">
@@ -72,36 +66,30 @@
 
             <div class="col-lg-4">
               <div class="anonse-item mt-3">
-                <a class="e-school" href="#">
-                  <p class="e-school">Электронная школа</p>
-                  <p class="e-text text-dark">Добравлена видео-инструкция
-                    по правильному заполнению
-                    электронного журнала</p>
-                  <span class="anonse-data text-muted">24 февраля 2022</span>
+                <a class="e-school" href="https://mektep.edu.kz/">
+                  <p class="e-school">{{ Lang::get('Electronic school') }}</p>
+                  <p class="e-text text-dark">{{ Lang::get('A video instruction has been added on how to fill out the electronic journal correctly') }}</p>
+                  <span class="anonse-data text-muted">{{ Carbon\Carbon::now()->format('d-m-Y') }}</span>
                   <img style="width: 40px;" src="{{ asset('images/newArrow.svg') }}" alt="">
                 </a>
               </div>
             </div>
             <div class="col-lg-4">
               <div class="anonse-item mt-3">
-                <a class="e-school" href="#">
-                  <p class="e-school">Электронная школа</p>
-                  <p class="e-text text-dark">Добравлена видео-инструкция
-                    по правильному заполнению
-                    электронного журнала</p>
-                  <span class="anonse-data text-muted">24 февраля 2022</span>
+                <a class="e-school" href="https://mektep.edu.kz/">
+                  <p class="e-school">{{ Lang::get('Electronic school') }}</p>
+                  <p class="e-text text-dark">{{ Lang::get('A video instruction has been added on how to fill out the electronic journal correctly') }}</p>
+                  <span class="anonse-data text-muted">{{ Carbon\Carbon::now()->format('d-m-Y') }}</span>
                   <img style="width: 40px;" src="{{ asset('images/newArrow.svg') }}" alt="">
                 </a>
               </div>
             </div>
             <div class="col-lg-4">
               <div class="anonse-item mt-3">
-                <a class="e-school" href="#">
-                  <p class="e-school">Электронная школа</p>
-                  <p class="e-text text-dark">Добравлена видео-инструкция
-                    по правильному заполнению
-                    электронного журнала</p>
-                  <span class="anonse-data text-muted">24 февраля 2022</span>
+                <a class="e-school" href="https://mektep.edu.kz/">
+                  <p class="e-school">{{ Lang::get('Electronic school') }}</p>
+                  <p class="e-text text-dark">{{ Lang::get('A video instruction has been added on how to fill out the electronic journal correctly') }}</p>
+                  <span class="anonse-data text-muted">{{ Carbon\Carbon::now()->format('d-m-Y') }}</span>
                   <img style="width: 40px;" src="{{ asset('images/newArrow.svg') }}" alt="">
                 </a>
               </div>
@@ -121,27 +109,20 @@
           <div class="col-lg-4">
             <div style="width: 90%;" class="social-item"><img class="social-img" src="{{ asset('images/call-girl.png') }}" alt=""></div>
           </div>
-
           <div class="col-lg-4">
             <div class="social-item">
               <img class="social-img-you" src="{{ asset('images/you.svg') }}" alt="">
-              <p class="social-text">Мы создали канал со
-                множеством видео-
-                инструкций и ответов на
-                частые вопросы</p>
-              <p class="social-text2">Видео-инструкции на
-                канале <a href="https://www.youtube.com/">Ютуб</a></p>
+              <p class="social-text">{{ Lang::get('We have created a channel with many video instructions and answers to frequently asked questions') }}</p>
+              <p class="social-text2">{{ Lang::get('Video instructions in') }}<br>
+                <a href="https://www.youtube.com/c/EDUS-system/featured"> {{ Lang::get('Youtube channel') }}</a></p>
             </div>
           </div>
           <div class="col-lg-4">
             <div class="social-item">
               <img class="social-img-tel" src="{{ asset('images/telegram.png') }}" alt="">
-              <p class="social-text">Мгновенные ответы на
-                множество вопросов можно
-                получить с помощью
-                телеграм-бота</p>
-              <p class="social-text2">Подписывайтесь на
-                <a href="www.youtube.com">Телеграм-канал</a>
+              <p class="social-text">{{ Lang::get('Instant answers to many questions can be obtained using the telegram bot') }}</p>
+              <p class="social-text2">{{ Lang::get('Subscribe on') }}
+                <a href="www.youtube.com">{{ Lang::get('Telegram channel') }}</a>
               </p>
             </div>
           </div>
@@ -149,10 +130,6 @@
       </div>
     </div>
   </section>
-
-
-
-
   <section class="counter mt-5">
     <div class="container">
       <div class="counter-main">
@@ -179,12 +156,9 @@
               </div>
             </div>
           </div>
-
         </div>
-        <p class="last-text text-muted">Справочная система по работе систем и модулей платформы EDUS - пишите свои вопросы и
-          получайте на них ответы от специалистов техподдержки</p>
+        <p class="last-text text-muted">{{ Lang::get('Help system for the operation of systems and modules of the EDUS platform - write your questions and get answers from technical support specialists') }}</p>
       </div>
     </div>
   </section>
-
 @stop

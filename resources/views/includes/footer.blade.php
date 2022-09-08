@@ -1,9 +1,4 @@
 <div class="container">
-
-  {{-- {{ Cache::add('home_page', 'ssssaaaa1', 10) }} --}}
-  {{-- {{ Cache::clear('home_page') }} --}}
-  {{-- CACHE: {{ Cache::get('home_page') }} --}}
-
   <div class="row">
     <!-- Single Widget-->
     <div class="col-12 col-sm-6 col-lg-4">

@@ -11,9 +11,13 @@ use App\Models\Tickets;
 use App\Models\TicketsTmp;
 use App\Models\Uploads;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cache;
 
 class TicketsController extends Controller
 {
+    protected $sprs_caching_seconds = 86400;
+    protected $model_caching_seconds = 86400;
+
     /**
      * Renders the createTicket view 
      * or redirects to home page, if the user is not a client.
@@ -26,8 +30,9 @@ class TicketsController extends Controller
             session()->flash('error_message', trans('Only clients have access to create a ticket'));
             return redirect()->home();
         }
-        $service_types = \App\Models\Spr\SprServiceTypes::get();
-
+        $service_types = Cache::remember('service_types', $this->sprs_caching_seconds, function () {
+            return \App\Models\Spr\SprServiceTypes::get();
+        });
         return view('pages.chat.createTicket', [
             'user' => $user,
             'service_types' => $service_types,
@@ -67,6 +72,7 @@ class TicketsController extends Controller
 
         if(!$model->hasErrors()){
             if ($model instanceof Tickets) {
+                Cache::put('my_tickets', '', 0);
                 session()->flash('success_message', trans('Ticket successfully created'));
             } elseif ($model instanceof TicketsTmp) {
                 session()->flash('success_message', trans('Ticket successfully created. You need to activate your email'));
@@ -105,7 +111,9 @@ class TicketsController extends Controller
      * @return view
      */
     public function list(){
-        $my_tickets = Tickets::where(['created_by' => Auth::user()->id])->get();
+        $my_tickets = Cache::remember('my_tickets', $this->model_caching_seconds, function () {
+            return Tickets::where(['created_by' => Auth::user()->id])->get();
+        });
 
         return view('pages.chat.ticketsList', [
             'my_tickets' => $my_tickets,
@@ -145,7 +153,9 @@ class TicketsController extends Controller
     public function update($lang, $ticket_uid){
         $my_ticket = Tickets::where(['ticket_uid' => $ticket_uid])->first();
 
-        $service_types = \App\Models\Spr\SprServiceTypes::get();
+        $service_types = Cache::remember('service_types', $this->sprs_caching_seconds, function () {
+            return \App\Models\Spr\SprServiceTypes::get();
+        });
 
         return view('pages.chat.updateTicket', [
             'user' => Auth::user(),
@@ -169,6 +179,7 @@ class TicketsController extends Controller
         $my_ticket = new Tickets();
         $my_ticket->_update($conditions, $context);
 
+        Cache::put('my_tickets', '', 0);
         session()->flash('success_message', trans('Ticket successfully updated'));
         return redirect()->route('tickets-list');
     }
@@ -188,6 +199,7 @@ class TicketsController extends Controller
         if($my_ticket->hasErrors()){
             session()->flash('error_message', $my_ticket->getFirstError());
         }else{
+            Cache::put('my_tickets', '', 0);
             session()->flash('success_message', trans('Ticket successfully deleted'));
         }
         

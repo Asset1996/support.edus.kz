@@ -31,10 +31,6 @@
                   <td class=" font-weight-bold">
                     {{ $item->title }}
                   </td>
-
-
-
-
                   <td>{{ $item->created_at }}</td>
                   <td class="text-primary">{{ $item->ticket_status->name_ru }}</td>
                   <td>
@@ -70,7 +66,7 @@
                     @endif
                     @if ( $item->status_id == 3 )
                     {{-- CHAT BUTTON --}}
-                    <form class="table-action-form" method="GET" action="#">
+                    <form class="table-action-form" method="GET" action="{{ route('view-ticket', ['ticket_uid' => $item->ticket_uid]) }}">
                       @csrf
                       <button class="table-action-button" type="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-square-text" viewBox="0 0 16 16">

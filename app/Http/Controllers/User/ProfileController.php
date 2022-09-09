@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class ProfileController extends Controller
 {
@@ -14,13 +15,13 @@ class ProfileController extends Controller
      * @return view/redirect 
      */
     public function getProfile(){
-        $user = Auth::user();
+        $user = Cache::remember('user', 86400, function () {
+            return Auth::user();
+        });
         if ($user && $user->roles_id != 1) {
             session()->flash('error_message', trans('Only clients have access to create a ticket'));
             return redirect()->home();
         }
-
-        // echo '<pre>' . print_r($user->evaluated_messages->avg('evaluation'), true);exit();
 
         return view('pages.user.profile', [
             'user' => $user
@@ -32,15 +33,17 @@ class ProfileController extends Controller
      *
      * @return redirect 
      */
-    public function updateProfile(){
+    public function updateProfile(\App\Http\Requests\User\UpdateProfileRequest $request){
         $context = request()->only(
-            'phone', 'iin', 'surname'
+            'phone', 'iin', 'surname', 'name'
         );
 
         $user = Auth::user();
         $condition = ['id' => $user->id];
         $user->_update($condition, $context);
+        session()->flash('success_message', trans('Successfully updated'));
 
+        Cache::put('user', '', 0);
         return redirect()->back();
     }
 }

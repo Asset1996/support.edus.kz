@@ -32,24 +32,30 @@
                             <table class="profile_table">
                                 <tr>
                                     <td style="text-align:right">{{ Lang::get('Name') }}:</td>
-                                    <td>{{ $user->name }}</td>
+                                    <td>
+                                        <form id="profile-name-form-default" method="POST" action="{{ route('profile-update') }}">
+                                            @csrf
+                                            <input class="form-control profile-input" type="text" name="name" id="profile-name" value="{{ $user->name }}">
+                                            <button type="submit" class="btn btn-primary btn-sm">{{ Lang::get('Change') }}</button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td style="text-align:right">{{ Lang::get('Surname') }}:</td>
                                     <td>
                                         @if ($user->surname)
-                                        <form id="profile-surname-form-default" method="POST" action="{{ route('profile-update') }}">
-                                            @csrf
-                                            <input class="form-control profile-input" type="text" name="surname" id="profile-surname" value="{{ $user->surname }}">
-                                            <button type="submit" class="btn btn-primary btn-sm">{{ Lang::get('Change') }}</button>
-                                        </form>
+                                            <form id="profile-surname-form-default" method="POST" action="{{ route('profile-update') }}">
+                                                @csrf
+                                                <input class="form-control profile-input" type="text" name="surname" id="profile-surname" value="{{ $user->surname }}">
+                                                <button type="submit" class="btn btn-primary btn-sm">{{ Lang::get('Change') }}</button>
+                                            </form>
                                         @else
-                                        <a href="#" id="toggle-surname-form">Указать</a>
-                                        <form id="profile-surname-form" method="POST" action="{{ route('profile-update') }}">
-                                            @csrf
-                                            <input class="form-control profile-input" type="text" name="surname" id="profile-surname">
-                                            <button type="submit" class="btn btn-primary btn-sm">{{ Lang::get('Change') }}</button>
-                                        </form>
+                                            <a href="#" id="toggle-surname-form">Указать</a>
+                                            <form id="profile-surname-form" method="POST" action="{{ route('profile-update') }}">
+                                                @csrf
+                                                <input class="form-control profile-input" type="text" name="surname" id="profile-surname">
+                                                <button type="submit" class="btn btn-primary btn-sm">{{ Lang::get('Change') }}</button>
+                                            </form>
                                         @endif
                                     </td>
                                 </tr>
@@ -61,18 +67,18 @@
                                     <td style="text-align:right">{{ Lang::get('Phone') }}:</td>
                                     <td>
                                         @if ($user->phone)
-                                        <form id="profile-phone-form-default" method="POST" action="{{ route('profile-update') }}">
-                                            @csrf
-                                            <input class="form-control profile-input" type="text" name="phone" id="profile-phone" value="{{ $user->phone }}">
-                                            <button type="submit" class="btn btn-primary btn-sm">{{ Lang::get('Change') }}</button>
-                                        </form>
+                                            <form id="profile-phone-form-default" method="POST" action="{{ route('profile-update') }}">
+                                                @csrf
+                                                <input class="form-control profile-input" type="text" name="phone" id="profile-phone" value="{{ $user->phone }}">
+                                                <button type="submit" class="btn btn-primary btn-sm">{{ Lang::get('Change') }}</button>
+                                            </form>
                                         @else
-                                        <a href="#" id="toggle-phone-form">Указать</a>
-                                        <form id="profile-phone-form" method="POST" action="{{ route('profile-update') }}">
-                                            @csrf
-                                            <input class="form-control profile-input" class="profile-input" type="text" name="phone" id="profile-phone">
-                                            <button type="submit" class="btn btn-primary btn-sm" id="profile-phone-submit">{{ Lang::get('Change') }}</button>
-                                        </form>
+                                            <a href="#" id="toggle-phone-form">Указать</a>
+                                            <form id="profile-phone-form" method="POST" action="{{ route('profile-update') }}">
+                                                @csrf
+                                                <input class="form-control profile-input" class="profile-input" type="text" name="phone" id="profile-phone">
+                                                <button type="submit" class="btn btn-primary btn-sm" id="profile-phone-submit">{{ Lang::get('Change') }}</button>
+                                            </form>
                                         @endif
                                     </td>
                                 </tr>
@@ -87,7 +93,6 @@
                             </table>
                         </div>
                     </div>
-
                     <hr class="my-4">
                 </div>
                 <div class="col-md-4 col-sm-12">
@@ -108,88 +113,6 @@
     </div>
 </body>
 
-
-
-{{-- <body>
-    <div class="main-banner">
-        <h3>{{ Lang::get('My profile') }}</h3>
-        <div class="row">
-            <div class="col-md-8 col-sm-12">
-                <hr class="my-4">
-                <div class="row">
-                    <table>
-                        <tr>
-                            <td style="text-align:right">{{ Lang::get('Name') }}:</td>
-                            <td>{{ $user->name }}</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:right">{{ Lang::get('Surname') }}:</td>
-                            <td>
-                            @if ($user->surname) 
-                                <form id="profile-surname-form-default" method="POST" action="{{ route('profile-update') }}">
-                                    @csrf
-                                    <input class="form-control profile-input" type="text" name="surname" id="profile-surname" value="{{ $user->surname }}">
-                                    <button type="submit" class="btn btn-primary btn-sm">Изменить</button>
-                                </form>
-                            @else 
-                                <a href="#" id="toggle-surname-form">Указать</a>
-                                <form id="profile-surname-form" method="POST" action="{{ route('profile-update') }}">
-                                    @csrf
-                                    <input class="form-control profile-input" type="text" name="surname" id="profile-surname">
-                                    <button type="submit" class="btn btn-primary btn-sm">Изменить</button>
-                                </form>
-                            @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:right">{{ Lang::get('Email') }}:</td>
-                            <td>{{ $user->email }}</td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:right">{{ Lang::get('Phone') }}:</td>
-                            <td>
-                            @if ($user->phone) 
-                                <form id="profile-phone-form-default" method="POST" action="{{ route('profile-update') }}">
-                                    @csrf
-                                    <input class="form-control profile-input" type="text" name="phone" id="profile-phone" value="{{ $user->phone }}">
-                                    <button type="submit" class="btn btn-primary btn-sm">Изменить</button>
-                                </form>
-                            @else 
-                                <a href="#" id="toggle-phone-form">Указать</a>
-                                <form id="profile-phone-form" method="POST" action="{{ route('profile-update') }}">
-                                    @csrf
-                                    <input class="form-control profile-input" class="profile-input" type="text" name="phone" id="profile-phone">
-                                    <button type="submit" class="btn btn-primary btn-sm" id="profile-phone-submit">Изменить</button>
-                                </form>
-                            @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:right">{{ Lang::get('Password') }}:</td>
-                            <td><a href="{{ route('change-password') }}">{{ Lang::get('Change') }}</a></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:right">{{ Lang::get('Status') }}:</td>
-                            <td>{{ Lang::get('Active') }}</td>
-                        </tr>
-                    </table>
-                </div>
-                
-                <hr class="my-4">
-            </div>
-            <div class="col-md-4 col-sm-12">
-                <p>{{ Lang::get('Tickets amount') }}: {{$user->tickets->count()}}</p>
-                <p>{{ Lang::get('Comments amount') }}: {{$user->created_messages->count()}}</p>
-                <p>{{ Lang::get('Evaluations (average)') }}: 
-                @if ($user->evaluated_messages->avg('evaluation'))
-                    {{$user->evaluated_messages->avg('evaluation')}}
-                @else
-                    0
-                @endif </p>
-            </div>
-        </div>
-    </div>
-</body> --}}
 <script>
     $('#profile-phone-form').hide();
     $('#profile-surname-form').hide();
@@ -202,7 +125,6 @@
         $('#profile-surname-form').show();
         $(this).hide();
     })
-
 
     $("#profile-phone").keyup(function (e){
         pass_input = $(this).val()

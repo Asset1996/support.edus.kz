@@ -14,9 +14,7 @@ Route::prefix('{lang?}')->middleware('locale')->group(function(){
         /**
          * Home page route.
          */
-        Route::get('', function () {
-            return view('pages.home')->render();
-        })->name('home');
+        Route::get('', [\App\Http\Controllers\HomeController::class, 'getHome'])->name('home');
 
         /**
          * Auth routes.

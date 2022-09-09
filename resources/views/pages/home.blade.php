@@ -62,38 +62,18 @@
         </div>
         <div class="anonse-items mt-3">
           <div class="row">
-
-
-            <div class="col-lg-4">
-              <div class="anonse-item mt-3">
-                <a class="e-school" href="https://mektep.edu.kz/">
-                  <p class="e-school">{{ Lang::get('Electronic school') }}</p>
-                  <p class="e-text text-dark">{{ Lang::get('A video instruction has been added on how to fill out the electronic journal correctly') }}</p>
-                  <span class="anonse-data text-muted">{{ Carbon\Carbon::now()->format('d-m-Y') }}</span>
-                  <img style="width: 40px;" src="{{ asset('images/newArrow.svg') }}" alt="">
-                </a>
+            @foreach ($announcements as $announcement)
+              <div class="col-lg-4">
+                <div class="anonse-item mt-3">
+                  <a class="e-school" href="{{ $announcement->link }}">
+                    <p class="e-school">{{ $announcement['theme_'.Lang::locale()] }}</p>
+                    <p class="e-text text-dark">{{ $announcement['message_'.Lang::locale()] }}</p>
+                    <span class="anonse-data text-muted">{{ $announcement->date }}</span>
+                    <img style="width: 40px;" src="{{ asset('images/newArrow.svg') }}" alt="">
+                  </a>
+                </div>
               </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="anonse-item mt-3">
-                <a class="e-school" href="https://mektep.edu.kz/">
-                  <p class="e-school">{{ Lang::get('Electronic school') }}</p>
-                  <p class="e-text text-dark">{{ Lang::get('A video instruction has been added on how to fill out the electronic journal correctly') }}</p>
-                  <span class="anonse-data text-muted">{{ Carbon\Carbon::now()->format('d-m-Y') }}</span>
-                  <img style="width: 40px;" src="{{ asset('images/newArrow.svg') }}" alt="">
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="anonse-item mt-3">
-                <a class="e-school" href="https://mektep.edu.kz/">
-                  <p class="e-school">{{ Lang::get('Electronic school') }}</p>
-                  <p class="e-text text-dark">{{ Lang::get('A video instruction has been added on how to fill out the electronic journal correctly') }}</p>
-                  <span class="anonse-data text-muted">{{ Carbon\Carbon::now()->format('d-m-Y') }}</span>
-                  <img style="width: 40px;" src="{{ asset('images/newArrow.svg') }}" alt="">
-                </a>
-              </div>
-            </div>
+            @endforeach
           </div>
         </div>
       </div>
@@ -138,20 +118,20 @@
           <div class="row">
             <div class="col-lg-3 col-sm-12">
               <div class="counter-item">
-                <h4 class="counter-num text-primary">2919</h4>
+                <h4 class="counter-num text-primary">{{ $statistics->last_30_days }}</h4>
                 <p class="counter-text">{{ Lang::get('Requests within 30 days') }}</p>
               </div>
             </div>
 
             <div class="col-lg-3 col-sm-12">
               <div class="counter-item ">
-                <h4 class="counter-num text-primary">343</h4>
+                <h4 class="counter-num text-primary">{{ $statistics->last_7_days }}</h4>
                 <p class="counter-text">{{ Lang::get('Requests within a week') }}</p>
               </div>
             </div>
             <div class="col-lg-3 col-sm-12">
               <div class="counter-item">
-                <h4 class="counter-num text-warning">83%</h4>
+                <h4 class="counter-num text-warning">{{ $statistics->percent_of_processed }}%</h4>
                 <p class="counter-text">{{ Lang::get('questions answered') }}</p>
               </div>
             </div>

@@ -1,6 +1,6 @@
 <?php
 /**
- * Controller to work with tickets.
+ * Controller to work with uploaded files.
  */
 namespace App\Http\Controllers;
 

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB;
+
 class Tickets extends BaseModel
 {
     /**
@@ -127,5 +129,23 @@ class Tickets extends BaseModel
             self::create($tickets->toArray());
         }
         return True;
+    }
+
+    /**
+     * Returns the statistics data for home page about
+     * how many tickers created and answered etc.
+     *
+     * @return self 
+     */
+    public static function getStatistics(){
+        $statistics = DB::table('support_tickets')
+             ->select(DB::raw('
+                SUM(created_at >= CURDATE() - INTERVAL 6 DAY) as `last_7_days`,
+                SUM(created_at >= CURDATE() - INTERVAL 29 DAY) as `last_30_days`,
+                ROUND(SUM(status_id=4)*100/COUNT(*)) as `percent_of_processed`
+            '))
+             ->first();
+
+        return $statistics;
     }
 }

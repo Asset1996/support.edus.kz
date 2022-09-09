@@ -1,7 +1,8 @@
-@include('modals.login-modal')
-@include('modals.register-modal')
-@include('modals.reset-password-modal')
-
+@if (!auth()->check())
+  @include('modals.login-modal')
+  @include('modals.register-modal')
+  @include('modals.reset-password-modal')
+@endif
 <div class="container">
   <div class="header-content">
     <nav class="navbar navbar-expand-lg navbar-light">
@@ -12,7 +13,6 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse mt-2" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           @if (auth()->check())
@@ -55,7 +55,6 @@
             {{Lang::get("Login")}}
           </button>
         </div>
-
         <div class="header-button">
           <button type="button" class="auth-action-button" data-toggle="modal" data-target="#registerModal">
             {{Lang::get("Register")}}

@@ -21,7 +21,7 @@
                                     <input value="{{ $service_type->id }}" class="form-check-input PodsInput" type="radio" name="service_types_id" id="service_types_id_{{ $service_type->id }}" @if ($service_type->id == 1)
                                     checked
                                     @endif>
-                                    {{ $service_type->name_ru }}
+                                    {{ $service_type["name_" . Lang::locale()] }}
                                 </label>
                             </div>
                             @endforeach

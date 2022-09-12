@@ -27,7 +27,8 @@
     "The password field is required": "Поле пароль объязателен к заполнению",
     "The email field is required": "Поле email объязателен к заполнению",
     "The name field is required": "Поле Имя объязателен к заполнению",
-    "The password must be minimum 6:max:50 symbols": "Пароль должен состоять минимум из 6 и максимум из 50 символов",
+    "The password must be minimum 8 symbols": "Пароль должен состоять минимум из 8 символов",
+    "Password must contain minimum 1 character and 1 digit": "Пароль должен состоять минимум из 1 буквы и 1 цифры",
     "The password does not match": "Пароли не совпадают",
     "Incorrect email or password": "Неправильный email или пароль",
     "You have successfully logged in": "Вы успрешно авторизовались",
@@ -35,6 +36,9 @@
     "The email is already used": "Указанный email уже используется",
     "The not robot field is required": "Вы не нажали на 'Я не робот'",
     "The agree with terms field is required": "Вы не нажали на 'Согласен с условиями предоставления сервиса'",
+    "The email must be email type": "Поле 'Электронная почта' должна иметь тип email",
+    "The title must be minimum 10 symbols": "Поле 'Тема сообщения' должно состоять минимум из 10 символов",
+    "The initial message must be minimum 10 symbols": "Поле 'Подробное описание' должно состоять минимум из 10 символов",
 
     "Wrong password": "Неверный пароль",
     "Error occured": "Ошибка",
@@ -182,5 +186,6 @@
     "Help system for the operation of systems and modules of the EDUS platform - write your questions and get answers from technical support specialists": "Справочная система по работе систем и модулей платформы EDUS - пишите свои вопросы и получайте на них ответы от специалистов техподдержки",
     "Electronic school": "Электронная школа",
     "A video instruction has been added on how to fill out the electronic journal correctly": "Добравлена видео-инструкция по правильному заполнению электронного журнала",
-    "Icorrect format of phone number.": "Неправильный формат номера телефона."
+    "Icorrect format of phone number.": "Неправильный формат номера телефона.",
+    "First, you must verify your email": "Вам нужно подтвердить свою электронную почту"
 }

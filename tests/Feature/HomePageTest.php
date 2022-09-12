@@ -6,6 +6,17 @@ use Tests\TestCase;
 
 class HomePageTest extends TestCase
 {
+    private $url_prefix;
+
+    /**
+     * Setup the test environment.
+     *
+     * @return void
+     */
+    protected function setUp(): void{
+        parent::setUp();
+        $this->url_prefix = '/' . config('app.locale') . '/' . env('APP_VERSION', 'v1') . '/';
+    }
     /**
      * Url '/' redirects to '/ru/v1/'.
      *
@@ -24,7 +35,7 @@ class HomePageTest extends TestCase
      */
     public function test_home_page()
     {
-        $response = $this->get('/ru/v1');
+        $response = $this->get($this->url_prefix);
         $response->assertStatus(200);
     }
 }

@@ -5,7 +5,6 @@
 namespace App\Http\Controllers\Chat;
 
 use App\Http\Controllers\Controller;
-use App\Models\Messages;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Tickets;
 use App\Models\TicketsTmp;
@@ -24,7 +23,7 @@ class TicketsController extends Controller
      *
      * @return view/redirect 
      */
-    public function askQuestion(){
+    public function createTicket(){
         $user = Auth::user();
         if ($user && $user->roles_id != 1) {
             session()->flash('error_message', trans('Only clients have access to create a ticket'));
@@ -45,14 +44,13 @@ class TicketsController extends Controller
      * @param AskQuestionRequest $request - validation request.
      * @return redirect 
      */
-    public function askQuestionPost(\App\Http\Requests\Chat\AskQuestionRequest $request){
+    public function createTicketPost(\App\Http\Requests\Chat\AskQuestionRequest $request){
         $context = request()->only(
             'email', 'name', 'title', 'initial_message', 'service_types_id'
         );
         $model = Auth::check() ? new Tickets() : new TicketsTmp();
 
         $ticket = $model->_create($context);
-
         if(request()->has('ask_images')){
             $upload_model = new Uploads();
             foreach(request()->file('ask_images') as $img){
@@ -61,6 +59,7 @@ class TicketsController extends Controller
                 Storage::disk('public')->put($filePath, $img->get());
                 $context = [
                     'name' => $fileName,
+                    'original_name' => $img->getClientOriginalName(),
                     'ticket_uid' => $ticket->ticket_uid,
                     'path' => 'storage/' . $filePath,
                     'extention' => $img->extension(),
@@ -110,7 +109,7 @@ class TicketsController extends Controller
      *
      * @return view
      */
-    public function list(){
+    public function listTickets(){
         $my_tickets = Cache::remember('my_tickets', $this->model_caching_seconds, function () {
             return Tickets::where(['created_by' => Auth::user()->id])->get();
         });
@@ -132,25 +131,12 @@ class TicketsController extends Controller
             'ticket' => $ticket,
         ]);
     }
-
-    /**
-     * Evaluates the message.
-     *
-     * @return view
-     */
-    public function evaluateMessage(){
-        $message_id = request()->input('message_id');
-        $evaluation = request()->input('evaluation');
-        Messages::where(['id' => $message_id])->update(['evaluation'=> $evaluation]);
-        return response(trans('Evaluation saved'), 200)->header('Content-Type', 'text/plain');;
-    }
-
     /**
      * Update the ticket.
      *
      * @return view
      */
-    public function update($lang, $ticket_uid){
+    public function updateTicket($lang, $ticket_uid){
         $my_ticket = Tickets::where(['ticket_uid' => $ticket_uid])->first();
 
         $service_types = Cache::remember('service_types', $this->sprs_caching_seconds, function () {
@@ -170,7 +156,7 @@ class TicketsController extends Controller
      * @param AskQuestionRequest $request - validation request.
      * @return redirect 
      */
-    public function updatePost(\App\Http\Requests\Chat\AskQuestionRequest $request, $lang, $ticket_uid){
+    public function updateTicketPost(\App\Http\Requests\Chat\AskQuestionRequest $request, $lang, $ticket_uid){
         $context = request()->only(
             'title', 'initial_message', 'service_types_id'
         );
@@ -190,7 +176,7 @@ class TicketsController extends Controller
      * @param int $ticket_uid - unique ID of ticket.
      * @return redirect 
      */
-    public function delete($lang, $ticket_uid){
+    public function deleteTicket($lang, $ticket_uid){
         $conditions['ticket_uid'] = $ticket_uid;
 
         $my_ticket = new Tickets();
@@ -212,39 +198,11 @@ class TicketsController extends Controller
      * @param int $ticket_uid - unique ID of ticket.
      * @return redirect 
      */
-    public function close($lang, $ticket_uid){
+    public function closeTicket($lang, $ticket_uid){
         Tickets::where(['ticket_uid' => $ticket_uid])->update(['status_id' => 4]);
 
         session()->flash('success_message', trans('Ticket successfully closed'));
         
-        return redirect()->back();
-    }
-
-    /**
-     * Updates the ticket status to "closed".
-     *
-     * @param int $ticket_uid - unique ID of ticket.
-     * @return redirect 
-     */
-    public function writeMessage(\App\Http\Requests\Chat\WriteMessageRequest $request, $lang, $ticket_uid){
-        $last_message_order_num = Messages::select('order_num')->where([
-            'ticket_uid' => $ticket_uid,
-        ])->latest('order_num')->first()->order_num;
-
-        $context['ticket_uid'] = $ticket_uid;
-        $context['created_by_type'] = 1;
-        $context['message_body'] = request()->input('message_body');
-        $context['order_num'] = $last_message_order_num + 1;
-
-        $message = new Messages();
-        $ticket = new Tickets();
-        $message->_create($context);
-
-        $ticket->_update(
-            ['ticket_uid' => $ticket_uid], 
-            ['status_id' => 2], 
-        );
-
         return redirect()->back();
     }
 }

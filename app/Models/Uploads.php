@@ -19,6 +19,7 @@ class Uploads extends BaseModel
     protected $fillable = [
         'ticket_uid',
         'name',
+        'original_name',
         'tickets_id',
         'messages_id',
         'path',

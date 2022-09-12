@@ -10,7 +10,7 @@
                 <div class="first-item-text-section">
                   <h1>{{ Lang::get('Write to tech support') }}</h1>
                   <p class="mb-4 text-white fs-17">{{ Lang::get('Help system for the operation of systems and modules of the EDUS platform - write your questions and get answers from technical support specialists.') }}</p>
-                  <a class="myLink text-white" href="{{ route('ask-question') }}">{{ Lang::get('Go') }} <span><img style="width: 20px; margin-left: 7px;" src="{{ asset('images/firstArrow.svg') }}" alt=""></span></a>
+                  <a class="myLink text-white" href="{{ route('create-ticket') }}">{{ Lang::get('Go') }} <span><img style="width: 20px; margin-left: 7px;" src="{{ asset('images/firstArrow.svg') }}" alt=""></span></a>
                 </div>
               </div>
             </div>

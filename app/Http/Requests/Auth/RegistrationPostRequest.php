@@ -16,7 +16,7 @@ class RegistrationPostRequest extends BaseRequest
         return [
             'name' => 'required|max:50',
             'email' => 'required|email|unique:support_user|max:255',
-            'password' => ['required', 'confirmed', 'min:7', 'max:50', new \App\Rules\PasswordValidate()],
+            'password' => ['required', 'confirmed', 'min:8', 'max:50', new \App\Rules\PasswordValidate()],
             'not_robot' => ['required', \Illuminate\Validation\Rule::in(['on'])],
             'agree_with_terms' => ['required', \Illuminate\Validation\Rule::in(['on'])],
         ];

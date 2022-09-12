@@ -16,6 +16,7 @@ class CreateUploadsTable extends Migration
         Schema::create('uploads', function (Blueprint $table) {
             $table->id();
             $table->string('name')->length(255)->comment('Наименование файла');
+            $table->string('original_name')->length(255)->comment('Оригинальное наименование файла');
             $table->string('ticket_uid')->length(20)->comment('Уникальный ID тикета');
             $table->integer('messages_id')->default(0)->comment('ID сообщения');
             $table->string('path')->length(1024)->comment('Путь файла');

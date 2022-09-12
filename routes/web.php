@@ -5,6 +5,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Chat\TicketsController;
+use App\Http\Controllers\Chat\MessagesController;
 use App\Http\Controllers\User\ProfileController;
 
 Route::prefix('{lang?}')->middleware('locale')->group(function(){
@@ -61,32 +62,32 @@ Route::prefix('{lang?}')->middleware('locale')->group(function(){
             Route::get('/view/{ticket_uid}', [TicketsController::class, 'viewTicket'])
                 ->middleware('authenticated')
                 ->name('view-ticket');
-            Route::get('/ask-question', [TicketsController::class, 'askQuestion'])->name('ask-question');
-            Route::post('/ask-question', [TicketsController::class, 'askQuestionPost'])->name('ask-question-post');
+            Route::get('/create-ticket', [TicketsController::class, 'createTicket'])->name('create-ticket');
+            Route::post('/create-ticket', [TicketsController::class, 'createTicketPost'])->name('create-ticket-post');
             Route::get('/ticket-created/{ticket_uid}', [TicketsController::class, 'ticketCreated'])->name('ticket-created');
-            Route::get('/update/{ticket_uid}', [TicketsController::class, 'update'])
+            Route::get('/update/{ticket_uid}', [TicketsController::class, 'updateTicket'])
                 ->middleware('authenticated')
                 ->name('update-ticket');
-            Route::post('/update/{ticket_uid}', [TicketsController::class, 'updatePost'])
+            Route::post('/update/{ticket_uid}', [TicketsController::class, 'updateTicketPost'])
                 ->middleware('authenticated')
                 ->name('update-ticket-post');
-            Route::get('/list', [TicketsController::class, 'list'])
+            Route::get('/list', [TicketsController::class, 'listTickets'])
                 ->middleware('authenticated')
                 ->name('tickets-list');
-            Route::post('/delete/{ticket_uid}', [TicketsController::class, 'delete'])
+            Route::post('/delete/{ticket_uid}', [TicketsController::class, 'deleteTicket'])
                 ->middleware('authenticated')
                 ->name('delete-ticket');
-            Route::post('/close/{ticket_uid}', [TicketsController::class, 'close'])
+            Route::post('/close/{ticket_uid}', [TicketsController::class, 'closeTicket'])
                 ->middleware('authenticated')
                 ->name('close-ticket');
-            Route::post('/write-message/{ticket_uid}', [TicketsController::class, 'writeMessage'])
-                ->middleware('authenticated')
-                ->name('write-message');
 
             /**
-             * AJAX request.
+             * Message routes.
              */
-            Route::post('/message/evaluate', [TicketsController::class, 'evaluateMessage'])
+            Route::post('/write-message/{ticket_uid}', [MessagesController::class, 'writeMessage'])
+                ->middleware('authenticated')
+                ->name('write-message');
+            Route::post('/message/evaluate', [MessagesController::class, 'evaluateMessage'])
                 ->middleware('authenticated')
                 ->name('evaluate-message');
             
@@ -97,7 +98,6 @@ Route::prefix('{lang?}')->middleware('locale')->group(function(){
          * Profile routes.
          */
         Route::prefix('profile')->middleware('authenticated')->group(function(){
-            //TODO
             Route::get('', [ProfileController::class, 'getProfile'])->name('profile');
             Route::post('/update', [ProfileController::class, 'updateProfile'])->name('profile-update');
         });

@@ -27,7 +27,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('ask-question') }}" class="nav-link btn pdBtn text-white">{{ Lang::get('Write to support') }}</a>
+            <a href="{{ route('create-ticket') }}" class="nav-link btn pdBtn text-white">{{ Lang::get('Write to support') }}</a>
           </li>
         </ul>
         <div class="header-button ml-10">

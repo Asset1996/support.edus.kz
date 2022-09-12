@@ -11,7 +11,7 @@
                     {{
                     Lang::get('Our support team makes his best effort to process your request ASAP. As soon as we respond to your request (ticket), you will receive an email notification')
                 }}
-                    <form method="POST" action="{{ route('ask-question-post') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('create-ticket-post') }}" enctype="multipart/form-data">
                         @csrf
                         {{-- First page --}}
                         <div id="first_block">
@@ -74,9 +74,18 @@
                             </div>
 
                             {{-- File upload --}}
-
-                            <label for="ask-file-input" class="" style="cursor: pointer;"><img src="/images/pin.png" alt=""> <span style="color: #76AFE4; font-size: 18px;">Прикрепить файл</span></label>
-                            <input name='ask_images[]' style="display: none;" class="form-control " type='file' data-classButton="btn btn-primary" id="ask-file-input" data-input="false" multiple />
+                            <label for="ask-file-input" class="" style="cursor: pointer;"><img src="{{ asset('/images/pin.png') }}" alt=""> <span style="color: #76AFE4; font-size: 18px;">Прикрепить файл</span></label>
+                            <input 
+                                name='ask_images[]' 
+                                accept="image/png, image/jpeg, image/webp, application/pdf, application/vnd.ms-excel, application/msword, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.openxmlformats-officedocument.wordprocessingml.document" 
+                                style="display: none;" 
+                                class="form-control " 
+                                type='file' 
+                                data-classButton="btn btn-primary" 
+                                id="ask-file-input" 
+                                data-input="false" 
+                                multiple 
+                            />
                             {{-- File upload END --}}
 
                             <div class="form-group form-check mt-5">
@@ -91,6 +100,7 @@
                         {{-- Second page END --}}
                     </form>
                     <div id="images-preview"></div>
+                    <div id="documents-preview"></div>
 
                 </div>
                 <div class="col-md-3 col-sm-12 info-block">
@@ -120,20 +130,34 @@
         if (files) {
             for (let i = 0; i < files.length; i++) {
                 var reader = new FileReader();
+                reader.fileName = files[i].name
                 reader.onload = function (e) {
-                    jQuery('<img>', {
-                        id: 'image-' + i,
-                        class: 'uploading-files col-sm',
-                    }).appendTo('#images-preview');
-                    $('#image-' + i).attr('src', e.target.result);
+                    let mimeType = e.target.result.split(";")[0].substring(5);
+                    let type = mimeType.split("/")[0];
+                    let extension = mimeType.split("/")[1];
+                    console.log(e.target.fileName)
+                    if (type == 'image'){
+                        jQuery('<img>', {
+                            id: 'image-' + i,
+                            class: 'uploading-files col-sm',
+                        }).appendTo('#images-preview');
+                        $('#image-' + i).attr('src', e.target.result);
+                    }else{
+                        $('#documents-preview').append("<p><svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='currentColor' class='bi bi-file-earmark-text-fill' viewBox='0 0 16 16'> <path d='M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z'/></svg>" + e.target.fileName + "</p>")
+                    }
                 }
                 reader.readAsDataURL(files[i]);
-                
             }
         }
     }
     $("#ask-file-input").change(function(){
-        readURL(this);
+        if(this.files.length>5){
+            alert('Too many files')
+            $('#ask-file-input').val('');
+        }
+        else{
+            readURL(this);
+        }
     });
 </script>
 @stop

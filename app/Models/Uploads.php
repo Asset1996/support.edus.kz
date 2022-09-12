@@ -23,6 +23,7 @@ class Uploads extends BaseModel
         'tickets_id',
         'messages_id',
         'path',
+        'type',
         'extention',
         'size'
     ];
@@ -55,5 +56,24 @@ class Uploads extends BaseModel
      */
     public function _delete(array $conditions){
         return $this::where($conditions)->delete();
+    }
+
+    /**
+     * Deletes the upload from DB with files in strorage.
+     *
+     * @param array $conditions
+     * @return object 
+     */
+    public function delete_with_files(array $conditions){
+        $tickets = $this->select('path')->where($conditions)->get();
+        
+        $filesPaths = array_map(
+            function($arr) {
+                return storage_path() . '/app/public/' . str_replace('storage/', '', $arr['path']);
+            }, 
+            $tickets->toArray()
+        );
+        \Illuminate\Support\Facades\File::delete($filesPaths);
+        return $this->_delete($conditions);
     }
 }

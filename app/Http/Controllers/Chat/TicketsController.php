@@ -62,6 +62,7 @@ class TicketsController extends Controller
                     'original_name' => $img->getClientOriginalName(),
                     'ticket_uid' => $ticket->ticket_uid,
                     'path' => 'storage/' . $filePath,
+                    'type' => explode('/', $img->getMimeType())[0],
                     'extention' => $img->extension(),
                     'size' => $img->getSize()
                 ];
@@ -139,13 +140,10 @@ class TicketsController extends Controller
     public function updateTicket($lang, $ticket_uid){
         $my_ticket = Tickets::where(['ticket_uid' => $ticket_uid])->first();
 
-        $service_types = Cache::remember('service_types', $this->sprs_caching_seconds, function () {
-            return \App\Models\Spr\SprServiceTypes::get();
-        });
+        // echo '<pre>' . print_r($my_ticket->uploads, true);exit();
 
         return view('pages.chat.updateTicket', [
             'user' => Auth::user(),
-            'service_types' => $service_types,
             'my_ticket' => $my_ticket,
         ]);
     }
@@ -158,7 +156,7 @@ class TicketsController extends Controller
      */
     public function updateTicketPost(\App\Http\Requests\Chat\AskQuestionRequest $request, $lang, $ticket_uid){
         $context = request()->only(
-            'title', 'initial_message', 'service_types_id'
+            'title', 'initial_message'
         );
         $conditions['ticket_uid'] = $ticket_uid;
 
@@ -179,6 +177,7 @@ class TicketsController extends Controller
     public function deleteTicket($lang, $ticket_uid){
         $conditions['ticket_uid'] = $ticket_uid;
 
+        $uplaods = new Uploads();
         $my_ticket = new Tickets();
         $my_ticket->_delete($conditions);
 
@@ -186,7 +185,9 @@ class TicketsController extends Controller
             session()->flash('error_message', $my_ticket->getFirstError());
         }else{
             Cache::put('my_tickets', '', 0);
+            $uplaods->delete_with_files($conditions);
             session()->flash('success_message', trans('Ticket successfully deleted'));
+            
         }
         
         return redirect()->route('tickets-list');

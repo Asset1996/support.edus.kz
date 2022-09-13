@@ -1,9 +1,7 @@
 {
-    "test": "тестирование",
     "Copyright © 2022 Mediana LLC. All Rights Reserved": "Правообладатель © 2022 ТОО Mediana. Все права защищены",
     "Online technical support service": "Онлайн служба техподдержки",
     "Technical support": "Техподдержка",
-
     "Home": "Главное",
     "About Us": "О нас",
     "Our products": "Наши продукты",
@@ -15,7 +13,6 @@
     "Login": "Войти",
     "Logout": "Выйти",
     "Sign up": "Регистрация",
-
     "Password": "Пароль",
     "Name": "Имя",
     "Surname": "Фамилия",
@@ -23,7 +20,6 @@
     "Email": "Электронная почта",
     "Phone": "Номер телефона",
     "Repeat your password": "Повторите пароль",
-
     "The password field is required": "Поле пароль объязателен к заполнению",
     "The email field is required": "Поле email объязателен к заполнению",
     "The name field is required": "Поле Имя объязателен к заполнению",
@@ -39,7 +35,6 @@
     "The email must be email type": "Поле 'Электронная почта' должна иметь тип email",
     "The title must be minimum 10 symbols": "Поле 'Тема сообщения' должно состоять минимум из 10 символов",
     "The initial message must be minimum 10 symbols": "Поле 'Подробное описание' должно состоять минимум из 10 символов",
-
     "Wrong password": "Неверный пароль",
     "Error occured": "Ошибка",
     "User not found": "Пользователь не найден",
@@ -47,14 +42,12 @@
     "Reset password": "Восстановить пароль",
     "Remind password": "Напомнить пароль",
     "Accept": "Принять",
-
     "Successfully logged in": "Успешно авторизован",
     "Registration successfull, now need to confirm credentials": "Регистрация прошла успешно, теперь необходимо подтвердить учетные данные",
     "Email verified successfully": "Почта успешно верифицирована",
     "Successfully updated": "Изменения успешно внесены",
     "Password successfully updated": "Новый пароль успешно установлен",
     "Please confirm your credentials": "Пожалуйста, подтвердите свои учетные данные",
-
     "Your question regarding": "Ваш вопрос касательно",
     "Hint": "Подсказка",
     "Link": "Ссылка",
@@ -94,7 +87,6 @@
     "Active": "Активный",
     "Old password": "Старый пароль",
     "Incorrect old password": "Старый пароль не совпадает",
-
     "Your request successfully processed. Please, follow the link, that we sent to you email": "Ваш запрос успешно обработан. Пожалуйста, перейдите по ссылке, которую мы отправили на вашу почту",
     "To register, the system requires your name and your email address": "Для регистрации система требует вашего имени и адреса электронной почты.",
     "Password must contain:": "Пароль должен содержать:",
@@ -112,12 +104,10 @@
     "If the mail is not found, you will need to": "Если почта не обнаружится, вам нужно",
     "Please, enter the old and new password": "Пожалуйста, введите свой действующий и новый пароль",
     "The new password was successfully saved": "Новый пароль успешно сохранен",
-
     "Forgot the password?": "Забыли пароль?",
     "Remembered the password?": "Вспомнили пароль?",
     "Have a registration?": "Есть регистрация?",
     "Remind account password": "Напомнить пароль аккаунта",
-
     "The new password successfully set": "Новый пароль успешно установлен",
     "New password": "Новый пароль",
     "Email verification": "Подтверждение электронной почты",
@@ -138,18 +128,17 @@
     "Tags": "Тэги",
     "Evaluation saved": "Оценка сохранена",
     "Account": "Аккаунт",
-
+    "Save": "Сохранить",
     "Request activation": "Активация запроса",
     "you have created a new request, but it is inactive - in order for technical support specialists to see it, you need to confirm the email you specified": "вы создали новое обращение, однако оно неактивно - для того, чтобы его увидели специалисты техподдержки, вам необходимо подтвердить указанную вами почту",
     "An activation link has been sent to your email, please check your inbox": "На вашу почту отправлена ссылка для активации, проверьте почтовый ящик",
-
     "Enter your email when registering:": "Укажите электронную почту при регистрации:",
     "I'm not robot:": "Я не робот",
     "Only for registered users": "Вход для зарегистрированных пользователей",
     "If you are here for the first time, then registration is required to enter your personal account:": "Если вы здесь впервые, то для входа в личный кабинет необходима регистрация:",
     "I agree with the terms of service":"Согласен с условиями предоставления сервиса",
     "Telegram bot": "Телеграм бот",
-    "Найдите в справочнике": "Find in the directory",
+    "Find in the directory":"Найти в справочнике",
     "Write to technical support" : "Пишите в техподдержку",
     "Go": "Перейти",
     "ABOUT SERVICE": "О СЕРВИСЕ",

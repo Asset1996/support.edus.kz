@@ -18,10 +18,6 @@ class ProfileController extends Controller
         $user = Cache::remember('user', 86400, function () {
             return Auth::user();
         });
-        if ($user && $user->roles_id != 1) {
-            session()->flash('error_message', trans('Only clients have access to create a ticket'));
-            return redirect()->home();
-        }
 
         return view('pages.user.profile', [
             'user' => $user

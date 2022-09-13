@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
 
         'locale' => \App\Http\Middleware\Locale::class,
         'authenticated' => \App\Http\Middleware\IsAuthenticated::class,
+        'superuser' => \App\Http\Middleware\IsSuperuser::class,
         'guest' => \App\Http\Middleware\IsGuest::class,
     ];
 }

@@ -34,6 +34,11 @@ Route::prefix('{lang?}')->middleware('locale')->group(function(){
         include('webroutes/profile.php');
 
         /**
+         * Control panel routes.
+         */
+        include('webroutes/control.php');
+
+        /**
          * Static routes (about, reference_book etc).
          */
         include('webroutes/static.php');

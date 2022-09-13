@@ -57,7 +57,8 @@
 
     "Your question regarding": "Ваш вопрос касательно",
     "Hint": "Подсказка",
-    "Our support team makes his best effort to process your request ASAP. As soon as we respond to your request (ticket), you will receive an email notification": "Наша служба поддержки делает все возможное, чтобы обрабатывать вашио бращения в кратчайшие сроки. Как только мы ответим на ваш запрос (тикет), вам придет уведомление на электронную почту",
+    "Link": "Ссылка",
+    "Our support team makes his best effort to process your request ASAP. As soon as we respond to your request (ticket), you will receive an email notification": "Наша служба поддержки делает все возможное, чтобы обрабатывать ваши обращения в кратчайшие сроки. Как только мы ответим на ваш запрос (тикет), вам придет уведомление на электронную почту",
     "We try to respond to all requests (tickets) as soon as possible. But we can do it even faster if you write your request in more detail and clearly": "Мы стараемся отвечать на все запросы (тикеты) как можно скорее. Но мы сможем делать это еще быстрее, если вы напишите ваш запрос более детально и понятно",
     "Please note that if you supplement an already open request with new details, the response time may increase as the request is re-added to the queue. Therefore, it is important to send a detailed request right away": "Обратите внимание, что если дополнять уже открытый запрос новыми подробностями, время ответа может увеличиться, так как заявка заново добавляется в очередь. Поэтому важно сразу отправлять подробный запрос",
     "Send request": "Отправить запрос",
@@ -171,7 +172,7 @@
     "questions answered": "отвеченных вопросов",
     "Write to tech support": "Пишите в техподдержку",
     "Find in directory": "Найдите в справочнике",
-    "Convenient search and reference base will help you quickly find the right answers to your problems and questions. You do not need to wait for a support response.": "Удобный поиск и справочная база помогут вам быстро найти нужные ответы на ваши проблемы и вопросы. Вам не нужно ожиддать ответа поддержки.",
+    "Convenient search and reference base will help you quickly find the right answers to your problems and questions. You do not need to wait for a support response.": "Удобный поиск и справочная база помогут вам быстро найти нужные ответы на ваши проблемы и вопросы. Вам не нужно ожидать ответа поддержки.",
     "Help system for the operation of systems and modules of the EDUS platform - write your questions and get answers from technical support specialists.": "Справочная система по работе систем и модулей платформы EDUS - пишите свои вопросы и получайте на них ответы от специалистов техподдержки.",
     "Your request is being processed by the operator. Wait for a response from the operator.": "Ваше обращение обрабатывается оператором. Ждите ответа от оператора.",
     "The message body must be minimum 10 symbols": "Сообщение должно состоять минимум из 10 символов",
@@ -187,5 +188,6 @@
     "Electronic school": "Электронная школа",
     "A video instruction has been added on how to fill out the electronic journal correctly": "Добравлена видео-инструкция по правильному заполнению электронного журнала",
     "Icorrect format of phone number.": "Неправильный формат номера телефона.",
-    "First, you must verify your email": "Вам нужно подтвердить свою электронную почту"
+    "First, you must verify your email": "Вам нужно подтвердить свою электронную почту",
+    "Frequently sked questions": "Часто задаваемые вопросы"
 }

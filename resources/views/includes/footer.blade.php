@@ -18,10 +18,10 @@
         <!-- Footer Menu-->
         <div class="footer_menu">
           <ul>
-            <li><a href="#">{{ Lang::get("About platform") }}</a></li>
-            <li><a href="#">{{ Lang::get("Proposal for cooperation") }}</a></li>
-            <li><a href="#">{{ Lang::get("Legal details") }}</a></li>
-            <li><a href="#">{{ Lang::get("Terms of use") }}</a></li>
+            <li><a href="{{ route('about-platform') }}">{{ Lang::get("About platform") }}</a></li>
+            <li><a href="{{ route('cooperation-proposal') }}">{{ Lang::get("Proposal for cooperation") }}</a></li>
+            <li><a href="{{ route('legal-details') }}">{{ Lang::get("Legal details") }}</a></li>
+            <li><a href="{{ route('terms-of-use') }}">{{ Lang::get("Terms of use") }}</a></li>
           </ul>
         </div>
       </div>
@@ -34,11 +34,9 @@
         <!-- Footer Menu-->
         <div class="footer_menu">
           <ul>
-            <li><a href="#">{{ Lang::get("Help") }}</a></li>
-            <li><a href="#">{{ Lang::get("Support") }}</a></li>
-            <li><a href="#">{{ Lang::get("Privacy Policy") }}</a></li>
-            <li><a href="#">{{ Lang::get("Term & Conditions") }}</a></li>
-            <li><a href="#">{{ Lang::get("Help & Support") }}</a></li>
+            <li><a href="{{ route('help') }}">{{ Lang::get("Help") }}</a></li>
+            <li><a href="{{ route('support') }}">{{ Lang::get("Support") }}</a></li>
+            <li><a href="{{ route('privacy-policy') }}">{{ Lang::get("Privacy Policy") }}</a></li>
           </ul>
         </div>
       </div>

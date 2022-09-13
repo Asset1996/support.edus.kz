@@ -32,7 +32,7 @@
                     {{ $item->title }}
                   </td>
                   <td>{{ $item->created_at }}</td>
-                  <td class="text-primary">{{ $item->ticket_status->name_ru }}</td>
+                  <td class="text-primary">{{ $item->ticket_status['name_'.Lang::locale()] }}</td>
                   <td>
                     {{ $item->messages->count() }}
                   </td>

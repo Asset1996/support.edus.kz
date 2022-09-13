@@ -19,7 +19,7 @@
                 <div class="first-item-text-section">
                   <h1>{{ Lang::get('Find in directory') }}</h1>
                   <p class="mb-4 text-white fs-17">{{ Lang::get('Convenient search and reference base will help you quickly find the right answers to your problems and questions. You do not need to wait for a support response.') }}</p>
-                  <a class="myLink text-white" href="#">{{ Lang::get('Go') }} <span><img style="width: 20px; margin-left: 7px;" src="{{ asset('images/firstArrow.svg') }}" alt=""></span></a>
+                  <a class="myLink text-white" href="{{ route('reference-book') }}">{{ Lang::get('Go') }} <span><img style="width: 20px; margin-left: 7px;" src="{{ asset('images/firstArrow.svg') }}" alt=""></span></a>
                 </div>
               </div>
             </div>
@@ -50,9 +50,6 @@
     </div>
   </section>
 
-
-
-
   <section class="anonse" style="margin-top: 80px;">
     <div class="container">
       <div class="anon">
@@ -79,8 +76,6 @@
       </div>
     </div>
   </section>
-
-
 
   <section class="social mt-5">
     <div class="container">
@@ -110,6 +105,7 @@
       </div>
     </div>
   </section>
+
   <section class="counter mt-5">
     <div class="container">
       <div class="counter-main">

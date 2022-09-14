@@ -14,9 +14,9 @@
     @foreach ($translates as $key=>$val)
         <tbody>
             <tr>
+                <th scope="row">{{ $loop->iteration + ($paginator['page'] - 1)*$paginator['per_page'] }}</th>
                 <form method="POST" action="{{ route('localize-post') }}">
                     @csrf
-                    <th scope="row">{{ $loop->iteration }}</th>
                     <td>
                         @if (Str::length($val) > 40)
                             <textarea name="original" class="form-control" rows="4" readonly="readonly">{{ $key }}</textarea>

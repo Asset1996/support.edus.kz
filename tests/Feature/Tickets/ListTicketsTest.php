@@ -1,15 +1,16 @@
 <?php
 /**
- * Logout routes testing.
+ * Tickets list routes testing.
  */
-namespace Tests\Auth\Feature;
+namespace Tests\Tickets\Feature;
 
 use Tests\TestCase;
 use App\Models\User;
 
-class LogoutTest extends TestCase
+class ListTicketsTest extends TestCase
 {
     use \Illuminate\Foundation\Testing\DatabaseMigrations;
+    // use \Illuminate\Foundation\Testing\RefreshDatabase;
     /**
      * User not verified his email.
      */
@@ -50,26 +51,28 @@ class LogoutTest extends TestCase
     }
 
     /**
-     * Test that logout successfull.
+     * Test that list all tickets page
+     * loaded successfully for authorized user.
      *
      * @return void
      */
-    public function test_logout_successfull()
+    public function test_list_tickets_page_loaded_successfully_for_authorized_user()
     {
         auth()->login($this->verified_user);
-        $response = $this->post($this->url_prefix . 'auth/logout');
-        $response->assertStatus(302);
-        $this->assertGuest();
+        $response = $this->get($this->url_prefix . 'ticket/list/');
+        $response->assertStatus(200);
+        $response->assertViewIs('pages.chat.ticketsList');
     }
 
     /**
-     * Test that logout throws 401(Unauthorized) for
-     * unauthorized users.
+     * Test that list all tickets page
+     * returns 401(unauthorized) for unauthorized user.
      *
      * @return void
      */
-    public function test_logout_throws_401_for_unauthorized(){
-        $response = $this->post($this->url_prefix . 'auth/logout');
+    public function test_list_tickets_page_401_for_unauthorized()
+    {
+        $response = $this->get($this->url_prefix . 'ticket/list/');
         $response->assertStatus(401);
     }
 }

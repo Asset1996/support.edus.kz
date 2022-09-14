@@ -5,7 +5,6 @@
 namespace App\Models;
 
 use Illuminate\Support\Facades\Hash;
-use App\Helpers\MailSender;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;

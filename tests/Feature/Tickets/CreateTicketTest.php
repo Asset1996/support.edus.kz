@@ -1,19 +1,16 @@
 <?php
 /**
- * Authorization routes testing.
+ * Tickets create routes testing.
  */
 namespace Tests\Tickets\Feature;
 
 use Tests\TestCase;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 
-class TicketsTest extends TestCase
+class CreateTicketTest extends TestCase
 {
-    use DatabaseMigrations, RefreshDatabase;
+    use \Illuminate\Foundation\Testing\DatabaseMigrations;
+    // use \Illuminate\Foundation\Testing\RefreshDatabase;
     /**
      * User not verified his email.
      */
@@ -61,7 +58,7 @@ class TicketsTest extends TestCase
      *
      * @return void
      */
-    public function test_create_ticket_page_loaded_successfull()
+    public function test_create_ticket_page_loaded_successfully()
     {
         $response = $this->get($this->url_prefix . 'ticket/create-ticket/');
         $response->assertStatus(200);
@@ -74,7 +71,7 @@ class TicketsTest extends TestCase
      *
      * @return void
      */
-    public function test_create_ticket_unauthorized_successfull()
+    public function test_create_ticket_unauthorized_successfully()
     {
         $response = $this->post($this->url_prefix . 'ticket/create-ticket/', [
             'email' => 'unauthorized_user@mail.com',
@@ -94,6 +91,7 @@ class TicketsTest extends TestCase
         $this->assertDatabaseHas('support_tickets_tmp', [
             'title' => 'Create ticket for unauthorized user successfully',
         ]);
+        $response->assertRedirectContains('/ticket-created/');
         $response->assertStatus(302);
     }
 
@@ -103,7 +101,7 @@ class TicketsTest extends TestCase
      *
      * @return void
      */
-    public function test_create_ticket_authorized_successfull()
+    public function test_create_ticket_authorized_successfully()
     {
         auth()->login($this->verified_user);
         $response = $this->post($this->url_prefix . 'ticket/create-ticket/', [
@@ -121,6 +119,7 @@ class TicketsTest extends TestCase
         $this->assertDatabaseHas('support_tickets', [
             'title' => 'Create ticket for authorized user successfully',
         ]);
+        $response->assertRedirectContains('/ticket-created/');
         $response->assertStatus(302);
     }
 
@@ -206,14 +205,14 @@ class TicketsTest extends TestCase
      *
      * @return void
      */
-    public function test_validation_upload_file()
+    public function test_upload_file()
     {
         auth()->login($this->verified_user);
         $stub = storage_path().'/app/test/test.png';
         $fileName = 'test_' . uniqid().'.png';
         $path = sys_get_temp_dir().'/'.$fileName;
         copy($stub, $path);
-        $file = new UploadedFile($path, $fileName, 'image/png',  null, true);
+        $file = new \Illuminate\Http\UploadedFile($path, $fileName, 'image/png',  null, true);
 
         $response = $this->post($this->url_prefix . 'ticket/create-ticket/', [
             'email' => $this->verified_user->email,

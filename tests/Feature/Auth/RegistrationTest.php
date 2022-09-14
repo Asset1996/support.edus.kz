@@ -6,11 +6,10 @@ namespace Tests\Auth\Feature;
 
 use Tests\TestCase;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class RegistrationTest extends TestCase
 {
-    use DatabaseMigrations;
+    use \Illuminate\Foundation\Testing\DatabaseMigrations;
     /**
      * User not verified his email.
      */

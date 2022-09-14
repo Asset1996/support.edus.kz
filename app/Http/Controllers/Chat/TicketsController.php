@@ -126,21 +126,34 @@ class TicketsController extends Controller
      * @return view
      */
     public function viewTicket($lang, $ticket_uid){
-        $ticket = Tickets::where(['ticket_uid' => $ticket_uid])->first();
-        // echo '<pre>' . print_r($ticket, true);exit();
+        $my_ticket = Tickets::where([
+            'ticket_uid' => $ticket_uid,
+            'created_by' => auth()->user()->id
+        ])->first();
+
+        if (!$my_ticket){
+            abort(404);
+        }
+
         return view('pages.chat.viewTicket', [
-            'ticket' => $ticket,
+            'ticket' => $my_ticket,
         ]);
     }
+
     /**
      * Update the ticket.
      *
      * @return view
      */
     public function updateTicket($lang, $ticket_uid){
-        $my_ticket = Tickets::where(['ticket_uid' => $ticket_uid])->first();
+        $my_ticket = Tickets::where([
+            'ticket_uid' => $ticket_uid,
+            'created_by' => auth()->user()->id
+        ])->first();
 
-        // echo '<pre>' . print_r($my_ticket->uploads, true);exit();
+        if (!$my_ticket){
+            abort(404);
+        }
 
         return view('pages.chat.updateTicket', [
             'user' => Auth::user(),

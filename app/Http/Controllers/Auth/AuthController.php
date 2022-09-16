@@ -16,9 +16,9 @@ class AuthController extends Controller
 
     /**
      * Registrates new user into the system.
-     * 
+     *
      * @param RegistrationPostRequest $request
-     * @return Redirect 
+     * @return Redirect
      */
     public function registration(\App\Http\Requests\Auth\RegistrationPostRequest $request){
         $context = request()->only(['name', 'email', 'password']);
@@ -41,12 +41,12 @@ class AuthController extends Controller
 
     /**
      * Verifies email by verification token.
-     * 
+     *
      * @param string $token - email verifiacation token.
-     * @return Redirect 
+     * @return Redirect
      */
     public function verifyEmail(string $lang, string $token){
-        
+
         $user = $this->user->verifyEmail($token);
         session()->forget(['error_message', 'success_message']);
         if($this->user->hasErrors()){
@@ -105,7 +105,7 @@ class AuthController extends Controller
     public function resetPassword(\App\Http\Requests\Auth\ResetPasswordRequest $request){
 
         $context = $this->user->resetPassword();
-        
+
         if($this->user->hasErrors()){
             session()->flash('error_message', $this->user->getFirstError());
             return redirect()->home();
@@ -113,7 +113,7 @@ class AuthController extends Controller
 
         $mail_sender = new MailSender(env('SET_NEW_PASSWORD_ROUTE'), 'mail.ResetPassword');
         $mail_sender->send($context);
-        
+
         if($mail_sender->hasErrors()){
             session()->flash('error_message', $mail_sender->getFirstError());
         }else{
@@ -128,7 +128,7 @@ class AuthController extends Controller
      * @return redirect|view
      */
     public function setNewPassword(string $lang, string $token){
-        
+
         $user = $this->user->where(
             ['verification_token' => $token]
         )->first();
@@ -145,7 +145,7 @@ class AuthController extends Controller
      * @return view
      */
     public function changePassword(){
-        
+
         return view('pages.auth.changePassword');
     }
 
@@ -169,7 +169,7 @@ class AuthController extends Controller
      * @return redirect
      */
     public function setNewPasswordPost(\App\Http\Requests\Auth\SetNewPasswordRequest $request, string $lang, string $token){
-        
+
         $user = $this->user->where(
             ['verification_token' => $token]
         )->first();

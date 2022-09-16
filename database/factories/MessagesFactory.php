@@ -4,9 +4,9 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class TicketsFactory extends Factory
+class MessagesFactory extends Factory
 {
-    protected $model = \App\Models\Tickets::class;
+    protected $model = \App\Models\Messages::class;
     /**
      * Define the model's default state.
      *
@@ -16,11 +16,10 @@ class TicketsFactory extends Factory
     {
         return [
             'ticket_uid' => 't_'.uniqid(),
-            'title' => $this->faker->word(),
-            'initial_message' => $this->faker->sentence(),
-            'service_types_id' => 1,
-            'status_id' => 1,
             'created_by' => 1,
+            'created_by_type' => 0,
+            'message_body' => $this->faker->sentence(),
+            'order_num' => 1,
         ];
     }
 }

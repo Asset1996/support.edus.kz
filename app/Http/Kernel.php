@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'authenticated' => \App\Http\Middleware\IsAuthenticated::class,
         'superuser' => \App\Http\Middleware\IsSuperuser::class,
         'guest' => \App\Http\Middleware\IsGuest::class,
+        'client' => \App\Http\Middleware\IsClient::class,
     ];
 }

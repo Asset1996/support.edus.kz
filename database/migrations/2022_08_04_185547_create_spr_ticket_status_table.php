@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 
 class CreateSprTicketStatusTable extends Migration
 {
@@ -21,34 +20,13 @@ class CreateSprTicketStatusTable extends Migration
             $table->timestamp('created_at')->comment('Время создания записи')->useCurrent();
             $table->timestamp('updated_at')->comment('Время обновления записи')->useCurrentOnUpdate()->nullable();
         });
-        DB::table('spr_ticket_status')->insert(
-            array(
-                'id' => 1,
-                'name_ru' => 'Создан',
-                'name_kk' => 'Құрылды'
-            ),
-        );
-        DB::table('spr_ticket_status')->insert(
-            array(
-                'id' => 2,
-                'name_ru' => 'В процессе',
-                'name_kk' => 'Өңделуде'
-            ),
-        );
-        DB::table('spr_ticket_status')->insert(
-            array(
-                'id' => 3,
-                'name_ru' => 'Отвечен',
-                'name_kk' => 'Жауап берілді'
-            ),
-        );
-        DB::table('spr_ticket_status')->insert(
-            array(
-                'id' => 4,
-                'name_ru' => 'Закрыто',
-                'name_kk' => 'Жабылды'
-            ),
-        );
+        $ticket_statuses = [
+            ['id' => 1, 'name_ru' => 'Создан', 'name_kk' => 'Құрылды'],
+            ['id' => 2, 'name_ru' => 'В процессе', 'name_kk' => 'Өңделуде'],
+            ['id' => 3, 'name_ru' => 'Отвечен', 'name_kk' => 'Жауап берілді'],
+            ['id' => 4, 'name_ru' => 'Закрыто', 'name_kk' => 'Жабылды'],
+        ];
+        \App\Models\Spr\SprTicketStatus::insert($ticket_statuses);
     }
 
     /**

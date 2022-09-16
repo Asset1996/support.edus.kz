@@ -4,7 +4,9 @@ namespace App\Models\Spr;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class SprServiceTypes extends BaseSprModel
+use Illuminate\Database\Eloquent\Model;
+
+class SprServiceTypes extends Model implements BaseSprInterface
 {
     use HasFactory;
 
@@ -12,4 +14,8 @@ class SprServiceTypes extends BaseSprModel
      * Name of table in DB.
      */
     protected $table = "spr_service_types";
+
+    public static function get(){
+        return self::all();
+    }
 }

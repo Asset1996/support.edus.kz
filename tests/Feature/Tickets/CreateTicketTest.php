@@ -32,12 +32,16 @@ class CreateTicketTest extends TestCase
         parent::setUp();
         $this->url_prefix = '/' . config('app.locale') . '/' . env('APP_VERSION', 'v1') . '/';
         $this->user = User::factory()->create();
-        $this->verified_user = User::factory()->create(
-            User::factory()->definition() + [
-                'has_access' => 1,
-                'email_verified_at' => now()
-            ]
-        );
+        $this->verified_user = User::factory()->create([
+            'has_access' => 1,
+            'roles_id' => 1,
+            'email_verified_at' => now()
+        ]);
+        $this->not_client = User::factory()->create([
+            'has_access' => 1,
+            'roles_id' => 2,
+            'email_verified_at' => now()
+        ]);
     }
 
     /**
@@ -66,6 +70,19 @@ class CreateTicketTest extends TestCase
     }
 
     /**
+     * Test that create ticket page load fails,
+     * if authorized user is not a client (roles_id != 1).
+     *
+     * @return void
+     */
+    public function test_create_ticket_page_load_403_if_not_client()
+    {
+        auth()->login($this->not_client);
+        $response = $this->get($this->url_prefix . 'ticket/create-ticket/');
+        $response->assertStatus(403);
+    }
+
+    /**
      * Test that ticket successfully created
      * by unauthorized user.
      *
@@ -82,8 +99,8 @@ class CreateTicketTest extends TestCase
             'not_robot' => 'on',
         ]);
         $this->assertEquals(
-            session('success_message'),
-            "Тикет успешно создан. Вам надо верифицировать ваш email"
+            "Тикет успешно создан. Вам надо верифицировать ваш email",
+            session('success_message')
         );
         $this->assertDatabaseHas('support_user', [
             'email' => 'unauthorized_user@mail.com',
@@ -121,6 +138,28 @@ class CreateTicketTest extends TestCase
         ]);
         $response->assertRedirectContains('/ticket-created/');
         $response->assertStatus(302);
+    }
+
+    /**
+     * Test that only clients(roles_id = 1) can create ticket.
+     *
+     * @return void
+     */
+    public function test_create_ticket_only_clients()
+    {
+        auth()->login($this->not_client);
+        $response = $this->post($this->url_prefix . 'ticket/create-ticket/', [
+            'email' => $this->not_client->email,
+            'name' => $this->not_client->name,
+            'title' => 'Created ticket by operator Denis',
+            'initial_message' => 'Message created ticket by operator Denis',
+            'service_types_id' => 1,
+            'not_robot' => 'on',
+        ]);
+        $this->assertDatabaseMissing('support_tickets', [
+            'title' => 'Created ticket by operator Denis',
+        ]);
+        $response->assertStatus(403);
     }
 
     /**

@@ -59,7 +59,7 @@ class TicketsTmp extends BaseModel
      * Creates temporary ticket.
      *
      * @param array $context
-     * @return object 
+     * @return object
      */
     public function _create(array $context = []){
         $user_model = new User();
@@ -89,7 +89,7 @@ class TicketsTmp extends BaseModel
      *
      * @param array $conditions
      * @param array $context
-     * @return object 
+     * @return object
      */
     public function _update(array $conditions, array $context){
         return $this::where($conditions)->update($context);
@@ -99,7 +99,7 @@ class TicketsTmp extends BaseModel
      * Deletes the temporary ticket.
      *
      * @param array $conditions
-     * @return object 
+     * @return object
      */
     public function _delete(array $conditions){
         return $this::where($conditions)->delete();

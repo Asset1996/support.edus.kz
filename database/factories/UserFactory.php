@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserFactory extends Factory
 {
+    protected $model = \App\Models\User::class;
     /**
      * Define the model's default state.
      *

@@ -82,7 +82,7 @@ class Tickets extends BaseModel
      * Creates ticket.
      *
      * @param array $context
-     * @return object 
+     * @return object
      */
     public function _create(array $context = []){
         $context['created_by'] = auth()->user()->id;
@@ -94,7 +94,7 @@ class Tickets extends BaseModel
      * Updates the ticket.
      *
      * @param array $context
-     * @return object 
+     * @return object
      */
     public function _update(array $conditions, array $context){
         return $this::where($conditions)->update($context);
@@ -104,7 +104,7 @@ class Tickets extends BaseModel
      * Deletes the ticket.
      *
      * @param array $conditions
-     * @return object 
+     * @return object
      */
     public function _delete(array $conditions){
         $ticket = $this::where($conditions)->first();
@@ -119,7 +119,7 @@ class Tickets extends BaseModel
      * Inserts the tickets, that are deleted from temporary tickets table.
      *
      * @param collection $user->tickets_tmp
-     * @return bool 
+     * @return bool
      */
     public static function get_tickets_from_temp($tickets_tmp){
         foreach ($tickets_tmp as $tickets) {
@@ -135,7 +135,7 @@ class Tickets extends BaseModel
      * Returns the statistics data for home page about
      * how many tickers created and answered etc.
      *
-     * @return self 
+     * @return self
      */
     public static function getStatistics(){
         $statistics = DB::table('support_tickets')

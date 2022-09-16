@@ -1,7 +1,7 @@
 {
     "name": "laravel/laravel",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Technical online support for EDUS services.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {

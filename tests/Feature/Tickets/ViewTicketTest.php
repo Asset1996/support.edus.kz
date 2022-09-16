@@ -31,14 +31,13 @@ class ViewTicketTest extends TestCase
      */
     protected function setUp(): void{
         parent::setUp();
+        // $this->artisan('db:seed');
         $this->url_prefix = '/' . config('app.locale') . '/' . env('APP_VERSION', 'v1') . '/';
         $this->user = User::factory()->create();
-        $this->verified_user = User::factory()->create(
-            User::factory()->definition() + [
-                'has_access' => 1,
-                'email_verified_at' => now()
-            ]
-        );
+        $this->verified_user = User::factory()->create([
+            'has_access' => 1,
+            'email_verified_at' => now()
+        ]);
     }
 
     /**

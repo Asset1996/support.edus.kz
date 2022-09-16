@@ -4,7 +4,7 @@ namespace App\Http\Requests\Chat;
 
 use App\Http\Requests\BaseRequest;
 
-class AskQuestionRequest extends BaseRequest
+class CreateTicketRequest extends BaseRequest
 {
     /**
      * Get the validation rules that apply to the request.

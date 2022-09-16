@@ -37,6 +37,9 @@ class UpdateTicketsTest extends TestCase
             'has_access' => 1,
             'email_verified_at' => now()
         ]);
+        $this->ticket = Tickets::factory()->create([
+            'created_by' => $this->verified_user->id
+        ]);
     }
 
     /**
@@ -49,6 +52,7 @@ class UpdateTicketsTest extends TestCase
         unset($this->url_prefix);
         User::where(['id' => $this->user->id])->delete();
         User::where(['id' => $this->verified_user->id])->delete();
+        Tickets::where(['ticket_uid' => $this->ticket->ticket_uid])->delete();
     }
 
     /**
@@ -60,15 +64,7 @@ class UpdateTicketsTest extends TestCase
     public function test_ticket_update_page_loaded_successfully()
     {
         auth()->login($this->verified_user);
-        $ticket = Tickets::factory()->create([
-            'ticket_uid' => 't_' . uniqid(),
-            'title' => 'Title of the ticket',
-            'initial_message' => 'Init message of the ticket',
-            'service_types_id' => 1,
-            'status_id' => 1,
-            'created_by' => $this->verified_user->id,
-        ]);
-        $response = $this->get($this->url_prefix . 'ticket/update/'. $ticket->ticket_uid);
+        $response = $this->get($this->url_prefix . 'ticket/update/'. $this->ticket->ticket_uid);
         $response->assertStatus(200);
         $response->assertViewIs('pages.chat.updateTicket');
     }
@@ -81,8 +77,7 @@ class UpdateTicketsTest extends TestCase
      */
     public function test_ticket_update_page_401_for_unauthorized()
     {
-        $ticket = Tickets::factory()->create();
-        $response = $this->get($this->url_prefix . 'ticket/update/' . $ticket->ticket_uid);
+        $response = $this->get($this->url_prefix . 'ticket/update/' . $this->ticket->ticket_uid);
         $response->assertStatus(401);
     }
 
@@ -119,5 +114,26 @@ class UpdateTicketsTest extends TestCase
         ]);
         $response = $this->get($this->url_prefix . 'ticket/update/' . $ticket->ticket_uid);
         $response->assertStatus(404);
+    }
+
+    /**
+     * Test that ticked updated successfully.
+     *
+     * @return void
+     */
+    public function test_update_ticket_successfully(){
+        auth()->login($this->verified_user);
+        $response = $this->post($this->url_prefix . 'ticket/update/' . $this->ticket->ticket_uid, [
+            'title' => 'Updated ticket title',
+            'initial_message' => 'Updated ticket message body',
+            'not_robot' => 'on',
+        ]);
+        $this->assertDatabaseHas('support_tickets', [
+            'ticket_uid' => $this->ticket->ticket_uid,
+            'title' => 'Updated ticket title',
+        ]);
+        $response->assertStatus(302);
+        $url = route('tickets-list');
+        $response->assertRedirectContains($url);
     }
 }

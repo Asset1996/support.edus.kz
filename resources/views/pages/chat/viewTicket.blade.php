@@ -25,7 +25,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="word-break: break-word;" class="operators-message">
+                        <div style="word-break: break-word;" class="clients-message">
                             <p class="paragraph">
                             <h4>{{ $ticket->title }}</h4>
                             </p>
@@ -40,17 +40,17 @@
                             @endif
                         </div>
                         @foreach ($ticket->messages as $message)
-                        <div @if ($message->created_by_type == 1)
-                            class="clients-message"
+                        <div @if ($message->created_by_type == 0)
+                                class="clients-message"
                             @else
-                            class="operators-message"
+                                class="operators-message"
                             @endif
-                            >
+                        >
                             <p><span class="created-date">{{ $message->created_at }}</span></p>
                             <p class="paragraph">
                             <h4>{{ $message->message_body }}</h4>
                             </p>
-                            @if ($message->created_by_type != 1)
+                            @if ($message->created_by_type != 0)
                             <p class="paragraph">
                             <form action="">
                                 <div class="starrating risingstar d-flex flex-row-reverse">

@@ -4,44 +4,14 @@
 @section('content')
 <body>
     <div class="container">
-        <div class="main-banner"> 
+        <div class="main-banner">
             <h3>{{ Lang::get('Update appeal No') }} {{$my_ticket->ticket_uid}}</h3>
             <div class="row justify-content-between">
                 <div class="col-md-8 col-sm-12">
                     <form method="POST" action="{{ route('update-ticket-post', ['ticket_uid' => $my_ticket->ticket_uid]) }}">
                         @csrf
-                        {{-- Second page --}}
+                        {{-- Main --}}
                         <div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <div class="form-outline flex-fill mb-0 w-100">
-                                            <label class="form-label" for="ask_email">{{Lang::get("Email")}}</label>
-                                            @if ($user)
-                                                <input type="email" value="{{ $user->email }}" id="ask_email" name="email" class="form-control myInput" required readonly/>
-                                            @else
-                                                <input type="email" id="ask_email" name="email" class="form-control myInput" required/>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <div class="form-outline flex-fill mb-0 w-100">
-                                            <label class="form-label" for="ask_name">{{Lang::get("Your name")}}</label>
-                                            @if ($user)
-                                                <input type="text" value="{{ $user->name }}" id="ask_name" name="name" class="form-control myInput" required readonly/>
-                                            @else
-                                                <input type="text" id="ask_name" name="name" class="form-control myInput" required/>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <span style="color:red">{{ Lang::get("Your question regarding") }}:</span>
-                                <span id="service_type_text" style="font-weight:bold"></span>
-                            </div>
                             <div class="form-group">
                                 <label for="ask_title">{{ Lang::get('Message subject') }}</label>
                                 <input type="text" class="form-control myInput" id="ask_title" name="title" value="{{ $my_ticket->title }}" required>
@@ -56,7 +26,7 @@
                                     @foreach ($my_ticket->uploads as $upload)
                                     @if ($upload->type == 'image')
                                         <img class="uploading-files col-sm" src="{{URL::asset($upload->path)}}" alt="">
-                                    @else 
+                                    @else
                                         <p>
                                             <svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' fill='currentColor' class='bi bi-file-earmark-text-fill' viewBox='0 0 16 16'>
                                                 <path d='M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z'/>
@@ -76,7 +46,7 @@
                                 <button type="submit" class="btn btn-primary btn-lg">{{Lang::get("Save request")}}</button>
                             </div>
                         </div>
-                        {{-- Second page END --}}
+                        {{-- Main END --}}
                     </form>
                 </div>
                 <div class="col-md-4 col-sm-12 info-block">

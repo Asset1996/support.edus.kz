@@ -1,4 +1,3 @@
-
 .starrating{
     justify-content: left;
 }
@@ -36,10 +35,22 @@
 }
 
 .operators-message{
+    background-color: #a8ffaf;
+    padding: 30px 30px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.clients-message{
     background: rgba(24, 179, 228, 0.19);
     padding: 0 30px 30px 26px;
     border-radius: 20px;
     margin-top: 20px;
+}
+
+.evaluation-message{
+    max-width: 300px;
+    overflow: hidden;
 }
 
 .ticketBtn {
@@ -71,18 +82,6 @@
 
 .filter-inner-block>p{
     margin: 0;
-}
-
-.clients-message{
-    background-color: #a8ffaf;
-    padding: 30px 30px;
-    border-radius: 20px;
-    margin-top: 20px;
-}
-
-.evaluation-message{
-    max-width: 300px;
-    overflow: hidden;
 }
 
 

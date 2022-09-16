@@ -5,7 +5,8 @@
 namespace App\Http\Controllers\Chat;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Chat\AskQuestionRequest;
+use App\Http\Requests\Chat\CreateTicketRequest;
+use App\Http\Requests\Chat\UpdateTicketRequest;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -62,11 +63,11 @@ class TicketsController extends Controller
     /**
      * Processes the POST request from askQuestion page form.
      *
-     * @param AskQuestionRequest $request - validation request.
+     * @param CreateTicketRequest $request - validation request.
      * @return RedirectResponse
      * @throws FileNotFoundException
      */
-    public function createTicketPost(AskQuestionRequest $request): RedirectResponse
+    public function createTicketPost(CreateTicketRequest $request): RedirectResponse
     {
         $context = request()->only(
             'email', 'name', 'title', 'initial_message', 'service_types_id'
@@ -194,18 +195,17 @@ class TicketsController extends Controller
     /**
      * Processes the POST request from update ticket page form.
      *
-     * @param AskQuestionRequest $request - validation request.
+     * @param UpdateTicketRequest $request - validation request.
      * @param $lang
      * @param $ticket_uid
-     * @return redirect
+     * @return RedirectResponse
      */
-    public function updateTicketPost(AskQuestionRequest $request, $lang, $ticket_uid): redirect
+    public function updateTicketPost(UpdateTicketRequest $request, $lang, $ticket_uid): RedirectResponse
     {
         $context = request()->only(
             'title', 'initial_message'
         );
         $conditions['ticket_uid'] = $ticket_uid;
-
         $my_ticket = new Tickets();
         $my_ticket->_update($conditions, $context);
 

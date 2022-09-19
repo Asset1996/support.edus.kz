@@ -136,4 +136,72 @@ class UpdateTicketsTest extends TestCase
         $url = route('tickets-list');
         $response->assertRedirectContains($url);
     }
+
+    /**
+     * Test - message title must be minimum 10 symbols.
+     *
+     * @return void
+     */
+    public function test_validation_message_title_min_10_symbols()
+    {
+        auth()->login($this->verified_user);
+        $response = $this->post($this->url_prefix . 'ticket/update/' . $this->ticket->ticket_uid, [
+            'title' => 'short',
+            'initial_message' => 'Message title must be minimum 10 symbols',
+            'not_robot' => 'on',
+        ]);
+        $this->assertEquals(
+            "Поле 'Тема сообщения' должно состоять минимум из 10 символов",
+            session('error_message')
+        );
+        $this->assertDatabaseMissing('support_tickets', [
+            'title' => 'short',
+        ]);
+        $response->assertStatus(302);
+    }
+
+    /**
+     * Test - message body must be minimum 10 symbols.
+     *
+     * @return void
+     */
+    public function test_validation_message_body_min_10_symbols()
+    {
+        auth()->login($this->verified_user);
+        $response = $this->post($this->url_prefix . 'ticket/update/' . $this->ticket->ticket_uid, [
+            'title' => 'Message body must be minimum 10 symbolsy',
+            'initial_message' => 'short',
+            'not_robot' => 'on',
+        ]);
+        $this->assertEquals(
+            "Поле 'Подробное описание' должно состоять минимум из 10 символов",
+            session('error_message')
+        );
+        $this->assertDatabaseMissing('support_tickets', [
+            'initial_message' => 'short',
+        ]);
+        $response->assertStatus(302);
+    }
+
+    /**
+     * Test - I'm not robot checker must be checked.
+     *
+     * @return void
+     */
+    public function test_validation_not_robot_must_be_checked()
+    {
+        auth()->login($this->verified_user);
+        $response = $this->post($this->url_prefix . 'ticket/update/' . $this->ticket->ticket_uid, [
+            'title' => 'Message not robot',
+            'initial_message' => 'Message not robot body',
+        ]);
+        $this->assertEquals(
+            "Вы не нажали на 'Я не робот'",
+            session('error_message')
+        );
+        $this->assertDatabaseMissing('support_tickets', [
+            'title' => 'Message not robot',
+        ]);
+        $response->assertStatus(302);
+    }
 }

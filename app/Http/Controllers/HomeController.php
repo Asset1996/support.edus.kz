@@ -7,16 +7,18 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\StaticModels\Announcement;
 use App\Models\Tickets;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
     /**
      * Return the home page.
-     * 
-     * @return view
+     *
+     * @return View
      */
-    public function getHome(){
+    public function getHome(): View
+    {
         $announcements = Cache::remember('announcement', 604800, function () {
             return Announcement::all();
         });
@@ -24,7 +26,7 @@ class HomeController extends Controller
             return Tickets::getStatistics();
         });
 
-        return view('pages.home', [
+        return View('pages.home', [
             'announcements' => $announcements,
             'statistics' => $statistics
         ]);

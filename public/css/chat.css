@@ -1,3 +1,4 @@
+
 .starrating{
     justify-content: left;
 }
@@ -5,16 +6,16 @@
 .starrating > input {display: none;}  /* Remove radio buttons */
 
 .starrating > label:before {
-  content: "\f005"; /* Star */
-  margin: 2px;
-  font-size: 1em;
-  font-family: FontAwesome;
-  display: inline-block;
+    content: "\f005"; /* Star */
+    margin: 2px;
+    font-size: 1em;
+    font-family: FontAwesome;
+    display: inline-block;
 }
 
 .starrating > label
 {
-  color: #d8bf64; /* Start color when not clicked */
+    color: #d8bf64; /* Start color when not clicked */
 }
 
 .starrating > input:checked ~ label
@@ -48,11 +49,6 @@
     margin-top: 20px;
 }
 
-.evaluation-message{
-    max-width: 300px;
-    overflow: hidden;
-}
-
 .ticketBtn {
     width: 100%;
     max-width: 238px;
@@ -84,4 +80,7 @@
     margin: 0;
 }
 
-
+.evaluation-message{
+    max-width: 300px;
+    overflow: hidden;
+}

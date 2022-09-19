@@ -3,23 +3,24 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class ProfileController extends Controller
 {
     /**
-     * Renders the profile main view 
+     * Renders the profile main view
      * or redirects to home page, if the user is not a client.
      *
-     * @return view/redirect 
+     * @return View/redirect
      */
-    public function getProfile(){
-        $user = Cache::remember('user', 86400, function () {
-            return Auth::user();
-        });
+    public function getProfile(): View
+    {
+        $user = Auth::user();
 
-        return view('pages.user.profile', [
+        return View('pages.user.profile', [
             'user' => $user
         ]);
     }
@@ -27,9 +28,10 @@ class ProfileController extends Controller
     /**
      * Processes the POST request to update the user data in DB.
      *
-     * @return redirect 
+     * @return RedirectResponse
      */
-    public function updateProfile(\App\Http\Requests\User\UpdateProfileRequest $request){
+    public function updateProfile(\App\Http\Requests\User\UpdateProfileRequest $request): RedirectResponse
+    {
         $context = request()->only(
             'phone', 'iin', 'surname', 'name'
         );

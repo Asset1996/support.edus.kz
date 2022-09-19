@@ -3,12 +3,11 @@
   @include('modals.register-modal')
   @include('modals.reset-password-modal')
 @endif
-<div class="container">
-  <div class="header-content">
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="{{ route('home') }}">
-        <img style="width: 110px;" src="{{ asset('images/logo.png') }}" alt="">
-        <span class="logo-text">{{ Lang::get('Technical support') }}</span>
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand logo" href="{{ route('home') }}">
+        <img style="width: 90px;" src="{{ asset('images/logo.svg') }}" alt="">
+        <span>{{ Lang::get('Technical support') }}</span>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
         <span class="navbar-toggler-icon"></span>
@@ -55,13 +54,7 @@
             {{Lang::get("Login")}}
           </button>
         </div>
-        <div class="header-button">
-          <button type="button" class="auth-action-button" data-toggle="modal" data-target="#registerModal">
-            {{Lang::get("Register")}}
-          </button>
-        </div>
         @endif
       </div>
     </nav>
-  </div>
 </div>

@@ -17,7 +17,7 @@ class UpdateProfileRequest extends BaseRequest
             'name' => 'min:1|max:50',
             'surname' => 'min:1|max:50',
             'phone' => new \App\Rules\PhoneNumber(),
-            'iin' => 'min:12|max:12',
+            'iin' => new \App\Rules\ValidateIIN(),
         ];
     }
 }

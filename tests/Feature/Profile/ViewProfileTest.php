@@ -1,22 +1,17 @@
 <?php
 /**
- * Tickets list routes testing.
+ * View profile routes testing.
  */
 namespace Tests\Feature\Tickets;
 
-use Tests\TestCase;
+use App\Models\Tickets;
 use App\Models\User;
-use Database\Seeders\UserSeeder;
+use Tests\TestCase;
 
-class ListTicketsTest extends TestCase
+class ViewProfileTest extends TestCase
 {
-    // use \Illuminate\Foundation\Testing\DatabaseMigrations;
-    // use \Illuminate\Foundation\Testing\RefreshDatabase;
-    /**
-     * User not verified his email.
-     */
+    use \Illuminate\Foundation\Testing\DatabaseMigrations;
 
-    private $user;
     /**
      * User DID verified his email.
      */
@@ -50,28 +45,29 @@ class ListTicketsTest extends TestCase
     }
 
     /**
-     * Test that list all tickets page
-     * loaded successfully for authorized user.
+     * Test that view profile page loaded
+     * successfully for authorized user.
      *
      * @return void
      */
-    public function test_list_tickets_page_loaded_successfully_for_authorized_user()
+    public function test_view_profile_page_loaded_successfully()
     {
         auth()->login($this->verified_user);
-        $response = $this->get($this->url_prefix . 'ticket/list/');
+        $response = $this->get($this->url_prefix . 'profile');
+        $contextUser = $response->getOriginalContent()->getData()['user'];
+        $this->assertEquals($contextUser['email'], $this->verified_user->email);
         $response->assertStatus(200);
-        $response->assertViewIs('pages.chat.ticketsList');
     }
 
     /**
-     * Test that list all tickets page
-     * returns 401(unauthorized) for unauthorized user.
+     * Test that view profile page returns
+     * 401(unauthorized) for unauthorized user.
      *
      * @return void
      */
-    public function test_list_tickets_page_401_for_unauthorized()
+    public function test_view_profile_page_401_for_unauthorized()
     {
-        $response = $this->get($this->url_prefix . 'ticket/list/');
+        $response = $this->get($this->url_prefix . 'profile');
         $response->assertStatus(401);
     }
 }

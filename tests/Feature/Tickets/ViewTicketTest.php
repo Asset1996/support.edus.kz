@@ -2,7 +2,7 @@
 /**
  * View ticket routes testing.
  */
-namespace Tests\Tickets\Feature;
+namespace Tests\Feature\Tickets;
 
 use Tests\TestCase;
 use App\Models\User;
@@ -12,10 +12,10 @@ class ViewTicketTest extends TestCase
 {
     use \Illuminate\Foundation\Testing\DatabaseMigrations;
     // use \Illuminate\Foundation\Testing\RefreshDatabase;
+
     /**
      * User not verified his email.
      */
-
     private $user;
     /**
      * User DID verified his email.
@@ -75,8 +75,8 @@ class ViewTicketTest extends TestCase
     }
 
     /**
-     * Test that view ticket page
-     * returns 401(unauthorized) for unauthorized user.
+     * Test that view ticket page returns
+     * 401(unauthorized) for unauthorized user.
      *
      * @return void
      */

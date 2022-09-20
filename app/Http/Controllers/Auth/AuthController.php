@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Helpers\MailSender;
+use Illuminate\Support\Facades\Cache;
 
 class AuthController extends Controller
 {
@@ -76,6 +77,7 @@ class AuthController extends Controller
             }
             request()->session()->regenerate();
             request()->session()->flash('success_message', trans('You have successfully logged in'));
+            Cache::flush();
             return redirect()->home();
         }
 
@@ -93,6 +95,7 @@ class AuthController extends Controller
         request()->session()->invalidate();
         request()->session()->regenerateToken();
         request()->session()->flash('success_message', trans('You have successfully logged out'));
+        Cache::flush();
 
         return redirect()->home();
     }

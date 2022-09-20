@@ -2,7 +2,7 @@
 /**
  * Tickets update routes testing.
  */
-namespace Tests\Tickets\Feature;
+namespace Tests\Feature\Tickets;
 
 use Tests\TestCase;
 use App\Models\User;

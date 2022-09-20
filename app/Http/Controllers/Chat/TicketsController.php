@@ -21,10 +21,7 @@ use Illuminate\Support\Facades\Cache;
 
 class TicketsController extends Controller
 {
-    protected $sprs_caching_seconds = 86400;
-    protected $model_caching_seconds = 86400;
-
-    protected $ticket;
+    protected object $ticket;
 
     /**
      * Constructor of the class.
@@ -51,7 +48,7 @@ class TicketsController extends Controller
     public function createTicket(Auth $auth): View
     {
         $user = $auth::user();
-        $service_types = Cache::remember('service_types', $this->sprs_caching_seconds, function () {
+        $service_types = Cache::remember('service_types', 86400, function () {
             return \App\Models\Spr\SprServiceTypes::get();
         });
         return View('pages.chat.createTicket', [
@@ -99,7 +96,10 @@ class TicketsController extends Controller
                 Cache::put('my_tickets', '', 0);
                 session()->flash('success_message', trans('Ticket successfully created'));
             } elseif ($model instanceof TicketsTmp) {
-                session()->flash('success_message', trans('Ticket successfully created. You need to activate your email'));
+                session()->flash(
+                    'success_message',
+                    trans('Ticket successfully created. You need to activate your email')
+                );
             }
             return redirect()->route('ticket-created', ['ticket_uid' => $ticket->ticket_uid]);
         }
@@ -112,7 +112,7 @@ class TicketsController extends Controller
      * Renders the ticket successfully created view.
      *
      * @param $lang
-     * @param $ticket_uid
+     * @param string $ticket_uid
      * @return View
      */
     public function ticketCreated($lang, string $ticket_uid): View
@@ -136,7 +136,7 @@ class TicketsController extends Controller
      */
     public function listTickets(): View
     {
-        $my_tickets = Cache::remember('my_tickets', $this->model_caching_seconds, function () {
+        $my_tickets = Cache::remember('my_tickets', 86400, function () {
             return Tickets::where(['created_by' => Auth::user()->id])->get();
         });
 
@@ -172,7 +172,7 @@ class TicketsController extends Controller
      * Update the ticket.
      *
      * @param $lang
-     * @param $ticket_uid
+     * @param string $ticket_uid
      * @return View
      */
     public function updateTicket($lang, string $ticket_uid): View
@@ -218,10 +218,10 @@ class TicketsController extends Controller
      * Processes the POST request from update ticket page form.
      *
      * @param $lang
-     * @param int $ticket_uid - unique ID of ticket.
-     * @return redirect
+     * @param string $ticket_uid - unique ID of ticket.
+     * @return RedirectResponse
      */
-    public function deleteTicket($lang, string $ticket_uid): redirect
+    public function deleteTicket($lang, string $ticket_uid): RedirectResponse
     {
         $conditions['ticket_uid'] = $ticket_uid;
 
@@ -244,10 +244,10 @@ class TicketsController extends Controller
      * Updates the ticket status to "closed".
      *
      * @param $lang
-     * @param int $ticket_uid - unique ID of ticket.
-     * @return redirect
+     * @param string $ticket_uid - unique ID of ticket.
+     * @return RedirectResponse
      */
-    public function closeTicket($lang, string $ticket_uid): redirect
+    public function closeTicket($lang, string $ticket_uid): RedirectResponse
     {
         Tickets::where(['ticket_uid' => $ticket_uid])->update(['status_id' => 4]);
 

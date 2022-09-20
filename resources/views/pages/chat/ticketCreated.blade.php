@@ -14,14 +14,14 @@
             <div class="created-ticket">
                 <p class="paragraph">{{ $ticket->service_type->name_ru }} <a href="{{ route('update-ticket', ['ticket_uid' => $ticket->ticket_uid]) }}" class="change-button">{{ Lang::get('Update') }}</a></p>
                 <p class="paragraph">
-                <h4>{{ $ticket->title }}</h4>
+                <h4 style="font-weight: 700; font-size: 20px; color: #000000;">{{ $ticket->title }}</h4>
                 </p>
-                <p class="paragraph">{{ $ticket->initial_message }}</p>
+                <p style="font-weight: 400; color: #000000; font-size: 18px;" class="paragraph">{{ $ticket->initial_message }}</p>
                 <p class="paragraph">{{ Lang::get('Attached files') }}</p>
                 @if ($ticket->uploads->isNotEmpty())
                 <div id="images-preview">
                     @foreach ($ticket->uploads as $upload)
-                    <img class="uploading-files col-sm" src="{{URL::asset($upload->path)}}" alt="">
+                    <img style="width: 100px; height: 70px;" class="uploading-files col-sm" src="{{URL::asset($upload->path)}}" alt="">
                     @endforeach
                 </div>
                 @endif

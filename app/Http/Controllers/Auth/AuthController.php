@@ -2,26 +2,38 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\ChangePasswordRequest;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\RegistrationPostRequest;
+use App\Http\Requests\Auth\ResetPasswordRequest;
+use App\Http\Requests\Auth\SetNewPasswordRequest;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use App\Helpers\MailSender;
 use Illuminate\Support\Facades\Cache;
 
 class AuthController extends Controller
 {
+    /**
+     * @var User
+     */
+    private $user;
+
     public function __construct(User $user)
     {
         $this->user = $user;
     }
 
     /**
-     * Registrates new user into the system.
+     * Sign up a new user into the system.
      *
      * @param RegistrationPostRequest $request
-     * @return Redirect
+     * @return RedirectResponse
      */
-    public function registration(\App\Http\Requests\Auth\RegistrationPostRequest $request){
+    public function registration(RegistrationPostRequest $request): RedirectResponse
+    {
         $context = request()->only(['name', 'email', 'password']);
         $context['password'] = \Illuminate\Support\Facades\Hash::make($context['password']);
         $context['verification_token'] = uniqid();
@@ -43,10 +55,12 @@ class AuthController extends Controller
     /**
      * Verifies email by verification token.
      *
-     * @param string $token - email verifiacation token.
-     * @return Redirect
+     * @param string $lang
+     * @param string $token - email verification token.
+     * @return View
      */
-    public function verifyEmail(string $lang, string $token){
+    public function verifyEmail(string $lang, string $token): View
+    {
 
         $user = $this->user->verifyEmail($token);
         session()->forget(['error_message', 'success_message']);
@@ -56,16 +70,16 @@ class AuthController extends Controller
             Auth::login($user);
             session()->flash('success_message', trans('Email verified successfully'));
         }
-        return view('pages.auth.verifyEmail');
+        return View('pages.auth.verifyEmail');
     }
 
     /**
      * Receives auth credentials from Login form and attemts to log user in.
      *
-     * @param credentials
-     * @return redirect
+     * @param LoginRequest $request
+     * @return RedirectResponse
      */
-    public function authenticate(\App\Http\Requests\Auth\LoginRequest $request)
+    public function authenticate(LoginRequest $request): RedirectResponse
     {
         $credentials = request()->only(['email', 'password']);
 
@@ -88,9 +102,10 @@ class AuthController extends Controller
     /**
      * Logs the user out of the system(if he(she) was logged in).
      *
-     * @return redirect
+     * @return RedirectResponse
      */
-    public function logout(){
+    public function logout(): RedirectResponse
+    {
         Auth::logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
@@ -103,9 +118,11 @@ class AuthController extends Controller
     /**
      * Checks the email before ret the new password if forgot.
      *
-     * @return redirect
+     * @param ResetPasswordRequest $request
+     * @return RedirectResponse
      */
-    public function resetPassword(\App\Http\Requests\Auth\ResetPasswordRequest $request){
+    public function resetPassword(\App\Http\Requests\Auth\ResetPasswordRequest $request): RedirectResponse
+    {
 
         $context = $this->user->resetPassword();
 
@@ -128,7 +145,9 @@ class AuthController extends Controller
     /**
      * Page for setting the new password.
      *
-     * @return redirect|view
+     * @param string $lang
+     * @param string $token
+     * @return RedirectResponse|View
      */
     public function setNewPassword(string $lang, string $token){
 
@@ -139,25 +158,27 @@ class AuthController extends Controller
             session()->flash('error_message', trans('User not found'));
             return redirect()->home();
         }
-        return view('pages.auth.setNewPassword', ['token' => $token, 'name' => $user->name]);
+        return View('pages.auth.setNewPassword', ['token' => $token, 'name' => $user->name]);
     }
 
     /**
      * Page for changing the password only for Authenticated user.
      *
-     * @return view
+     * @return View
      */
-    public function changePassword(){
+    public function changePassword(): View
+    {
 
-        return view('pages.auth.changePassword');
+        return View('pages.auth.changePassword');
     }
 
     /**
      * Handle post request for changing the password only for Authenticated user.
      *
-     * @return view
+     * @param ChangePasswordRequest $request
+     * @return RedirectResponse
      */
-    public function changePasswordPost(\App\Http\Requests\Auth\ChangePasswordRequest $request)
+    public function changePasswordPost(\App\Http\Requests\Auth\ChangePasswordRequest $request): RedirectResponse
     {
         $user = auth()->user();
         $user->password = \Illuminate\Support\Facades\Hash::make(request()->input('password'));
@@ -169,9 +190,17 @@ class AuthController extends Controller
     /**
      * Post request for setting the new password.
      *
-     * @return redirect
+     * @param SetNewPasswordRequest $request
+     * @param string $lang
+     * @param string $token
+     * @return RedirectResponse
      */
-    public function setNewPasswordPost(\App\Http\Requests\Auth\SetNewPasswordRequest $request, string $lang, string $token){
+    public function setNewPasswordPost(
+        SetNewPasswordRequest $request,
+        string $lang,
+        string $token
+    ): RedirectResponse
+    {
 
         $user = $this->user->where(
             ['verification_token' => $token]

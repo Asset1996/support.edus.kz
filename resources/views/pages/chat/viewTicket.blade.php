@@ -13,13 +13,13 @@
                             <div class="profile_otvet" style="margin-bottom: -13px;">
                                 <div class="row justify-content-between align-items-center">
                                     <div class="col-lg-5 col-md-5">
-                                        <div style="margin-bottom: 0px;" class="prev_title">
-                                            <span style="padding: 10px; background: #007bff; color: white;">{{ $ticket->ticket_status->name_ru }}</span>
+                                        <div style="margin-bottom: -4px;" class="prev_title">
+                                            <span style="padding: 5px 33px; background: #007bff; color: white;">{{ $ticket->ticket_status->name_ru }}</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-3">
                                         <div class="prev_date">
-                                            <p style="margin-bottom: -5px; font-weight: 400;">{{ $ticket->created_at }}</p>
+                                            <p style="margin-bottom: -5px; font-weight: 400; color: #000000;">{{ $ticket->created_at }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -27,14 +27,14 @@
                         </div>
                         <div style="word-break: break-word;" class="clients-message">
                             <p class="paragraph">
-                            <h4>{{ $ticket->title }}</h4>
+                            <h4 style="font-weight: 700; font-size: 20px; color: #000000;">{{ $ticket->title }}</h4>
                             </p>
-                            <p class="paragraph">{{ $ticket->initial_message }}</p>
+                            <p style="font-weight: 400; color: #000000; font-size: 18px;" class="paragraph">{{ $ticket->initial_message }}</p>
 
                             @if ($ticket->uploads->isNotEmpty())
                             <div id="images-preview">
                                 @foreach ($ticket->uploads as $upload)
-                                <img class="uploading-files col-sm" src="{{URL::asset($upload->path)}}" alt="">
+                                <img style="width: 100px; height: 70px;" class="uploading-files col-sm" src="{{URL::asset($upload->path)}}" alt="">
                                 @endforeach
                             </div>
                             @endif

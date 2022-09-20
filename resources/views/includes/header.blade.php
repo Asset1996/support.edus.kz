@@ -12,13 +12,13 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse mt-2" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-          @if (auth()->check())
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('tickets-list') }}">{{ Lang::get('My appeals') }}</a>
-          </li>
-          @endif
+{{--          @if (auth()->check())--}}
+{{--          <li class="nav-item">--}}
+{{--            <a class="nav-link" href="{{ route('tickets-list') }}">{{ Lang::get('My appeals') }}</a>--}}
+{{--          </li>--}}
+{{--          @endif--}}
           <li class="nav-item active">
             <a class="nav-link link-color" href="#">
               <img style="width: 30px; height: 30px;" src="{{ asset('images/telegram.png') }}" alt="">
@@ -28,26 +28,32 @@
           <li class="nav-item">
             <a href="{{ route('create-ticket') }}" class="nav-link btn pdBtn text-white">{{ Lang::get('Write to support') }}</a>
           </li>
-        </ul>
-        <div class="header-button ml-10">
-          @if (Lang::locale() == 'ru')
-            <a style="padding: 8px 10px;" href="{{ URL::toRoute($cur = Route::current(), ['lang' => 'kk'] + $cur->parameters(), true) }}" class="btn btColor text-white">KAZ</a>
-          @elseif(Lang::locale() == 'kk')
-            <a style="padding: 8px 10px;" href="{{ URL::toRoute($cur = Route::current(), ['lang' => 'ru'] + $cur->parameters(), true) }}" class="btn btColor text-white">RUS</a>
-          @endif
-        </div>
+
+{{--        <div class="header-button ml-10">--}}
+{{--          @if (Lang::locale() == 'ru')--}}
+{{--            <a style="padding: 8px 10px;" href="{{ URL::toRoute($cur = Route::current(), ['lang' => 'kk'] + $cur->parameters(), true) }}" class="btn btColor text-white">KAZ</a>--}}
+{{--          @elseif(Lang::locale() == 'kk')--}}
+{{--            <a style="padding: 8px 10px;" href="{{ URL::toRoute($cur = Route::current(), ['lang' => 'ru'] + $cur->parameters(), true) }}" class="btn btColor text-white">RUS</a>--}}
+{{--          @endif--}}
+{{--        </div>--}}
         @if (auth()->check())
-        <div class="header-button ml-10">
-          <form class="form-inline" method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button class="auth-action-button" type="submit">{{ Lang::get('Logout') }}</button>
-          </form>
-        </div>
-        <div class="header-button person ml-10">
-          <a href="{{ route('profile') }}">
-            <img style="width: 49px;" src="{{ asset('images/ava.svg') }}" alt="">
-          </a>
-        </div>
+        <li class="nav-item">
+            <div class="dropdown">
+                  <button style="background: transparent;" class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <img style="width: 49px;" src="{{ asset('images/ava.svg') }}" alt="">
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="{{ route('profile') }}">{{ Lang::get('Profile') }}</a>
+                      <a class="dropdown-item" href="{{ route('tickets-list') }}">{{ Lang::get('My appeals') }}</a>
+                      <a class="dropdown-item" href="#">
+                          <form class="form-inline" method="POST" action="{{ route('logout') }}">
+                              @csrf
+                              <button class="auth-action-button" type="submit">{{ Lang::get('Logout') }}</button>
+                          </form>
+                      </a>
+                  </div>
+            </div>
+        </li>
         @else
         <div class="header-button">
           <button type="button" class="auth-action-button" data-toggle="modal" data-target="#loginModal">
@@ -55,6 +61,7 @@
           </button>
         </div>
         @endif
+        </ul>
       </div>
     </nav>
 </div>

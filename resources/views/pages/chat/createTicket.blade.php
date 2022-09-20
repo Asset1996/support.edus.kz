@@ -27,6 +27,7 @@
                                     </div>
                                     <div class="col">
                                         <p style="margin-bottom: 9px;"> {{ $service_type["name_" . Lang::locale()] }} </p>
+                                        <p style="line-height: 22px; color: #000000; font-weight: 400;">{{ $service_type["hint_" . Lang::locale()] }}</p>
                                     </div>
                                 </label>
                             </div>
@@ -111,10 +112,12 @@
                     </form>
 
                 </div>
-                <div class="col-md-3 col-sm-12 info-block">
-                    <h5>{{ Lang::get('Hint') }}</h5>
-                    <p>{{ Lang::get('We try to respond to all requests (tickets) as soon as possible. But we can do it even faster if you write your request in more detail and clearly') }}. </p>
-                    <p>{{ Lang::get('Please note that if you supplement an already open request with new details, the response time may increase as the request is re-added to the queue. Therefore, it is important to send a detailed request right away') }}. </p>
+                <div class="col-md-4 col-sm-12 pd">
+                    <div class="left_sols">
+                        <h5>{{ Lang::get('Hint') }}</h5>
+                        <p>{{ Lang::get('We try to respond to all requests (tickets) as soon as possible. But we can do it even faster if you write your request in more detail and clearly') }}. </p>
+                        <p>{{ Lang::get('Please note that if you supplement an already open request with new details, the response time may increase as the request is re-added to the queue. Therefore, it is important to send a detailed request right away') }}. </p>
+                    </div>
                 </div>
             </div>
         </div>

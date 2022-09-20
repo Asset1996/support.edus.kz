@@ -14,6 +14,7 @@
 
 @section('content')
 <body>
+<div class="mons" style="border-top: 1px solid #777777;">
     <div class="container">
         <div class="main-banner">
             <h3 style="font-size: 40px;">{{ Lang::get('My profile') }}</h3>
@@ -32,7 +33,7 @@
                             <table class="profile_table">
                                 <tr>
                                     <td style="text-align:right">{{ Lang::get('Name') }}:</td>
-                                    <td>
+                                    <td style="font-weight: 700;">
                                         <form id="profile-name-form-default" method="POST" action="{{ route('profile-update') }}">
                                             @csrf
                                             <input class="form-control profile-input" type="text" name="name" id="profile-name" value="{{ $user->name }}">
@@ -50,7 +51,7 @@
                                                 <button type="submit" class="btn btn-primary btn-sm">{{ Lang::get('Change') }}</button>
                                             </form>
                                         @else
-                                            <a href="#" id="toggle-surname-form">Указать</a>
+                                            <a style="border-bottom: 1px solid #006BCE;" href="#" id="toggle-surname-form">Указать</a>
                                             <form id="profile-surname-form" method="POST" action="{{ route('profile-update') }}">
                                                 @csrf
                                                 <input class="form-control profile-input" type="text" name="surname" id="profile-surname">
@@ -73,7 +74,7 @@
                                                 <button type="submit" class="btn btn-primary btn-sm">{{ Lang::get('Change') }}</button>
                                             </form>
                                         @else
-                                            <a href="#" id="toggle-phone-form">Указать</a>
+                                            <a style="border-bottom: 1px solid #006BCE;" href="#" id="toggle-phone-form">Указать</a>
                                             <form id="profile-phone-form" method="POST" action="{{ route('profile-update') }}">
                                                 @csrf
                                                 <input class="form-control profile-input" class="profile-input" type="text" name="phone" id="profile-phone">
@@ -84,19 +85,18 @@
                                 </tr>
                                 <tr>
                                     <td style="text-align:right">{{ Lang::get('Password') }}:</td>
-                                    <td><a href="{{ route('change-password') }}">{{ Lang::get('Change') }}</a></td>
+                                    <td><a style="border-bottom: 1px solid #006BCE;" href="{{ route('change-password') }}">{{ Lang::get('Change') }}</a></td>
                                 </tr>
                                 <tr>
                                     <td style="text-align:right">{{ Lang::get('Status') }}:</td>
-                                    <td>{{ Lang::get('Active') }}</td>
+                                    <td style="color: #00B212;">{{ Lang::get('Active') }}</td>
                                 </tr>
                             </table>
                         </div>
                     </div>
-                    <hr class="my-4">
                 </div>
                 <div class="col-md-4 col-sm-12">
-                    <div style="margin-top: 55px;">
+                    <div class="endD" style="margin-top: 133px;">
                         <p>{{ Lang::get('Tickets amount') }}: {{$user->tickets->count()}}</p>
                         <p>{{ Lang::get('Comments amount') }}: {{$user->created_messages->count()}}</p>
                         <p>{{ Lang::get('Evaluations (average)') }}:
@@ -108,9 +108,35 @@
                         </p>
                     </div>
                 </div>
+                <div class="col-md-8 col-sm-12">
+                    <div class="account myLine">
+                        <p class="mb-5" style="color: #CCCCCC; font-size: 24px;">{{ Lang::get('Profile') }}</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1">
+                        </div>
+                        <div style="margin-left: 29px;" class="col-lg-6">
+                            <table class="profile_table">
+                                <tr>
+                                    <td style="text-align:right">{{ Lang::get('Registration') }}:</td>
+                                    <td style="font-weight: 400; color: #000000;">21.08.2022 14:27</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">{{ Lang::get('Link to organization') }}:</td>
+                                    <td style="color: #CCCCCC;">Не указана</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">{{ Lang::get('Position') }}:</td>
+                                    <td style="color: #CCCCCC;">Не указана</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>
 </body>
 
 <script>

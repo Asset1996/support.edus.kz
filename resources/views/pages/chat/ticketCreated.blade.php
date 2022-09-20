@@ -2,6 +2,7 @@
 @section('title', Lang::get('Ticket created'))
 
 @section('content')
+
 <body>
     <div class="container">
         <div class="main-banner">
@@ -12,7 +13,7 @@
                 <p>{{ Lang::get('The history of your requests is in the section') }} "<a href="{{ route('tickets-list') }}">{{Lang::get('My appeals')}}</a>"</p>
             </div>
             <div class="created-ticket">
-                <p class="paragraph">{{ $ticket->service_type->name_ru }} <a href="{{ route('update-ticket', ['ticket_uid' => $ticket->ticket_uid]) }}" class="change-button">{{ Lang::get('Update') }}</a></p>
+                <p class="paragraph">{{ $ticket->service_type->name_ru }} <a href="#" class="change-button">{{ Lang::get('Update') }}</a></p>
                 <p class="paragraph">
                 <h4 style="font-weight: 700; font-size: 20px; color: #000000;">{{ $ticket->title }}</h4>
                 </p>

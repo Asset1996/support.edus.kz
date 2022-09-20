@@ -7,7 +7,7 @@
 
 <body>
     <div id="wrap">
-        <header style="padding: 30px 0;">
+        <header style="padding: 33px 0 20px 0; border-bottom: 1px solid #777777;">
             @include('includes.header')
         </header>
 
@@ -39,7 +39,7 @@
         <footer class="footer_area section_padding_130_0 mt-5">
             @include('includes.footer')
         </footer>
- </div>
+    </div>
 </body>
 
 </html>

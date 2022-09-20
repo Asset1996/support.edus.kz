@@ -13,20 +13,22 @@
             <div class="col-lg-6">
               <div class="modal_item mt-4">
                 <div class="modal_form">
-                  <h6 class="mb-3">{{ Lang::get('Enter your email when registering:') }}</h6>
+                  <h6 class="mb-3" style="color: #000000;">Укажите электронную почту при
+                    регистрации:</h6>
+
                   <form method="POST" action="{{ route('reset-password') }}">
                     @csrf
                     <div class="form-group">
-                      <input placeholder="{{ Lang::get("Email") }}" type="email" name="email" class="form-control myInput" id="reset_password_email" required>
+                      <input placeholder="<?php echo 'Lang::get("Email")'; ?>" type="email" name="email" class="form-control myInput" id="reset_password_email" required>
                     </div>
                     <div class="form-group form-check">
-                      <input type="checkbox" class="form-check-input " id="reset_not_robot" name="not_robot">
-                      <label class="form-check-label" for="reset_not_robot">{{ Lang::get('I\'m not robot:') }}</label>
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Я не робот</label>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Проверить аккаунт</button>
                   </form>
                   <div class="mt-43 fs-18">
-                    <span>{{ Lang::get('Remembered the password?') }}</span> <a data-toggle="modal" data-target="#loginModal" data-dismiss="modal" href="">{{Lang::get("Login")}}</a>
+                    <span>{{ Lang::get('Remembered the password?') }}</span> <a style="border-bottom: 1px solid #006BCE;" data-toggle="modal" data-target="#loginModal" data-dismiss="modal" href="">{{Lang::get("Login")}}</a>
                   </div>
                 </div>
               </div>
@@ -35,6 +37,8 @@
               <div class="modal_item mt-4">
                 <div style="max-width: 100%;" class="modal_text">
                   <p>{{ Lang::get('If an account is found, an email with a link will be sent to your email') }}.</p>
+
+
                   <p>{{ Lang::get('If the mail is not found, you will need to') }} <a data-toggle="modal" data-target="#registerModal" data-dismiss="modal" href="">{{ Lang::get('register') }}</a></p>
                 </div>
               </div>

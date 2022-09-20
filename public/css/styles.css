@@ -169,7 +169,7 @@ body {
     position: absolute;
     left: 110px;
     top: 18px;
-    width: 50%;
+    width: 70%;
     height: 2px;
     background-color: #CCCCCC;
 }
@@ -190,6 +190,14 @@ body {
     .first-item-text-section {
         max-width: 100%;
     }
+    .endD {
+        text-align: center !important;
+    }
+}
+
+
+.endD {
+    text-align: end;
 }
 
 @media (max-width: 991px) {
@@ -368,7 +376,7 @@ body {
 }
 
 .fMod .modal-body {
-    padding: 79px 0 0 0;
+    padding: 70px 0 0 0;
 }
 
 .modal_form {
@@ -464,7 +472,10 @@ body {
 
 
 
-
+.stanDart {
+    color: #000000;
+    font-size: 18px;
+}
 
 
 
@@ -480,7 +491,7 @@ body {
 .anonse-header {
     display: flex;
     align-items: center;
-    margin-bottom: 35px;
+    margin-bottom: 25px;
 }
 
 .anonse-item {
@@ -539,12 +550,10 @@ body {
     width: 32px;
     height: 32px;
     position: inherit;
-    margin-right: 50px;
 }
 
 .formLabel {
     display: flex;
-    align-items:center;
 }
 
 
@@ -949,7 +958,7 @@ header {
     position: absolute;
     left: 0;
     top: 0;
-    width: 458px;
+    width: 50%;
     background-color: #FFB800;
     min-height: 600px;
     height: 100%;
@@ -962,7 +971,7 @@ header {
     position: absolute;
     right: 0;
     top: 0;
-    width: 1366px;
+    width: 50%;
     background-color: #18B3E4;
     min-height: 600px;
     height: 100%;
@@ -1054,11 +1063,11 @@ header {
 
 @media (min-width: 1400px) {
     .main::before {
-        width: 85%;
+        width: 50%;
     }
 
     .main::after {
-        width: 35%;
+        width: 50%;
     }
 }
 
@@ -1066,7 +1075,7 @@ header {
 @media (min-width: 1600px) {
 
     .main::after {
-        width: 38%;
+        width: 50%;
     }
 }
 
@@ -1082,6 +1091,10 @@ header {
 @media (max-width: 1200px) {
     .main::before {
         width: 50%;
+    }
+
+    .ml-43 {
+        margin-left: auto !important;
     }
 
     .main::after {
@@ -1116,10 +1129,193 @@ header {
     }
 
     .main::before {
-        width: 85%;
+        width: 50%;
     }
 
     .main::after {
-        width: 35%;
+        width: 50%;
     }
+}
+
+
+
+.bg {
+    position: relative;
+    min-height: 600px;
+}
+
+.bg::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 458px;
+    height: 100%;
+    min-height: 600px;
+    background-color: #FFB800;
+    z-index: -99;
+}
+
+.bg::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 840px;
+    min-height: 600px;
+    background-color: #18B3E4;
+    z-index: -99;
+}
+
+
+
+@media (max-width: 1365px) {
+    .bg::before {
+        width: 40%;
+    }
+
+
+
+    .bg::after {
+        width: 67%;
+    }
+}
+
+
+@media (max-width: 1200px) {
+    .bg::before {
+        width: 50%;
+    }
+
+
+
+    .bg::after {
+        width: 50%;
+    }
+}
+
+
+
+
+@media (max-width: 767px) {
+    .bg::before {
+        width: 100%;
+        min-height: 50%;
+        padding-bottom: 20px;
+        top: unset;
+        height: 50%;
+    }
+
+    .main::before {
+        width: 100%;
+        min-height: 50%;
+        top: unset;
+        padding-bottom: 20px;
+        bottom: 0;
+        height: 50%;
+    }
+
+    .main_right {
+        padding-bottom: 160px;
+    }
+
+    .pd {
+        padding-right: 15px !important;
+        padding-left: 15px !important;
+    }
+
+
+
+    .bg::after {
+        width: 100%;
+        min-height: 50%;
+        bottom: 0;
+        top: unset;
+        height: 50%;
+    }
+
+
+    .main::after {
+        width: 100%;
+        min-height: 50%;
+        height: 50%;
+
+    }
+}
+
+.modal {
+    overflow: auto;
+}
+
+.left_sols {
+    max-width: 380px;
+    background: rgba(255, 168, 0, 0.27);
+    border: 1px solid #FFB800;
+    border-radius: 20px;
+    padding: 45px 39px 77px 39px;
+}
+
+.left_sols p {
+    color: rgba(0, 0, 0, 0.4);
+    line-height: 19px;
+}
+
+.left_sols h5 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+
+
+
+.pd {
+    padding: 0;
+}
+
+.mx-303 {
+    max-width: 303px;
+}
+
+
+
+
+
+.table-responsive {
+
+}
+
+
+
+
+.tableTr {
+    font-size: 20px;
+}
+
+
+.table td,
+.table th {
+    padding: 18px 14px;
+    vertical-align: inherit;
+}
+
+
+.table thead th {
+    font-size: 20px;
+    color: #000000;
+}
+
+
+.ml-43 {
+    margin-left: -43px;
+}
+
+
+
+.starrating>input:checked~label {
+    font-size: 20px !important;
+}
+
+.starrating>label {
+    font-size: 20px;
 }

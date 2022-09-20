@@ -2,6 +2,7 @@
 @section('content')
     <div class="main">
         <div class="container-fluid">
+            <div class="bg">
             <div class="main_content">
                 <div class="main_items">
                     <div class="row">
@@ -25,6 +26,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>

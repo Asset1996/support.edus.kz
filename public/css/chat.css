@@ -36,17 +36,17 @@
 }
 
 .operators-message{
-    background-color: #a8ffaf;
-    padding: 30px 30px;
-    border-radius: 20px;
-    margin-top: 20px;
+    margin-top: 29px;
 }
 
 .clients-message{
+    margin-top: 29px;
+}
+
+.operators-message2 {
     background: rgba(24, 179, 228, 0.19);
-    padding: 0 30px 30px 26px;
     border-radius: 20px;
-    margin-top: 20px;
+    padding: 36px 39px 29px 39px;
 }
 
 .ticketBtn {
@@ -66,9 +66,8 @@
     color: white;
 }
 
-.appeals-filter{
-    padding: 30px 30px;
-    margin-top: 20px;
+.appeals-filter {
+    margin-left: 56px;
 }
 
 .filter-inner-block{
@@ -83,4 +82,87 @@
 .evaluation-message{
     max-width: 300px;
     overflow: hidden;
+}
+
+
+
+.cTitle {
+    color: #000000;
+    font-size: 16px;
+}
+
+.cText {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+.operators-bg {
+    background: rgba(0, 179, 18, 0.15);
+}
+
+
+.clients-bg {
+    background: rgba(24, 179, 228, 0.19);
+}
+
+
+.tTitle {
+    color: #000000;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.tText {
+    color: #278DEB;
+    font-size: 20px;
+    line-height: 19px;
+}
+
+.header_footer {
+    padding: 0 25px;
+}
+
+
+.header_footer .badge span {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.log_obr li {
+    list-style: none;
+    margin-top: 12px;
+}
+
+
+.lTitle {
+    font-size: 20px;
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+.pos_ose {
+    padding-top: 47px;
+}
+
+
+.view_item {
+    margin-bottom: 52px;
+    max-width: 779px;
+}
+
+.ml-85 {
+    margin-left: 85px;
+}
+
+
+.d-none {
+    display: none;
+}
+
+
+@media ((max-width: 992px)) {
+    .ml-85 {
+        margin-left: 0;
+    }
 }

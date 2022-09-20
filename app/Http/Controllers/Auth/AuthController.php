@@ -1,6 +1,6 @@
 <?php
 /**
- * Auth controller.
+ * Auth controller 22.
  */
 namespace App\Http\Controllers\Auth;
 

@@ -15,7 +15,6 @@ header{
     border-bottom: 1px solid #777777;
 }
 
-
 #wrap {
     min-height: 100%;
     display: flex;
@@ -24,6 +23,16 @@ header{
 
 .mains {
     flex: 1 1 auto;
+}
+
+.photo {
+    position: absolute;
+    top: 0;
+    right: 11px;
+    margin-top: 106px;
+    z-index: -1;
+    margin-right: 50px;
+    overflow: hidden;
 }
 
 .flash-messages {

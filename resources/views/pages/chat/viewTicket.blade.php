@@ -217,10 +217,18 @@
                                     </ul>
                                 </div>
                                 <div class="filter-inner-block" style="margin-top: 9px;">
-                                    <p style="color: #000000; font-size: 16px;">Обращение ожидает<a style="border-bottom: 1px solid #278DEB; color: #278DEB;" href="#">
-                                            закрытие тикета
-                                        </a>
-                                    </p>
+                                    @if ($ticket->status_id == 2)
+                                        {{Lang::get('Your request is being processed by the operator. Wait for a response from the operator.')}}
+                                    @elseif ($ticket->status_id == 3)
+                                        <p style="color: #000000; font-size: 16px;">Обращение ожидает <form method="POST" action="{{ route('close-ticket', ['ticket_uid' => $ticket->ticket_uid]) }}">
+                                                @csrf
+                                                <button class="close-ticket" type="submit">{{ Lang::get('tickets closing') }}</button>
+                                            </form>
+                                        </p>
+                                    @elseif ($ticket->status_id == 4)
+                                        {{ Lang::get('Ticket is closed') }}
+                                    @endif
+
                                 </div>
                             </div>
                         </div>

@@ -78,16 +78,13 @@
                                                             <img src="{{ asset('images/admin.svg') }}" alt="">
                                                         </div>
                                                         <div style="margin-left: 13px;" class="ms-2 c-details">
-                                                            <h6 class="mb-0">{{ $message->message_created_by->name }}</h6> <span>1 days ago</span>
+                                                            <h6 class="mb-0"><strong>{{ $message->message_created_by->name }}</strong></h6>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-6">
                                                         <div id="eval-message{{ $message->id }}" class="alert alert-light evaluation-message" role="alert"></div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <p><span class="created-by">{{ $message->message_created_by->name }}</span></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -207,12 +204,12 @@
                                         @foreach ($ticket->messages as $key => $message)
                                             <li>
                                             @if ($loop->first)
-                                                {{ $message->created_at }} - Принят в обработку
+                                                {{ $message->created_at->format('d.m.Y H:i') }} - Принят в обработку
                                             @else
                                                 @if ($message->created_by_type == 1)
-                                                    {{ $message->created_at }} - Комментарии клиента
+                                                    {{ $message->created_at->format('d.m.Y H:i') }} - Комментарии клиента
                                                 @else
-                                                    {{ $message->created_at }} - Ответ оператора
+                                                    {{ $message->created_at->format('d.m.Y H:i') }} - Ответ оператора
                                                 @endif
                                             @endif
                                             </li>

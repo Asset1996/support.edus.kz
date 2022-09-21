@@ -4,8 +4,8 @@
 @section('content')
     <body>
         <div class="container">
-            <div class="main-banner">
-                <h1>{{ Lang::get('Request activation') }}</h1>
+            <div class="main-banner" style="max-width: 690px;">
+                <h1 style="margin-bottom: 20px;">{{ Lang::get('Request activation') }}</h1>
                 <p><strong>{{ $ticket->user->name }}</strong>, {{ Lang::get('you have created a new request, but it is inactive - in order for technical support specialists to see it, you need to confirm the email you specified') }} <strong>{{ $ticket->user->email }}</strong>.</p>
                 <p style="color: red">{{ Lang::get('An activation link has been sent to your email, please check your inbox') }}.</p>
             </div>

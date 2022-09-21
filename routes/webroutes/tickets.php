@@ -27,4 +27,7 @@ Route::prefix('ticket')->group(function(){
     Route::post('/close/{ticket_uid}', [TicketsController::class, 'closeTicket'])
         ->middleware('authenticated')
         ->name('close-ticket');
+    Route::post('/evaluate', [TicketsController::class, 'evaluateTicket'])
+        ->middleware('authenticated')
+        ->name('evaluate-ticket');
 });

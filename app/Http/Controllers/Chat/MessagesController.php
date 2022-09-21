@@ -30,7 +30,7 @@ class MessagesController extends Controller
         ])->latest('order_num')->first()->order_num;
 
         $context['ticket_uid'] = $ticket_uid;
-        $context['created_by_type'] = 0;
+        $context['created_by_type'] = 1; //1 - client
         $context['message_body'] = request()->input('message_body');
         $context['order_num'] = $last_message_order_num + 1;
 

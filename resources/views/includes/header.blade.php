@@ -14,11 +14,6 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-{{--          @if (auth()->check())--}}
-{{--          <li class="nav-item">--}}
-{{--            <a class="nav-link" href="{{ route('tickets-list') }}">{{ Lang::get('My appeals') }}</a>--}}
-{{--          </li>--}}
-{{--          @endif--}}
           <li class="nav-item active">
             <a class="nav-link link-color" href="#">
               <img style="width: 30px; height: 30px;" src="{{ asset('images/telegram.png') }}" alt="">
@@ -36,8 +31,8 @@
 {{--            <a style="padding: 8px 10px;" href="{{ URL::toRoute($cur = Route::current(), ['lang' => 'ru'] + $cur->parameters(), true) }}" class="btn btColor text-white">RUS</a>--}}
 {{--          @endif--}}
 {{--        </div>--}}
-        @if (auth()->check())
         <li class="nav-item">
+        @if (auth()->check())
             <div class="dropdown">
                   <button style="background: transparent;" class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <img style="width: 49px;" src="{{ asset('images/ava.svg') }}" alt="">
@@ -53,7 +48,6 @@
                       </a>
                   </div>
             </div>
-        </li>
         @else
         <div class="header-button">
           <button type="button" class="auth-action-button" data-toggle="modal" data-target="#loginModal">
@@ -61,6 +55,7 @@
           </button>
         </div>
         @endif
+        </li>
         </ul>
       </div>
     </nav>

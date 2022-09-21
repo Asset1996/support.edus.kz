@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Chat;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Chat\CreateTicketRequest;
 use App\Http\Requests\Chat\UpdateTicketRequest;
+use App\Models\Messages;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -254,5 +255,17 @@ class TicketsController extends Controller
         session()->flash('success_message', trans('Ticket successfully closed'));
 
         return redirect()->back();
+    }
+
+    /**
+     * Evaluates the ticket.
+     */
+    public function evaluateTicket(Tickets $tickets)
+    {
+        $ticket_id = request()->input('ticket_id');
+        $evaluation = request()->input('evaluation');
+        $tickets->where(['id' => $ticket_id])->update(['evaluation'=> $evaluation]);
+        return response(trans('Evaluation saved'), 200)
+            ->header('Content-Type', 'text/plain');;
     }
 }

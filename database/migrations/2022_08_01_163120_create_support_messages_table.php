@@ -17,7 +17,7 @@ class CreateSupportMessagesTable extends Migration
             $table->id();
             $table->string('ticket_uid')->length(20)->comment('Уникальный ID тикета');
             $table->integer('created_by')->comment('ID автора');
-            $table->integer('created_by_type')->comment('Тип автора: 0 - Клиаент, 1 - Оператор');
+            $table->integer('created_by_type')->default(1)->comment('Тип автора: 1 - Клиент, 0 - Оператор');
             $table->string('message_body')->length(1024)->comment('Тело сообщения');
             $table->integer('order_num')->default(0)->comment('Порядок сообщения');
             $table->integer('replied_message_id')

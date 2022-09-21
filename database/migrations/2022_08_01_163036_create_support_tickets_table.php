@@ -20,6 +20,10 @@ class CreateSupportTicketsTable extends Migration
             $table->text('initial_message')->comment('Вводный текст тикета');
             $table->integer('service_types_id')->comment('Тип сервиса (Колледж, школа, абитуриент)');
             $table->integer('status_id')->default(1)->comment('Статус обработки [spr_ticket_status]');
+            $table->tinyInteger('evaluation')
+                ->lenght(6)
+                ->comment('Оценка тикета (от 1 до 5)')
+                ->nullable();
             $table->integer('created_by')->comment('ID создателя тикета');
             $table->integer('answered_by')->comment('ID оператора, ответившии на тикет')->nullable();
             $table->timestamp('answered_at')->comment('Время ответа оператором')->nullable();

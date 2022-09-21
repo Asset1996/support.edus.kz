@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="main-banner">
                 <h3 style="color: #000000; font-size: 40px; font-weight: 400;" class="ml-85">{{ Lang::get('My appeal') }} - <span style="color: #006BCE;">#{{ $ticket->ticket_uid }}</span></h3>
-                <div class="ose" style="margin-top: 80px;">
+                <div class="ose" style="margin-top: 60px;">
                     <div class="row">
                         <div class="col-md-8 col-sm-12">
                             <div class="view_item ml-85">
@@ -51,7 +51,7 @@
                                              @endif
                                              style="border-radius: 20px; padding: 43px 39px 0 39px; margin-top: 20px;" class="views_content">
                                             <div class="views_text">
-                                                <p>
+                                                <p style="font-size: 18px;color: #000000;">
                                                     {{ $message->message_body }}
                                                 </p>
                                             </div>
@@ -177,22 +177,53 @@
                         </div>
                         <div class="col-md-4 col-sm-12">
                             <div class="appeals-filter">
-                                <p class="appleale-title">{{ Lang::get('Appeals filter') }}</p>
+                                <p style="color: #000000; font-size: 20px; font-weight: 400; text-transform: uppercase;" class="appleale-title">{{ Lang::get('Appeals filter') }}</p>
                                 <div class="filter-inner-block">
-                                    <p>{{ Lang::get('Appeals category') }}:</p>
-                                    <p><strong>{{ $ticket->service_type->name_ru }}</strong></p>
+                                    <p class="cTitle">{{ Lang::get('Appeals category') }}:</p>
+                                    <p class="cText">{{ $ticket->service_type['name_' . Lang::locale()] }}</p>
                                 </div>
                                 <div class="filter-inner-block">
-                                    <p>{{ Lang::get('Subcategory') }}:</p>
-                                    <p><strong>{{ $ticket->subcategory }}</strong></p>
+                                    <p class="cTitle">{{ Lang::get('Subcategory') }}:</p>
+                                    <p class="cText">Проблемы авторизации</p>
                                 </div>
                                 <div class="filter-inner-block">
-                                    <p>{{ Lang::get('Appeals priority') }}:</p>
-                                    <p><strong>{{ $ticket->priority }}</strong></p>
+                                    <p class="cTitle">{{ Lang::get('Appeals priority') }}:</p>
+                                    <p class="cText">Обычный</p>
                                 </div>
                                 <div class="filter-inner-block">
-                                    <p>{{ Lang::get('Tags') }}:</p>
-                                    <p><strong>{{ $ticket->tags }}</strong></p>
+                                    <p class="tTitle">{{ Lang::get('Tags') }}:</p>
+                                    <p class="tText">
+                                        авторизация, логин, ИИН, пользователь, система
+                                    </p>
+                                </div>
+                                <div class="filter-inner-block" style="margin-top: 9px;">
+                                    <p style="color: #000000; font-size: 18px;">Найти ответы <a style="border-bottom: 1px solid #278DEB; color: #278DEB;" href="{{ route('reference-book') }}">в Справочнике</a></p>
+                                </div>
+                                <div class="filter-inner-block">
+                                    <p class="lTitle">ЛОГ ОБРАЩЕНИЯ</p>
+                                    <ul class="log_obr">
+                                        <li>{{ $ticket->created_at->format('d.m.Y H:i') }} - Обращение создано</li>
+
+                                        @foreach ($ticket->messages as $key => $message)
+                                            <li>
+                                            @if ($loop->first)
+                                                {{ $message->created_at }} - Принят в обработку
+                                            @else
+                                                @if ($message->created_by_type == 1)
+                                                    {{ $message->created_at }} - Комментарии клиента
+                                                @else
+                                                    {{ $message->created_at }} - Ответ оператора
+                                                @endif
+                                            @endif
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <div class="filter-inner-block" style="margin-top: 9px;">
+                                    <p style="color: #000000; font-size: 16px;">Обращение ожидает<a style="border-bottom: 1px solid #278DEB; color: #278DEB;" href="#">
+                                            закрытие тикета
+                                        </a>
+                                    </p>
                                 </div>
                             </div>
                         </div>

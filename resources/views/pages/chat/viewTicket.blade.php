@@ -30,7 +30,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                @foreach ($ticket->messages as $message)
+                                @foreach ($ticket->messages as $key => $message)
                                     <div @if ($message->created_by_type == 1)
                                              class="clients-message"
                                          @else
@@ -39,7 +39,8 @@
                                     >
                                         <div class="header_footer">
                                             <div class="d-flex flex-wrap justify-content-between v">
-                                                <div class="badge"> <span style="color:#CCCCCC;">Отвечен через 1 час 40 мин.</span> </div>
+                                                <div class="badge">
+                                                    <span style="color:#CCCCCC;">{{ Lang::get('Answered in') }} {{ $message["answered_in_" . Lang::locale()] }}</span> </div>
                                                 <div class="badge"> <span>{{ $message->created_at }}</span> </div>
                                             </div>
                                         </div>

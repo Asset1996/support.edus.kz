@@ -15,6 +15,7 @@ header{
     border-bottom: 1px solid #777777;
 }
 
+
 #wrap {
     min-height: 100%;
     display: flex;
@@ -1036,6 +1037,9 @@ header {
     height: 650px;
     margin-top: 85px;
     margin-right: 50px;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
 }
 
 
@@ -1090,6 +1094,9 @@ header {
     .main_content::before {
         margin-right: 0;
     }
+    .photo {
+        margin-right: 0 !important;
+    }
 }
 
 
@@ -1109,6 +1116,10 @@ header {
     .main_content::before {
         display: none;
     }
+    .photo {
+        display: none;
+    }
+
 }
 
 

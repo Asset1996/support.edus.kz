@@ -27,6 +27,8 @@ class Messages extends BaseModel
         'order_num',
         'replied_message_id',
         'evaluation',
+        'answered_in_ru',
+        'answered_in_kk'
     ];
 
     /**
@@ -59,7 +61,7 @@ class Messages extends BaseModel
      * Creates message.
      *
      * @param array $context
-     * @return object 
+     * @return object
      */
     public function _create(array $context = []){
         $context['created_by'] = auth()->user()->id;
@@ -71,7 +73,7 @@ class Messages extends BaseModel
      *
      * @param array $conditions
      * @param array $context
-     * @return object 
+     * @return object
      */
     public function _update(array $conditions = [], array $context = []){
         return $this::where($conditions)->update($context);
@@ -81,7 +83,7 @@ class Messages extends BaseModel
      * Deletes the message from DB.
      *
      * @param array $conditions
-     * @return object 
+     * @return object
      */
     public function _delete(array $conditions){
         return $this::where($conditions)->delete();

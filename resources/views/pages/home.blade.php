@@ -26,6 +26,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="photo" style="max-width: 308px;">
+                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" style="width: 308px;">
+                                <img style=" width: 308px; height: 606px; " class=" d-block w-100" src="{{ asset('images/fr.svg') }}" alt="">
+                            </div>
+                            <div class="carousel-item" style="width: 308px;">
+                                <img style=" width: 308px; height: 606px; " class=" d-block w-100" src=" https://play-lh.googleusercontent.com/P6SvI397vstQmOc9pG74AX3jLhdSrEJGLQx30UGIhEFioG_ut6efyZMqBDG0k6hQrw" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             </div>
         </div>

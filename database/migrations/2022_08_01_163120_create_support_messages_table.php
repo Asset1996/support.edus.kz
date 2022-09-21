@@ -30,6 +30,14 @@ class CreateSupportMessagesTable extends Migration
             $table->integer('evaluated_by')
                 ->comment('ID клиента, который поставил оценку')
                 ->nullable();
+            $table->string('answered_in_kk')
+                ->length(50)
+                ->comment('Через сколько времени был создан данный message (days hours minutes)')
+                ->nullable();
+            $table->string('answered_in_ru')
+                ->length(50)
+                ->comment('Через сколько времени был создан данный message (days hours minutes)')
+                ->nullable();
             $table->timestamp('created_at')->comment('Время создания записи')->useCurrent();
             $table->timestamp('updated_at')
                 ->comment('Время обновления записи')

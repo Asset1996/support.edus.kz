@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateSupportTicketsTable extends Migration
 {
@@ -30,6 +31,8 @@ class CreateSupportTicketsTable extends Migration
             $table->timestamp('created_at')->comment('Время создания записи')->useCurrent();
             $table->timestamp('updated_at')->comment('Время обновления записи')->useCurrentOnUpdate()->nullable();
         });
+        $statement = "ALTER TABLE support_tickets AUTO_INCREMENT = 100000;";
+        DB::unprepared($statement);
     }
 
     /**

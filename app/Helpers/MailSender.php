@@ -31,14 +31,14 @@ class MailSender
 
     /**
      * Sends an email with context.
-     * @param array $data.
-     * 
-     * @return bool 
+     * @param array $context
+     * @return bool
      */
-    public function send(array $context){
+    public function send(array $context): bool
+    {
         try{
             $context['url'] = route($this->route, [
-                'lang'=> app()->getLocale(), 
+                'lang'=> app()->getLocale(),
                 'token' => $context['verification_token']
             ]);
             $context['template'] = $this->template;
@@ -53,7 +53,7 @@ class MailSender
     /**
      * Cheks if the errors array is empty.
      *
-     * @return bool 
+     * @return bool
      */
     public function hasErrors(){
         return !empty($this->errors);
@@ -62,7 +62,7 @@ class MailSender
     /**
      * Returns the first element of the errors array.
      *
-     * @return array 
+     * @return array
      */
     public function getFirstError(){
         return $this->errors[0];

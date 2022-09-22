@@ -10,7 +10,7 @@
         <span>{{ Lang::get('Technical support') }}</span>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
-        <span class="navbar-toggler-icon"></span>
+          <i class="bi bi-text-center" style="font-size: 30px;"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Tickets;
 use App\Models\Messages;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Mail;
 
 class MessagesController extends Controller
 {
@@ -22,7 +23,8 @@ class MessagesController extends Controller
         \App\Http\Requests\Chat\WriteMessageRequest $request,
         string $lang,
         string $ticket_uid,
-        Tickets $ticket
+        Tickets $ticket,
+        Messages $message
     ): RedirectResponse
     {
         $last_message = Messages::select(['order_num', 'created_at'])->where([
@@ -46,20 +48,27 @@ class MessagesController extends Controller
             $diff_kk = round($diff_in_hours) . ' минут бурын';
         }
 
-        $context['ticket_uid'] = $ticket_uid;
-        $context['created_by_type'] = 1; //1 - client
-        $context['message_body'] = request()->input('message_body');
-        $context['order_num'] = $last_message_order_num + 1;
-        $context['answered_in_ru'] = $diff_ru;
-        $context['answered_in_kk'] = $diff_kk;
+        $context = [
+            'ticket_uid' => $ticket_uid,
+            'created_by_type' => 1, //1 - client,
+            'message_body' => request()->input('message_body'),
+            'order_num' => $last_message_order_num + 1,
+            'answered_in_ru' => $diff_ru,
+            'answered_in_kk' => $diff_kk,
+        ];
 
-        $message = new Messages();
         $message->_create($context);
-
         $ticket->_update(
             ['ticket_uid' => $ticket_uid],
             ['status_id' => 2],
         );
+
+        Mail::to("support@edus.kz")
+            ->send(new \App\Mail\MessageSentNotifyEmail(
+                auth()->user()->email,
+                route('view-ticket', ['ticket_uid' => $ticket_uid]),
+                request()->input('message_body')
+            ));
 
         return redirect()->back();
     }

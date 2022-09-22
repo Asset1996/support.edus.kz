@@ -27,12 +27,12 @@
               <tbody>
                 @foreach ($my_tickets as $item)
                 <tr class="tableTr">
-                  <td><a href="{{ route('view-ticket', ['ticket_uid' => $item->ticket_uid]) }}">{{ $item->ticket_uid }}</a></td>
+                  <td><a href="{{ route('view-ticket', ['ticket_uid' => $item->ticket_uid]) }}">{{ $item->id }}</a></td>
                   <td style="max-width: 346px; word-wrap: break-word;" class="font-weight-bold">
                     {{ $item->title }}
                   </td>
                   <td>{{ $item->created_at }}</td>
-                  <td class="text-primary">{{ $item->ticket_status['name_'.Lang::locale()] }}</td>
+                  <td class="text-primary" style="color: {{ $item->ticket_status->css_color }} !important">{{ $item->ticket_status['name_'.Lang::locale()] }}</td>
                   <td>
                     {{ $item->messages->count() }}
                   </td>

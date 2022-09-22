@@ -6,7 +6,7 @@
     <div>
         <div class="container-fluid">
             <div class="main-banner">
-                <h3 style="color: #000000; font-size: 40px; font-weight: 400;" class="ml-85">{{ Lang::get('My appeal') }} - <span style="color: #006BCE;">#{{ $ticket->ticket_uid }}</span></h3>
+                <h3 style="color: #000000; font-size: 40px; font-weight: 400;" class="ml-85">{{ Lang::get('My appeal') }} - <span style="color: #006BCE;">#{{ $ticket->id }}</span></h3>
                 <div class="ose" style="margin-top: 60px;">
                     <div class="row">
                         <div class="col-md-8 col-sm-12">

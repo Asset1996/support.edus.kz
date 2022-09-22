@@ -56,7 +56,7 @@ class LoginTest extends TestCase
      *
      * @return void
      */
-    public function test_login_successfull()
+    public function test_login_successfully()
     {
         $response = $this->post($this->url_prefix . 'auth/login/', [
             'email' => $this->verified_user->email,
@@ -116,7 +116,7 @@ class LoginTest extends TestCase
             'password' => 'asdqwe123',
             'not_robot' => 'on',
         ]);
-        
+
         $this->assertGuest();
         $this->assertEquals(
             session('error_message'),
@@ -137,7 +137,7 @@ class LoginTest extends TestCase
             'password' => 'wrong_password',
             'not_robot' => 'on',
         ]);
-        
+
         $this->assertGuest();
         $this->assertEquals(
             session('error_message'),
@@ -157,7 +157,7 @@ class LoginTest extends TestCase
             'email' => 'not_exist_email@mail.com',
             'password' => 'asdqwe123'
         ]);
-        
+
         $this->assertGuest();
         $this->assertEquals(
             session('error_message'),

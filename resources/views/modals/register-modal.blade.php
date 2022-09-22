@@ -58,11 +58,11 @@
                                 <div class="col-lg-6">
                                     <div class="check_form">
                                         <div style="margin-bottom: -2px;" class="form-group form-check">
-                                            <input type="checkbox" class="form-check-input " id="register_not_robot" name="not_robot">
+                                            <input type="checkbox" class="form-check-input " id="register_not_robot" name="not_robot" required>
                                             <label class="form-check-label" for="register_not_robot">{{ Lang::get('I\'m not robot:') }}</label>
                                         </div>
                                         <div class="form-group form-check">
-                                            <input type="checkbox" class="form-register_agree_with_terms-input" id="exampleCheck1" name="agree_with_terms">
+                                            <input type="checkbox" class="form-register_agree_with_terms-input" id="exampleCheck1" name="agree_with_terms" required>
                                             <label class="form-check-label" for="register_agree_with_terms">{{ Lang::get('I agree with the terms of service') }}</label>
                                         </div>
 

@@ -100,7 +100,7 @@
                             <div id="documents-preview"></div>
 
                             <div class="form-group form-check mt-5">
-                                <input type="checkbox" class="form-check-input" id="create_ticket_not_robot" name="not_robot">
+                                <input type="checkbox" class="form-check-input" id="create_ticket_not_robot" name="not_robot" required>
                                 <label style="font-size: 17px;" class="form-check-label" for="create_ticket_not_robot">{{ Lang::get('I\'m not robot:') }}</label>
                             </div>
 

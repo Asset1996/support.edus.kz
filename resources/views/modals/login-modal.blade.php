@@ -41,11 +41,11 @@
                                         </div>
                                     </div>
                                     <div style="margin-top: 29px; margin-bottom: 0;" class="form-group form-check">
-                                        <input type="checkbox" class="form-check-input " id="login_not_robot" name="not_robot">
+                                        <input type="checkbox" class="form-check-input " id="login_not_robot" name="not_robot" required>
                                         <label class="form-check-label" for="login_not_robot">{{ Lang::get('I\'m not robot:') }}</label>
                                     </div>
                                     <div class="justify-content-center">
-                                        <button type="submit" class="btn btnColor modal-submit-button text-white w-100 mt-29">{{Lang::get("Login")}}</button>
+                                        <button type="submit" id="login_submit_button" class="btn btnColor modal-submit-button text-white w-100 mt-29">{{Lang::get("Login")}}</button>
                                     </div>
                                 </form>
 

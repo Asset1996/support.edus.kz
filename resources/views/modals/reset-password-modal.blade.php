@@ -20,7 +20,7 @@
                       <input placeholder="{{ Lang::get("Email") }}" type="email" name="email" class="form-control myInput" id="reset_password_email" required>
                     </div>
                     <div class="form-group form-check">
-                      <input type="checkbox" class="form-check-input " id="reset_not_robot" name="not_robot">
+                      <input type="checkbox" class="form-check-input " id="reset_not_robot" name="not_robot" required>
                       <label class="form-check-label" for="reset_not_robot">{{ Lang::get('I\'m not robot:') }}</label>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Проверить аккаунт</button>

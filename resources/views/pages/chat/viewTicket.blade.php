@@ -101,7 +101,6 @@
                                         <div class="col-sm">
                                             <div class="pos_R">
                                                 <div class="starrating risingstar d-flex flex-row-reverse" style="margin-top: -8px;">
-
                                                     <form action="">
                                                         <div class="starrating risingstar d-flex flex-row-reverse">
                                                             @for ($i = 1; $i < 6; $i++) <input onclick="evaluate_ticket_ajax(value, {{ $ticket->id }})" type="radio" id="star{{$i}}{{ $ticket->id }}" name="rating" value="{{6 - $i}}" @if ($ticket->evaluation == 6 - $i)
@@ -243,8 +242,8 @@
     $(".evaluation-ticket").hide();
     //Evaluation of message
     function evaluate_message_ajax(value, message_id){
-        console.log(value)
-        console.log(message_id)
+        console.log('value', value)
+        console.log('message_id', message_id)
         $.ajax({
             url: "{{ route('evaluate-message') }}",
             method: 'post',
@@ -256,6 +255,7 @@
                 'evaluation': value
             },
             success: function(res){
+                console.log('success', res)
                 $("#eval-message"+message_id).show();
                 $("#eval-message"+message_id).html(res);
                 setTimeout(function(){ $("#eval-message"+message_id).hide(); },3000);
@@ -267,8 +267,8 @@
     }
     //Evaluation of ticket
     function evaluate_ticket_ajax(value, ticket_id){
-        console.log(value)
-        console.log(ticket_id)
+        console.log('value', value)
+        console.log('ticket_id', ticket_id)
         $.ajax({
             url: "{{ route('evaluate-ticket') }}",
             method: 'post',

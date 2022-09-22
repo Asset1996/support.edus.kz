@@ -5,6 +5,7 @@
 namespace App\Http\Controllers\Chat;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Chat\WriteMessageRequest;
 use App\Models\Tickets;
 use App\Models\Messages;
 use Illuminate\Http\RedirectResponse;
@@ -16,7 +17,11 @@ class MessagesController extends Controller
     /**
      * Updates the ticket status to "closed".
      *
+     * @param WriteMessageRequest $request
+     * @param string $lang
      * @param string $ticket_uid - unique ID of ticket.
+     * @param Tickets $ticket
+     * @param Messages $message
      * @return RedirectResponse
      */
     public function writeMessage(

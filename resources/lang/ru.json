@@ -76,7 +76,7 @@
     "Sign up account": "Регистрация аккаунта",
     "My appeals": "Мои обращения",
     "My appeal": "Мое обращение",
-    "Update appeal No": "Редактировать обращение No",
+    "Update appeal": "Редактировать обращение",
     "# of request": "Запрос #",
     "Topic": "Тема обращения",
     "Date": "Дата",
@@ -140,6 +140,7 @@
     "I agree with the terms of service":"Согласен с условиями предоставления сервиса",
     "Telegram bot": "Телеграм бот",
     "Find in the directory":"Найти в справочнике",
+    "in Reference book": "в Справочнике",
     "Write to technical support" : "Пишите в техподдержку",
     "Go": "Перейти",
     "ABOUT SERVICE": "О СЕРВИСЕ",
@@ -183,5 +184,14 @@
 
     "Answered in": "Был отвечен",
     "Profile": "Профиль",
-    "tickets closing": "закрытие тикета"
+    "tickets closing": "закрытие тикета",
+    "Or, you could close the ticket.": "Или вы можете закрыть тикет.",
+    "Rate how satisfied you are with the answer": "Оцените, насколько удовлетворены ответом",
+
+    "Appeal created": "Обращение создано",
+    "Accepted for processing": "Принят в обработку",
+    "Client commented": "Комментарии клиента",
+    "Operator responded": "Оператор ответил",
+    "APPEAL LOG": "ЛОГ ОБРАЩЕНИЯ",
+    "Find answers": "Найти ответы"
 }

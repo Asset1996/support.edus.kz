@@ -95,7 +95,7 @@
                                     <div class="row align-items-center">
                                         <div class="col-sm col-lg-auto">
                                             <div class="pos_text">
-                                                <p style="color: #000000;">Оцените, насколько удовлетворены ответом:</p>
+                                                <p style="color: #000000;">{{ Lang::get('Rate how satisfied you are with the answer') }}:</p>
                                             </div>
                                         </div>
                                         <div class="col-sm">
@@ -143,7 +143,14 @@
                                         </div>
                                     </div>
                                 @elseif ($ticket->status_id == 2)
-                                    {{Lang::get('Your request is being processed by the operator. Wait for a response from the operator.')}}
+                                    <p style="margin-left: 30px;">{{Lang::get('Your request is being processed by the operator. Wait for a response from the operator.')}}</p>
+                                    <p style="margin-left: 30px;">{{Lang::get('Or, you could close the ticket.')}}</p>
+                                    <form style="margin-left: 30px;" method="POST" action="{{ route('close-ticket', ['ticket_uid' => $ticket->ticket_uid]) }}">
+                                        @csrf
+                                        <div class="d-flex mb-3 mb-lg-4">
+                                            <button style="background: #006BCE; border: 3px solid #006BCE; border-radius: 8px; color: white; padding: 8px 67px;" class="btn" type="submit">{{ Lang::get('Close ticket') }}</button>
+                                        </div>
+                                    </form>
                                 @elseif ($ticket->status_id == 3)
 
                                     <form method="POST" action="{{ route('write-message', ['ticket_uid' => $ticket->ticket_uid]) }}" style="margin-left: 30px;">
@@ -193,22 +200,22 @@
                                     </p>
                                 </div>
                                 <div class="filter-inner-block" style="margin-top: 9px;">
-                                    <p style="color: #000000; font-size: 18px;">Найти ответы <a style="border-bottom: 1px solid #278DEB; color: #278DEB;" href="{{ route('reference-book') }}">в Справочнике</a></p>
+                                    <p style="color: #000000; font-size: 18px;">{{ Lang::get('Find answers') }} <a style="border-bottom: 1px solid #278DEB; color: #278DEB;" href="{{ route('reference-book') }}">{{ Lang::get('in Reference book') }}</a></p>
                                 </div>
                                 <div class="filter-inner-block">
-                                    <p class="lTitle">ЛОГ ОБРАЩЕНИЯ</p>
+                                    <p class="lTitle">{{ Lang::get('APPEAL LOG') }}</p>
                                     <ul class="log_obr">
-                                        <li>{{ $ticket->created_at->format('d.m.Y H:i') }} - Обращение создано</li>
+                                        <li>{{ $ticket->created_at->format('d.m.Y H:i') }} - {{ Lang::get('Appeal created') }}</li>
 
                                         @foreach ($ticket->messages as $key => $message)
                                             <li>
                                             @if ($loop->first)
-                                                {{ $message->created_at->format('d.m.Y H:i') }} - Принят в обработку
+                                                {{ $message->created_at->format('d.m.Y H:i') }} - {{ Lang::get('Accepted for processing') }}
                                             @else
                                                 @if ($message->created_by_type == 1)
-                                                    {{ $message->created_at->format('d.m.Y H:i') }} - Комментарии клиента
+                                                    {{ $message->created_at->format('d.m.Y H:i') }} - {{ Lang::get('Client commented') }}
                                                 @else
-                                                    {{ $message->created_at->format('d.m.Y H:i') }} - Ответ оператора
+                                                    {{ $message->created_at->format('d.m.Y H:i') }} - {{ Lang::get('Operator responded') }}
                                                 @endif
                                             @endif
                                             </li>

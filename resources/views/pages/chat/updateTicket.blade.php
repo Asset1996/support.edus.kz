@@ -5,7 +5,7 @@
 <body>
     <div class="container">
         <div class="main-banner">
-            <h3>{{ Lang::get('Update appeal No') }} {{$my_ticket->ticket_uid}}</h3>
+            <h3>{{ Lang::get('Update appeal') }} <span style="color: #006BCE">#{{$my_ticket->id}}</span></h3>
             <div class="row justify-content-between">
                 <div class="col-md-8 col-sm-12">
                     <form method="POST" action="{{ route('update-ticket-post', ['ticket_uid' => $my_ticket->ticket_uid]) }}">

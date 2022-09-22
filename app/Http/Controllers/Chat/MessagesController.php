@@ -9,6 +9,7 @@ use App\Http\Requests\Chat\WriteMessageRequest;
 use App\Models\Tickets;
 use App\Models\Messages;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 
 class MessagesController extends Controller
@@ -67,6 +68,8 @@ class MessagesController extends Controller
             ['ticket_uid' => $ticket_uid],
             ['status_id' => 2],
         );
+
+        Cache::put('my_tickets', '', 0);
 
         Mail::to("support@edus.kz")
             ->send(new \App\Mail\MessageSentNotifyEmail(

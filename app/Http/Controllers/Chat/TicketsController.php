@@ -253,6 +253,7 @@ class TicketsController extends Controller
         Tickets::where(['ticket_uid' => $ticket_uid])->update(['status_id' => 4]);
 
         session()->flash('success_message', trans('Ticket successfully closed'));
+        Cache::put('my_tickets', '', 0);
 
         return redirect()->back();
     }

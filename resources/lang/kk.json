@@ -75,7 +75,7 @@
     "Sign up account":"",
     "My appeals":"Менің өтініштерім",
     "My appeal":"Менің өтінішім",
-    "Update appeal No":"",
+    "Update appeal":"",
     "# of request":"# сұрау",
     "Topic":"",
     "Date":"",
@@ -139,6 +139,7 @@
     "I agree with the terms of service":"",
     "Telegram bot":"",
     "Find in the directory":"",
+    "in Reference book": "Анықтамада",
     "Write to technical support":"",
     "Go":"",
     "ABOUT SERVICE":"",
@@ -182,5 +183,14 @@
 
     "Answered in": "",
     "Profile": "Профиль",
-    "tickets closing": ""
+    "tickets closing": "билетті жабу",
+    "Or, you could close the ticket.": "Немесе билетті жапасаңыз болады.",
+    "Rate how satisfied you are with the answer": "Жауапқа қаншалықты қанағаттанғаныңызды бағалаңыз",
+
+    "Appeal created": "Өтініш жасалды",
+    "Accepted for processing": "Өңдеуге қабылданды",
+    "Client commented": "Клиент комментариі",
+    "Operator responded": "Оператор жауап берді",
+    "APPEAL LOG": "",
+    "Find answers": ""
 }

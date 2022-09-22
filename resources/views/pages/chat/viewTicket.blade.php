@@ -103,10 +103,10 @@
                                                 <div class="starrating risingstar d-flex flex-row-reverse" style="margin-top: -8px;">
                                                     <form action="">
                                                         <div class="starrating risingstar d-flex flex-row-reverse">
-                                                            @for ($i = 1; $i < 6; $i++) <input onclick="evaluate_ticket_ajax(value, {{ $ticket->id }})" type="radio" id="star{{$i}}{{ $ticket->id }}" name="rating" value="{{6 - $i}}" @if ($ticket->evaluation == 6 - $i)
+                                                            @for ($i = 1; $i < 6; $i++) <input onclick="evaluate_ticket_ajax(value, {{ $ticket->id }})" type="radio" id="star{{$i}}{{ $ticket->id }}_t" name="rating" value="{{6 - $i}}" @if ($ticket->evaluation == 6 - $i)
                                                                 checked
                                                                 @endif
-                                                            /><label for="star{{$i}}{{ $ticket->id }}"></label>
+                                                            /><label for="star{{$i}}{{ $ticket->id }}_t"></label>
                                                             @endfor
                                                         </div>
                                                     </form>
@@ -242,8 +242,6 @@
     $(".evaluation-ticket").hide();
     //Evaluation of message
     function evaluate_message_ajax(value, message_id){
-        console.log('value', value)
-        console.log('message_id', message_id)
         $.ajax({
             url: "{{ route('evaluate-message') }}",
             method: 'post',
@@ -255,7 +253,6 @@
                 'evaluation': value
             },
             success: function(res){
-                console.log('success', res)
                 $("#eval-message"+message_id).show();
                 $("#eval-message"+message_id).html(res);
                 setTimeout(function(){ $("#eval-message"+message_id).hide(); },3000);
@@ -267,8 +264,6 @@
     }
     //Evaluation of ticket
     function evaluate_ticket_ajax(value, ticket_id){
-        console.log('value', value)
-        console.log('ticket_id', ticket_id)
         $.ajax({
             url: "{{ route('evaluate-ticket') }}",
             method: 'post',
@@ -280,7 +275,6 @@
                 'evaluation': value
             },
             success: function(res){
-                console.log('success', res)
                 $("#eval-ticket").show();
                 $("#eval-ticket").html(res);
                 setTimeout(function(){ $("#eval-ticket").hide(); },3000);

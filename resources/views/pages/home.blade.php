@@ -17,7 +17,7 @@
                         </div>
                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
                             <div style="width: 335px;" class="main_item main_left">
-                                <div class="main_item_text">
+                                <div class="main_item_text test">
                                     <h1>{{ Lang::get('Find in directory') }}</h1>
                                     <p>{{ Lang::get('Convenient search and reference base will help you quickly find the right answers to your problems and questions. You do not need to wait for a support response.') }}</p>
                                     <a href="{{ route('reference-book') }}">{{ Lang::get('Go') }} <span class="fArrow"><img src="{{ asset('images/firstArrow.svg') }}"></span></a>

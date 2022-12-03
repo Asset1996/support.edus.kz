@@ -1,6 +1,6 @@
 name: CI workflow
 
-on: 
+on:
   push:
     branches: [ "main" ]
   pull_request:
@@ -13,8 +13,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: test
-        run: echo 'Teeeest'
-      
       - name: Install dependencies
         run: composer install
+
+      - name: php test
+        run: php -v

@@ -10,9 +10,20 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     env:
-      DB_DATABASE: support_edus_db
-      DB_USERNAME: admin
-      DB_PASSWORD: admin
+      DB_DATABASE: edussupport_primary
+      DB_USERNAME: edussupport_primary
+      DB_PASSWORD: edus_support1
+
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
+          MYSQL_ROOT_PASSWORD: edus_support1
+          MYSQL_DATABASE: edussupport_primary
+        ports:
+          - 3306/tcp
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e

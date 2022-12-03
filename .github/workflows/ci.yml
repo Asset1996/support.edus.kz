@@ -28,25 +28,12 @@ jobs:
       - name: Checkout ✅
         uses: actions/checkout@v2
 
-      - name: Get Composer Cache Directory 📂
-        id: get-composer-cache
-        run: |
-          echo "::set-output name=dir::$(composer config cache-files-dir)"
-      - name: Cache Composer ➕
-        uses: actions/cache@v1
-        id: composer-cache
-        with:
-          path: ${{ steps.get-composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
       - name: Install composer dependencies 🤖
         run: composer install --no-progress --prefer-dist --no-interaction --no-suggest --optimize-autoloader --no-scripts
 
       - name: Clear Config 🗑️
-        run: |
-          php artisan config:clear
-          php artisan cache:clear
+        run: php artisan config:clear
+
       - name: Prepare the application 🔧
         run: |
           cp .env.ci .env

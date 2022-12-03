@@ -9,6 +9,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
+    env:
+      DB_DATABASE: support_edus_db
+      DB_USERNAME: admin
+      DB_PASSWORD: admin
+
     steps:
       - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
         with:
@@ -25,6 +30,7 @@ jobs:
 
       - name: Generate key
         run: php artisan key:generate
+        shell: yes
 
       - name: Directory Permissions
         run: chmod -R 777 storage bootstrap/cache

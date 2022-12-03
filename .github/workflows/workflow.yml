@@ -13,7 +13,7 @@ jobs:
       DB_DATABASE: edussupport_db
       DB_USER: edussupport_admin
       DB_PASSWORD: aashsh1706
-      DB_HOST: mysql-master
+      DB_HOST: localhost
 
     services:
       mysql-master:

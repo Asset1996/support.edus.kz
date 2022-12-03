@@ -28,9 +28,6 @@ jobs:
       - name: Checkout ✅
         uses: actions/checkout@v2
 
-      - name: Setup Composer Parallel Downloads 💥
-        run: composer global require hirak/prestissimo
-
       - name: Get Composer Cache Directory 📂
         id: get-composer-cache
         run: |

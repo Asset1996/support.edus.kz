@@ -40,3 +40,6 @@ jobs:
           php artisan key:generate
       - name: Run Migrations 💾
         run: php artisan migrate --force -v
+
+      - name: Test with phpunit
+        run: vendor/bin/phpunit

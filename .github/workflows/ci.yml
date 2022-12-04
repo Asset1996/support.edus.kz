@@ -26,7 +26,7 @@ jobs:
           echo -e "Check new settings\n"
           mysql --host 127.0.0.1 -uroot -proot -e "SELECT @@global.secure_file_priv, @@global.local_infile"
       - name: Checkout ✅
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install composer dependencies 🤖
         run: composer install --no-progress --prefer-dist --no-interaction --no-suggest --optimize-autoloader --no-scripts
